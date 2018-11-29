@@ -29,7 +29,7 @@ def nb_days(variety):
 
     if variety == "tomato":
         T = 60
-    if variety == "salade" :
+    elif variety == "salade" :
         T = 50
     else :
         T = 60
@@ -45,7 +45,7 @@ def threshold_temp_min(t,nbdays,variety):
     if variety == "tomato":
         if nbdays <= 7 : # "germination" time
             x = 28
-        if nbdays > 7 and t <= 21 : # "croissance" time
+        elif nbdays > 7 and t <= 21 : # "croissance" time
             if t(2)<23 and t(2)>5 : #day
                 x = 26
             else : # night
@@ -69,17 +69,17 @@ def threshold_temp_max(t,nbdays,variety):
     if variety == "tomato":
         if nbdys <= 7 : # "germination" time
                 x = 28
-        if nbdays > 7 and t <= 21 : # "croissance" time
+        elif nbdays > 7 and t <= 21 : # "croissance" time
             if t(2)<23 and t(2)>5 : #day
                 x = 26
             else : # night
                 x = 19
-        if nbdays > 21 and t <= 51: : # "floraison" Time
+        elif nbdays > 21 and t <= 51: : # "floraison" Time
             if t(2)<19 and t(2)>7 : #day
                 x = 26
             else : # night
                 x = 19
-        if nbdays > 51 : # "fructification" time
+        elif nbdays > 51 : # "fructification" time
             if t(2)<19 and t(2)>7 : #day
                 x = 26
             else : # night
@@ -93,11 +93,11 @@ def thresholdd_humidity(t,variety):
     if variety == "tomato":
         if t <= 7 : # "germination" time
             x = 85
-        if t > 7 and t <= 21 : # "croissance" time
+        elif t > 7 and t <= 21 : # "croissance" time
             x = 75
-        if t > 21 and t <= 51: : # "floraison" Time
+        elif t > 21 and t <= 51: : # "floraison" Time
             x = 70
-        if t > 51 : # "fructification" time
+        elif t > 51 : # "fructification" time
             x = 70
     else :         #limit case (no climate recipe)
         x = -1
@@ -111,7 +111,7 @@ def LEDupBoundary(t,variety):
     if variety == "tomato":
         if t <= 21 : # "growth" time
             x = 23
-        if t > 21 : # "bloom" time
+        elif t > 21 : # "bloom" time
             x = 19
     else :         #limit case (no climate recipe)
         x = -1
@@ -122,7 +122,7 @@ def LEDdownBoundary(t,variety):
     if variety == "tomato":
         if t <= 21 : # "growth" time
             x = 5
-        if t > 21 : # "bloom" time
+        elif t > 21 : # "bloom" time
             x = 7
     else :         #limit case (no climate recipe)
         x = -1
@@ -136,27 +136,27 @@ def floraMicro(i, variety):
         if variety == "tomato":
             if i == 1 :
                 x = 2.5
-            if i == 2 :
+            elif i == 2 :
                 x = 7.5
-            if i == 3 :
+            elif i == 3 :
                 x = 10
-            if i == 4 :
+            elif i == 4 :
                 x = 7.5
-            if i == 5 :
+            elif i == 5 :
                 x = 7.5
-            if i == 6 :
+            elif i == 6 :
                 x = 7.5
-            if i == 7 :
+            elif i == 7 :
                 x = 7.5
-            if i == 8 :
+            elif i == 8 :
                 x = 7.5
-            if i == 9 :
+            elif i == 9 :
                 x = 7.5
-            if i == 10 :
+            elif i == 10 :
                 x = 7.5
-            if i == 11 :
+            elif i == 11 :
                 x = 5
-            if i == 12 :
+            elif i == 12 :
                 x = 0
         else :         #limit case (no climate recipe)
             x = 0
@@ -167,27 +167,27 @@ def floraGro(i, variety):
         if variety == "tomato":
             if i == 1 :
                 x = 2.5
-            if i == 2 :
+            elif i == 2 :
                 x = 10
-            if i == 3 :
+            elif i == 3 :
                 x = 10
-            if i == 4 :
+            elif i == 4 :
                 x = 7.5
-            if i == 5 :
+            elif i == 5 :
                 x = 2.5
-            if i == 6 :
+            elif i == 6 :
                 x = 2.5
-            if i == 7 :
+            elif i == 7 :
                 x = 2.5
-            if i == 8 :
+            elif i == 8 :
                 x = 2.5
-            if i == 9 :
+            elif i == 9 :
                 x = 0
-            if i == 10 :
+            elif i == 10 :
                 x = 0
-            if i == 11 :
+            elif i == 11 :
                 x = 0
-            if i == 12 :
+            elif i == 12 :
                 x = 0
         else :         #limit case (no climate recipe)
             x = 0
@@ -197,27 +197,27 @@ def floraBloom(i, variety):
         if variety == "tomato":
             if i == 1 :
                 x = 2.5
-            if i == 2 :
+            elif i == 2 :
                 x = 7.5
-            if i == 3 :
+            elif i == 3 :
                 x = 10
-            if i == 4 :
+            elif i == 4 :
                 x = 7.5
-            if i == 5 :
+            elif i == 5 :
                 x = 7.5
-            if i == 6 :
+            elif i == 6 :
                 x = 7.5
-            if i == 7 :
+            elif i == 7 :
                 x = 7.5
-            if i == 8 :
+            elif i == 8 :
                 x = 7.5
-            if i == 9 :
+            elif i == 9 :
                 x = 7.5
-            if i == 10 :
+            elif i == 10 :
                 x = 7.5
-            if i == 11 :
+            elif i == 11 :
                 x = 5
-            if i == 12 :
+            elif i == 12 :
                 x = 0
         else :         #limit case (no climate recipe)
             x = 0
@@ -235,7 +235,7 @@ def watering_first_cycle(t, variety):
 
     if nbdays <= 21 :
         bool = lectrique
-    if nbdays > 21 :
+    elif nbdays > 21 :
         bool = False
     return bool
 
