@@ -50,12 +50,12 @@ def threshold_temp_min(t,nbdays,variety):
                 x = 26
             else : # night
                 x = 19
-        if nbdays > 21 and t <= 51: : # "floraison" Time
+        elif nbdays > 21 and t <= 51: : # "floraison" Time
             if t(2)<19 and t(2)>7 : #day
                 x = 26
             else : # night
                 x = 19
-        if nbdays > 51 : # "fructification" time
+        elif nbdays > 51 : # "fructification" time
             if t(2)<19 and t(2)>7 : #day
                 x = 26
             else : # night
