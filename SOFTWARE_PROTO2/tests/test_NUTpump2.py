@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 NUTpump2_pin = ...                     #FloraGro
 GPIO.setup(NUTpump2_pin, GPIO.OUT, initial = GPIO.LOW)

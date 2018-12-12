@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 WARventilator_pin = ...
 GPIO.setup(WARventilator_pin, GPIO.OUT, initial = GPIO.LOW)

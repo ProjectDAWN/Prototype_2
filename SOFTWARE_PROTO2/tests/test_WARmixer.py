@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 WARmixer_pin = ...
 GPIO.setup(WARmixer_pin, GPIO.OUT, initial = GPIO.LOW)

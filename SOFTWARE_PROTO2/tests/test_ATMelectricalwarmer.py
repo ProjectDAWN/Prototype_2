@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 ATMelectricwarmer_pin = ...
 GPIO.setup(ATMelectricwarmer_pin, GPIO.OUT, initial = GPIO.LOW)

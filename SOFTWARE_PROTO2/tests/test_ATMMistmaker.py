@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 ATMmistmaker_pin = ...
 GPIO.setup(ATMmistmaker_pin, GPIO.OUT, initial = GPIO.LOW)

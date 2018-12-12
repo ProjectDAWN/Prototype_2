@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 ####### Lighting module (LIG)
 LIGled_pin = ...
