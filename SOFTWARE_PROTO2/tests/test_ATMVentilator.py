@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 ATMventilator_pin =  ...
 GPIO.setup(ATMventilator_pin, GPIO.OUT, initial = GPIO.LOW)

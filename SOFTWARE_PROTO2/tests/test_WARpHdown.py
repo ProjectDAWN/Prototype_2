@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 WARpHdown_pin = ...
 GPIO.setup(WARpHdown_pin, GPIO.OUT, initial = GPIO.LOW)

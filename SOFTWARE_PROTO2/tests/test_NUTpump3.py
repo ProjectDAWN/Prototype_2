@@ -1,3 +1,5 @@
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BOARD)
 NUTpump3_pin = ...                     #FloraBloom
 GPIO.setup(NUTpump3_pin, GPIO.OUT, initial = GPIO.LOW)
