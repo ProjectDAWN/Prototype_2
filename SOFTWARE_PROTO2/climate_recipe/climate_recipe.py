@@ -50,7 +50,7 @@ def threshold_temp_min(t,nbdays,variety):
                 x = 26
             else : # night
                 x = 19
-        elif nbdays > 21 and t <= 51: : # "floraison" Time
+        elif nbdays > 21 and t <= 51:# "floraison" Time
             if t(2)<19 and t(2)>7 : #day
                 x = 26
             else : # night
@@ -60,42 +60,43 @@ def threshold_temp_min(t,nbdays,variety):
                 x = 26
             else : # night
                 x = 19
-    else :         #limit case (no climate recipe)
+    else:        #limit case (no climate recipe)
         x = -1
     return x
 
 def threshold_temp_max(t,nbdays,variety):
-    "return the max acceptable value at t"
-    if variety == "tomato":
-        if nbdys <= 7 : # "germination" time
-                x = 28
-        elif nbdays > 7 and t <= 21 : # "croissance" time
-            if t(2)<23 and t(2)>5 : #day
-                x = 26
-            else : # night
-                x = 19
-        elif nbdays > 21 and t <= 51: : # "floraison" Time
-            if t(2)<19 and t(2)>7 : #day
-                x = 26
-            else : # night
-                x = 19
-        elif nbdays > 51 : # "fructification" time
-            if t(2)<19 and t(2)>7 : #day
-                x = 26
-            else : # night
-                x = 19
-    else :         #limit case (no climate recipe)
+    #return the max acceptable value at t
+    if variety =="tomato":
+        if nbdays <= 7: #Germination time
+            x = 28
+        elif nbdays > 7 and nbdays <=21: #Croissance time
+            if t(2)<23 and t(2)>5:
+                x=26
+            else : #Night
+                x=19
+        elif nbdays > 21 and t<=51: #Floraison time
+            if t(2)<19 and t(2)>7:
+                x=26
+            else: #Night
+                x=19
+        elif nbdays > 51: #Fructification time
+            if t(2)<19 and t(2)>7:
+                x=26
+            else : #Night
+                x=19
+    else :
         x = -1
     return x
 
+
 def thresholdd_humidity(t,variety):
-     "return the average value needed at t"
+     #return the average value needed at t
     if variety == "tomato":
         if t <= 7 : # "germination" time
             x = 85
         elif t > 7 and t <= 21 : # "croissance" time
             x = 75
-        elif t > 21 and t <= 51: : # "floraison" Time
+        elif t > 21 and t <= 51:  # "floraison" Time
             x = 70
         elif t > 51 : # "fructification" time
             x = 70
@@ -107,7 +108,7 @@ def thresholdd_humidity(t,variety):
 ####### Functions for Lighting module ##########################
 
 def LEDupBoundary(t,variety):
-    "return the hour when LEDs should be turned off"
+    #return the hour when LEDs should be turned off
     if variety == "tomato":
         if t <= 21 : # "growth" time
             x = 23
@@ -118,7 +119,7 @@ def LEDupBoundary(t,variety):
     return x
 
 def LEDdownBoundary(t,variety):
-    "return the hour when LEDs should be turned on"
+    #return the hour when LEDs should be turned on
     if variety == "tomato":
         if t <= 21 : # "growth" time
             x = 5
@@ -132,7 +133,7 @@ def LEDdownBoundary(t,variety):
 ############### Functions for Nutrients Module ######################
 
 def floraMicro(i, variety):
-    "return that return the number of ml of this nutrient for week i according to climate recipe"
+    #return that return the number of ml of this nutrient for week i according to climate recipe
         if variety == "tomato":
             if i == 1 :
                 x = 2.5
@@ -163,7 +164,7 @@ def floraMicro(i, variety):
         return x
 
 def floraGro(i, variety):
-    "return that return the number of ml of this nutrient for week i according to climate recipe"
+    #return that return the number of ml of this nutrient for week i according to climate recipe
         if variety == "tomato":
             if i == 1 :
                 x = 2.5
@@ -193,7 +194,7 @@ def floraGro(i, variety):
             x = 0
         return x
 def floraBloom(i, variety):
-    "return that return the number of ml of this nutrient for week i according to climate recipe"
+    #return that return the number of ml of this nutrient for week i according to climate recipe
         if variety == "tomato":
             if i == 1 :
                 x = 2.5
@@ -231,10 +232,10 @@ def pHlow(t,variety):
 def pHup(t,variety):
     return 6.2
 
-def watering_first_cycle(t, variety):
-
+def watering_first_cycle(t, variety,nbdays):
     if nbdays <= 21 :
-        bool = lectrique
+        #bool = lectrique
+        bool = True
     elif nbdays > 21 :
         bool = False
     return bool
