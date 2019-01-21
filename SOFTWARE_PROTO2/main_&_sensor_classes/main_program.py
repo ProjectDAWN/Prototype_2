@@ -104,30 +104,29 @@ def lighting_loop(t, variety):
         GPIO.output(LIGled_pin, GPIO.HIGH)
 
 ####### Nutrients module
-def nutrients_loop(nbdays, variety):
+def nutrients_loop(nbdays, variety,nutrient_week):
     #nutrients_loop is a function that control the release of nutrients according to climate recipe
-    nutrient_week=(False,False,False,False,False,False,False,False,False,False,False,False)
     flow= 1.6 #pump's flow = 1.6ml.s-1
     water_level = 0 #Add the fonction
     volume = size_x_bac*size_y_bac*water_level
     coeff = volume/3.79
     i = nbdays//7 +1 # week index
-    if not nutrient_week(i): # no nutrient for the current week
+    if not nutrient_week[i]: # no nutrient for the current week
+        nutrient_week[i]=True
         FloraMicro = climate_recipe.floraMicro(i, variety) #ml
         GPIO.output(NUTpump1_pin, GPIO.HIGH)
         time.sleep(FloraMicro/flow*coeff)
         GPIO.output(NUTpump1_pin, GPIO.LOW)
-
         FloraGro = climate_recipe.floraGro(i, variety) #ml
         GPIO.output(NUTpump2_pin, GPIO.HIGH)
         time.sleep(FloraGro/flow*coeff)
         GPIO.output(NUTpump2_pin, GPIO.LOW)
-
         FloraBloom = climate_recipe.floraBloop(i, variety) # ml
         GPIO.output(NUTpump3_pin, GPIO.HIGH)
         time.sleep(FloraBloom/flow*coeff)
         GPIO.output(NUTpump3_pin, GPIO.LOW)
-    nutrient_week(i) = True
+
+
 
 ####### Watering module
 def watering_loop(t, variety, nbdays):
@@ -234,6 +233,7 @@ def growing_program(variety) :
     Tini = (monthini,dayini,0,0,0) # Get the value of time at the beginning of the growth
     T = climate_recipe.nb_days(variety) # Get the end value from climate_recipe (in matter of days)
     nbdays= 0
+    nutrient_week = (False, False, False, False, False, False, False, False, False, False, False, False)
 
     while t(2) < T :  # loop until the current time reach T (in matter of days)
 
@@ -257,7 +257,7 @@ def growing_program(variety) :
         #Decide waiting time
         lighting_loop(t,variety)
         #Decide wainting Time
-        nutrients_loop(nbdays,variety)
+        nutrients_loop(nbdays,variety,nutrient_week)
         #Decide waiting Time
         watering_loop(t,variety)
         #Decide waiting time
