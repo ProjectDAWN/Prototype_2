@@ -36,7 +36,7 @@
 #
 ##################### Importation section   #################################
 
-import RPI.GPIO as GPIO
+import RPIO.GPIO as GPIO
 import datetime
 import climate_recipe
 import time
