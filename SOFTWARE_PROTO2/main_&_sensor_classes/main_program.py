@@ -2,7 +2,7 @@
 #  main_program.py
 #  SOFTWARE_PROTO2
 #  V1.0
-#  DAWN ©
+#  DAWN
 #  Antoine PINAUD
 #
 ###############################################################################
@@ -21,16 +21,16 @@
 #           - Arrosage
 #
 # Sensors :
-#          --> Atmospherique : Température, humidité (same probe)
+#          --> Atmospherique : Temperature, humidite (same probe)
 #          --> Eclairage : /
 #          --> Nutriments : /
 #          --> Arrosage : water level, pH, EC
 #
 # Actuactors :
-#          --> Atmosperique : ventilateur waterproof, mistmaker, réchauffeur
-#                             électrique
+#          --> Atmosperique : ventilateur waterproof, mistmaker, rechauffeur
+#                             electrique
 #          --> Eclairage : LED de croissance
-#          --> Nutriments : pompes peristatiques, ventilateurs mélangeurs
+#          --> Nutriments : pompes peristatiques, ventilateurs melangeurs
 #          --> Arrosage: ultrasonic mixt maker, agitateur solution nutritive,
 #                        ventilateur waterproof
 #
