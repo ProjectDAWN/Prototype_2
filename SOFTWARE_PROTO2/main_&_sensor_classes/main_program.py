@@ -36,7 +36,7 @@
 #
 ##################### Importation section   #################################
 
-import RPIO.GPIO as GPIO
+import RPi.GPIO as GPIO
 import datetime
 import climate_recipe
 import time
@@ -73,19 +73,19 @@ WARultrasonicmistmaker_pin = 0
 ####### Atmospheric module
 
 def atmospheric_loop(t,nbdays,variety):
-    #atmospheric_loop i a function that maintain parameters (temperature, humidity) in a range define in climate recipe
+    """atmospheric_loop i a function that maintain parameters (temperature, humidity) in a range define in climate recipe"""
 
     #Temperature
     temperature = am2315.read_temperature() #get value of temperature
-    if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not GPIO.input(ATMelectricwarmer_pin)  : #too cold
+    if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not GPIO.input(ATMelectricwarmer_pin): #too cold
         GPIO.output(ATMelectricwarmer_pin, GPIO.HIGH) #turn on electric warmer
-    if temperature < climate_recipe.threshold_temp_max(t,nbdays,variety)+1:  #too warm
+    if temperature > climate_recipe.threshold_temp_max(t,nbdays,variety)+1:  #too warm
         GPIO.output(ATMelectricwarmer_pin, GPIO.LOW) #turn off electric warmer
 
     #humidity
-    humidity = am2315.read_humidity() #get value of temperature
+    humidity = am2315.read_humidity() #get value of humidity
     humidity_threshold = climate_recipe.thresholdd_humidity(t,variety) # get value of threshold from climate recipe
-    if humidity < humidity_threshold*(1-0.005) and not GPIO.input(ATMmistmaker_pin) and not GPIO.input(ATMventilator_pin)  :
+    if humidity < humidity_threshold*(1-0.005) and not GPIO.input(ATMmistmaker_pin) and not GPIO.input(ATMventilator_pin):
         # humidity is too low
         GPIO.output(ATMmistmaker_pin, GPIO.HIGH) # turn on mistmaker
         GPIO.output(ATMventilator_pin, GPIO.HIGH) #turn on ventilator
@@ -96,21 +96,21 @@ def atmospheric_loop(t,nbdays,variety):
 
 ####### Lighting module
 def lighting_loop(t, variety):
-    #lighting_loop i a function that control Leds acoording to climate recipe
+    """lighting_loop i a function that control Leds acoording to climate recipe"""
 
-    if t(1) < climate_recipe.LEDupBoundary(t, variety) and GPIO.input(LIGled_pin) : # end of the day for LEDs
+    if t(1) < climate_recipe.LEDupBoundary(t, variety) and GPIO.input(LIGled_pin): # end of the day for LEDs
         GPIO.output(LIGled_pin, GPIO.LOW)
-    if t(1) > climate_recipe.LEDupBoundary(t,variety) and not GPIO.input(LIGled_pin) :# beginning of the day for LEDs
+    if t(1) > climate_recipe.LEDupBoundary(t,variety) and not GPIO.input(LIGled_pin):# beginning of the day for LEDs
         GPIO.output(LIGled_pin, GPIO.HIGH)
 
 ####### Nutrients module
 def nutrients_loop(nbdays, variety,nutrient_week):
-    #nutrients_loop is a function that control the release of nutrients according to climate recipe
+    """nutrients_loop is a function that control the release of nutrients according to climate recipe"""
     flow= 1.6 #pump's flow = 1.6ml.s-1
     water_level = 0 #Add the fonction
     volume = size_x_bac*size_y_bac*water_level
     coeff = volume/3.79
-    i = nbdays//7 +1 # week index
+    i = nbdays//7 # week index
     if not nutrient_week[i]: # no nutrient for the current week
         nutrient_week[i]=True
         FloraMicro = climate_recipe.floraMicro(i, variety) #ml
@@ -130,7 +130,7 @@ def nutrients_loop(nbdays, variety,nutrient_week):
 
 ####### Watering module
 def watering_loop(t, variety, nbdays):
-    "water_loop control level_water, pH, EC, hydroponic system"
+    """water_loop control level_water, pH, EC, hydroponic system"""
 
     #get pH value
     device = AtlasI2C(pH_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
@@ -177,7 +177,7 @@ def watering_loop(t, variety, nbdays):
 ####### End of growth
 
 def end_loop():
-    "put all the GPIO pins at LOW value"
+    """put all the GPIO pins at LOW value"""
     #ATM module
     GPIO.output(ATMventilator_pin, GPIO.LOW)
     GPIO.output(ATMmistmaker_pin, GPIO.LOW)
@@ -224,32 +224,28 @@ def growing_program(variety) :
 
     ####### Global variables
     t = (0,0,0,0,0) # current value of Time
-    T = (0,0,0,0,0) # value of the end of production
-
     ##### Global variables
-    dateini = datetime.datetime.now()
-    monthini = dateini.month
-    dayini = dateini.day
-    Tini = (monthini,dayini,0,0,0) # Get the value of time at the beginning of the growth
+    date_ini = datetime.datetime.now() # Get the value of time at the beginning of the growth
     T = climate_recipe.nb_days(variety) # Get the end value from climate_recipe (in matter of days)
-    nbdays= 0
-    nutrient_week = (False, False, False, False, False, False, False, False, False, False, False, False)
+    date_end = date_ini + datetime.timedelta(days = T)
+    nbdays = 0
+    nutrient_week = [False]*(T//7 + 1)
+    date_current = datetime.datetime.now()
 
-    while t(2) < T :  # loop until the current time reach T (in matter of days)
+    while  date_current < date_end:  # loop until the current time reach T (in matter of days)
 
         ###### Time update
-        date = datetime.datetime.now()
-        month = date.month
-        day = date.day
-        hour = date.hour
-        minute = date.minute
-        second = date. second
-        former_t = t
-        t = (month,day, hour, minute,second)
+        #date = datetime.datetime.now()
+        #month = monthini - date.month
+        #day = monthini - date.day
+        #hour = hourini - date.hour
+        #minute = min_ini - date.minute
+        #former_t = t
+        #t = (month,day, hour, minute,second)
 
         ## calculate the current number of days
-        if t(1) != former_t(1):
-            nbdays+=1
+        #if t[1] != former_t(1):
+        #    nbdays+=1
 
         ###### loop
 
@@ -261,6 +257,11 @@ def growing_program(variety) :
         #Decide waiting Time
         watering_loop(t,variety)
         #Decide waiting time
+        diff = datetime.datetime.now() - date_current
+
+        if diff < datetime.timedelta(minutes=10):
+            time.sleep(diff.total_seconds())
+        date_current = datetime.datetime.now()
 
     ###### End of loop
 
