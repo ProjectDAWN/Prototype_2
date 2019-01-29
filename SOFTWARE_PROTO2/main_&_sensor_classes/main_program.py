@@ -36,7 +36,7 @@
 #
 ##################### Importation section   #################################
 
-import RPI.GPIO as GPIO
+from Emulator import Interface
 import datetime
 import climate_recipe
 import time
@@ -56,31 +56,31 @@ def atmospheric_loop(t,nbdays,variety):
 
     #Temperature
     temperature = am2315.read_temperature() #get value of temperature
-    if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not GPIO.input(ATMelectricwarmer_pin)  : #too cold
-        GPIO.output(ATMelectricwarmer_pin, GPIO.HIGH) #turn on electric warmer
+    if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not Interface.input(ATMelectricwarmer_pin)  : #too cold
+        Interface.output(ATMelectricwarmer_pin, Interface.HIGH) #turn on electric warmer
     if temperature < climate_recipe.threshold_temp_max(t,nbdays,variety)+1:  #too warm
-        GPIO.output(ATMelectricwarmer_pin, GPIO.LOW) #turn off electric warmer
+        Interface.output(ATMelectricwarmer_pin, Interface.LOW) #turn off electric warmer
 
     #humidity
     humidity = am2315.read_humidity() #get value of temperature
     humidity_threshold = climate_recipe.thresholdd_humidity(t,variety) # get value of threshold from climate recipe
-    if humidity < humidity_threshold*(1-0.005) and not GPIO.input(ATMmistmaker_pin) and not GPIO.input(ATMventilator_pin)  :
+    if humidity < humidity_threshold*(1-0.005) and not Interface.input(ATMmistmaker_pin) and not Interface.input(ATMventilator_pin)  :
         # humidity is too low
-        GPIO.output(ATMmistmaker_pin, GPIO.HIGH) # turn on mistmaker
-        GPIO.output(ATMventilator_pin, GPIO.HIGH) #turn on ventilator
+        Interface.output(ATMmistmaker_pin, Interface.HIGH) # turn on mistmaker
+        Interface.output(ATMventilator_pin, Interface.HIGH) #turn on ventilator
     if humidity < humidity_threshold*(1+0.005) : # humidity is too high
-        GPIO.output(ATMmistmaker_pin, GPIO.LOW) # turn off ATMmistmaker_pin
+        Interface.output(ATMmistmaker_pin, Interface.LOW) # turn off ATMmistmaker_pin
         time.sleep(necessry_time) # decide how many time it gets to homogenize
-        GPIO.output(ATMmistmaker_pin, GPIO.LOW) #turn off ventilator
+        Interface.output(ATMmistmaker_pin, Interface.LOW) #turn off ventilator
 
 ####### Lighting module
 def lighting_loop(t, variety):
     "lighting_loop i a function that control Leds acoording to climate recipe"
 
-    if t(1) < climate_recipe.LEDupBoundary(t, variety) and GPIO.input(LIGled_pi) # end of the day for LEDs
-        GPIO.output(LIGled_pin, GPIO.LOW)
-    if t(1) > climate_recipe.LEDupBoundary(t,variety) and not GPIO.input(LIGled_pi) # beginning of the day for LEDs
-        GPIO.output(LIGled_pin, GPIO.HIGH)
+    if t(1) < climate_recipe.LEDupBoundary(t, variety) and Interface.input(LIGled_pi) # end of the day for LEDs
+        Interface.output(LIGled_pin, Interface.LOW)
+    if t(1) > climate_recipe.LEDupBoundary(t,variety) and not Interface.input(LIGled_pi) # beginning of the day for LEDs
+        Interface.output(LIGled_pin, Interface.HIGH)
 
 ####### Nutrients module
 def nutrients_loop(nbdays, variety):
@@ -93,19 +93,19 @@ def nutrients_loop(nbdays, variety):
     i = floor(nbdays/7) +1 # week index
     if nutrient_week(i) == False : # no nutrient for the current week
         FloraMicro = climate_recipe.floraMicro(i, variety) #ml
-        GPIO.output(NUTpump1_pin, GPIO.HIGH)
+        Interface.output(NUTpump1_pin, Interface.HIGH)
         time.sleep(FloraMicro/flow*coeff)
-        GPIO.output(NUTpump1_pin, GPIO.LOW)
+        Interface.output(NUTpump1_pin, Interface.LOW)
 
         FloraGro = climate_recipe.floraGro(i, variety) #ml
-        GPIO.output(NUTpump2_pin, GPIO.HIGH)
+        Interface.output(NUTpump2_pin, Interface.HIGH)
         time.sleep(FloraGro/flow*coeff)
-        GPIO.output(NUTpump2_pin, GPIO.LOW)
+        Interface.output(NUTpump2_pin, Interface.LOW)
 
         FloraBloom = climate_recipe.floraBloop(i, variety) # ml
-        GPIO.output(NUTpump3_pin, GPIO.HIGH)
+        Interface.output(NUTpump3_pin, Interface.HIGH)
         time.sleep(FloraBloom/flow*coeff)
-        GPIO.output(NUTpump3_pin, GPIO.LOW)
+        Interface.output(NUTpump3_pin, Interface.LOW)
 
         nutrient_week(i) = True
 
@@ -123,59 +123,59 @@ def watering_loop(t, variety):
 
     #pH regulation
     if pH < climate_recipe.pHlow(t, variety):
-        GPIO.output(WARpH_pin, GPIO.HIGH)
+        Interface.output(WARpH_pin, Interface.HIGH)
         time.sleep(x) # find the right amount of time to reach the good value
-        GPIO.output(WARpH_pin, GPIO.LOW)
+        Interface.output(WARpH_pin, Interface.LOW)
 
     if pH > climate_recipe.pHtop(t, variety):
-        GPIO.output(WARpHdown_pin, GPIO.HIGH)
+        Interface.output(WARpHdown_pin, Interface.HIGH)
         time.sleep(x) # find the right amount of time to reach the good value
-        GPIO.output(WARpHdown_pin, GPIO.LOW)
+        Interface.output(WARpHdown_pin, Interface.LOW)
 
     #watering
     if climate_recipe.watering_fistcycle(nbdays,variety):
-        GPIO.output(WARultrasonicmistmaker_pin, GPIO.HIGH)
-        GPIO.output(WARventilator_pin, GPIO.HIGH)
+        Interface.output(WARultrasonicmistmaker_pin, Interface.HIGH)
+        Interface.output(WARventilator_pin, Interface.HIGH)
         time.sleep(climate_recipe.WAR_ON_FIRST(variety))
-        GPIO.output(WARultrasonicmistmaker_pin, GPIO.LOW)
-        GPIO.output(WARventilator_pin, GPIO.LOW)
+        Interface.output(WARultrasonicmistmaker_pin, Interface.LOW)
+        Interface.output(WARventilator_pin, Interface.LOW)
 
-        GPIO.output(WARmixer_pi, GPIO.HIGH)
+        Interface.output(WARmixer_pi, Interface.HIGH)
         time.sleep(climate_recipe.WAR_OFF_FIRST(variety))
-        GPIO.output(WARmixer_pi, GPIO.LOW)
+        Interface.output(WARmixer_pi, Interface.LOW)
 
     if not climate_recipe.watering_fistcycle(nbdays,variety):
-        GPIO.output(WARultrasonicmistmaker_pin, GPIO.HIGH)
-        GPIO.output(WARventilator_pin, GPIO.HIGH)
+        Interface.output(WARultrasonicmistmaker_pin, Interface.HIGH)
+        Interface.output(WARventilator_pin, Interface.HIGH)
         time.sleep(climate_recipe.WAR_OFN_SECOND(variety))
-        GPIO.output(WARultrasonicmistmaker_pin, GPIO.LOW)
-        GPIO.output(WARventilator_pin, GPIO.LOW)
+        Interface.output(WARultrasonicmistmaker_pin, Interface.LOW)
+        Interface.output(WARventilator_pin, Interface.LOW)
 
-        GPIO.output(WARmixer_pi, GPIO.HIGH)
+        Interface.output(WARmixer_pi, Interface.HIGH)
         time.sleep(climate_recipe.WAR_OFF_SECOND(variety))
-        GPIO.output(WARmixer_pi, GPIO.LOW)
+        Interface.output(WARmixer_pi, Interface.LOW)
 
 ####### End of growth
 
 def end_loop():
-    "put all the GPIO pins at LOW value"
+    "put all the Interface pins at LOW value"
     #ATM module
-    GPIO.output(ATMventilator_pin, GPIO.LOW)
-    GPIO.output(ATMmistmaker_pin, GPIO.LOW)
-    GPIO.output(ATMelectricwarmer_pin, GPIO.LOW)
+    Interface.output(ATMventilator_pin, Interface.LOW)
+    Interface.output(ATMmistmaker_pin, Interface.LOW)
+    Interface.output(ATMelectricwarmer_pin, Interface.LOW)
     #LIG module
-    GPIO.output(LIGled_pin, GPIO.LOW)
+    Interface.output(LIGled_pin, Interface.LOW)
     #NUT module
-    GPIO.output(NUTpump1_pin, GPIO.LOW)
-    GPIO.output(NUTpump2_pin, GPIO.LOW)
-    GPIO.output(NUTpump3_pin, GPIO.LOW)
+    Interface.output(NUTpump1_pin, Interface.LOW)
+    Interface.output(NUTpump2_pin, Interface.LOW)
+    Interface.output(NUTpump3_pin, Interface.LOW)
     #WAT module
-    GPIO.output(WARultrasonicmistmaker_pin, GPIO.LOW)
-    GPIO.output(WARmixer_pin, GPIO.LOW)
-    GPIO.output(WARventilator_pin, GPIO.LOW)
-    GPIO.output(WARwatermevel_pin, GPIO.LOW)
-    GPIO.output(WARpHup_pin, GPIO.LOW)
-    GPIO.output(WARpHdown_pin, GPIO.LOW)
+    Interface.output(WARultrasonicmistmaker_pin, Interface.LOW)
+    Interface.output(WARmixer_pin, Interface.LOW)
+    Interface.output(WARventilator_pin, Interface.LOW)
+    Interface.output(WARwatermevel_pin, Interface.LOW)
+    Interface.output(WARpHup_pin, Interface.LOW)
+    Interface.output(WARpHdown_pin, Interface.LOW)
 
 ######################### Main loop ###########################################
 
@@ -183,40 +183,40 @@ def growing_program(variety) :
 
     ###################### Initialisation ########################################
 
-    GPIO.setmode(GPIO.BOARD)
+    Interface.setmode(Interface.BOARD)
 
     ####### Atmospheric module (ATM)
     ATMventilator_pin =  ...
-    GPIO.setup(ATMventilator_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(ATMventilator_pin, Interface.OUT, initial = Interface.LOW)
     ATMmistmaker_pin = ...
-    GPIO.setup(ATMmistmaker_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(ATMmistmaker_pin, Interface.OUT, initial = Interface.LOW)
     ATMelectricwarmer_pin = ...
-    GPIO.setup(ATMelectricwarmer_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(ATMelectricwarmer_pin, Interface.OUT, initial = Interface.LOW)
 
     ####### Lighting module (LIG)
     LIGled_pin = ...
-    GPIO.setup(LIGled_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(LIGled_pin, Interface.OUT, initial = Interface.LOW)
     ####### Nutrients module (NUT)
     NUTpump1_pin = ...                     #Flora Micro/Mato
-    GPIO.setup(NUTpump1_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(NUTpump1_pin, Interface.OUT, initial = Interface.LOW)
     NUTpump2_pin = ...                     #FloraGro
-    GPIO.setup(NUTpump2_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(NUTpump2_pin, Interface.OUT, initial = Interface.LOW)
     NUTpump3_pin = ...                     #FloraBloom
-    GPIO.setup(NUTpump3_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(NUTpump3_pin, Interface.OUT, initial = Interface.LOW)
     size_x_bac = ...
     size_y_bac ...
     ####### Watering module (WAT)
     WARultrasonicmistmaker_pin = ...
-    GPIO.setup(WARultrasonicmistmaker_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(WARultrasonicmistmaker_pin, Interface.OUT, initial = Interface.LOW)
     WARmixer_pin = ...
-    GPIO.setup(WARmixer_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(WARmixer_pin, Interface.OUT, initial = Interface.LOW)
     WARventilator_pin = ...
-    GPIO.setup(WARventilator_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(WARventilator_pin, Interface.OUT, initial = Interface.LOW)
     WARwaterlevel_pin = ...
     WARpHup_pin = ...
-    GPIO.setup(WARpHup_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(WARpHup_pin, Interface.OUT, initial = Interface.LOW)
     WARpHdown_pin = ...
-    GPIO.setup(WARpHdown_pin, GPIO.OUT, initial = GPIO.LOW)
+    Interface.setup(WARpHdown_pin, Interface.OUT, initial = Interface.LOW)
     pH_I2C_adress = ...
     EC_I2C_address = ...
 
