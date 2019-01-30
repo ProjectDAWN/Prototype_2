@@ -12,31 +12,30 @@ class Interface :
         self.pins = [None]*nbPins
 
     def verif_pin(pin):
+        return(pin>=0 and pin<nbPins)
 
-    def activate(self,pin,init=None):
-        if pin>=0 and pin<nbPins:
-            if pin not in self.activated_pins:
-                self.activated_pins.append(pin)
-                self.pins[pin]=init
-                
+    def activate(self,*pins,init=None):
+        for pin in pins:
+            if verif_pin(pin):
+                if pin not in self.activated_pins:
+                    self.activated_pins.append(pin)
+                    self.pins[pin]=init
+                else:
+                    raise ActivateExeption("Pin {} already activated".format(pin))
             else:
-                raise ActivateExeption("Pin {} already activated".format(pin))
-        else:
-            raise PinExeption("Pin {} doesn't exist".format(pin))
-methClasse = classmethod(methClass)
+                raise PinExeption("Pin {} doesn't exist".format(pin))
+    def desactivate(pin):
+        if verif_pin(pin):
+            self.pins[pins]=None
+            self.activated_pins.remove(pin)
 
+    def output(pin,val):
+        if verif_pin(pin):
+            self.pins[pin]=val
 
+    def input(pin):
+        return(12)
 
-
-def desactivate(pin):
-
-
-
-
-
-def input(pin):
-    return()
-
-def cleanup():
-    for pin in activated_pins:
-        desactivate(pin)
+    def cleanup():
+        for pin in activated_pins:
+            desactivate(pin)
