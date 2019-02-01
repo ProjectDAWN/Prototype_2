@@ -40,8 +40,8 @@ import RPi.GPIO as GPIO
 import datetime
 import climate_recipe
 import time
-import am2315
-import AtlasI2C
+from am2315 import *
+from AtlasI2C import *
 #add sensors' and actuators' classes here
 
 
@@ -67,7 +67,7 @@ WARwatermevel_pin=0
 WARventilator_pin =0
 WARmixer_pin = 0
 WARultrasonicmistmaker_pin = 0
-
+temp_I2C_addr = 0
 
 
 ####### Atmospheric module
@@ -76,6 +76,7 @@ def atmospheric_loop(t,nbdays,variety):
     """atmospheric_loop i a function that maintain parameters (temperature, humidity) in a range define in climate recipe"""
 
     #Temperature
+    temp_device = am2315(temp_I2C_addr)
     temperature = am2315.read_temperature() #get value of temperature
     if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not GPIO.input(ATMelectricwarmer_pin): #too cold
         GPIO.output(ATMelectricwarmer_pin, GPIO.HIGH) #turn on electric warmer
