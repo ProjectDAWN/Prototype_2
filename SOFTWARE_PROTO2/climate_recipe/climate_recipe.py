@@ -50,7 +50,7 @@ def threshold_temp_min(t,nbdays,variety):
                 x = 26
             else : # night
                 x = 19
-        elif nbdays > 21 and t <= 51: : # "floraison" Time
+        elif nbdays > 21 and t <= 51: # "floraison" Time
             if t(2)<19 and t(2)>7 : #day
                 x = 26
             else : # night
@@ -74,7 +74,7 @@ def threshold_temp_max(t,nbdays,variety):
                 x = 26
             else : # night
                 x = 19
-        elif nbdays > 21 and t <= 51: : # "floraison" Time
+        elif nbdays > 21 and t <= 51: # "floraison" Time
             if t(2)<19 and t(2)>7 : #day
                 x = 26
             else : # night
@@ -89,13 +89,13 @@ def threshold_temp_max(t,nbdays,variety):
     return x
 
 def thresholdd_humidity(t,variety):
-     "return the average value needed at t"
+    "return the average value needed at t"
     if variety == "tomato":
         if t <= 7 : # "germination" time
             x = 85
         elif t > 7 and t <= 21 : # "croissance" time
             x = 75
-        elif t > 21 and t <= 51: : # "floraison" Time
+        elif t > 21 and t <= 51: # "floraison" Time
             x = 70
         elif t > 51 : # "fructification" time
             x = 70
@@ -133,95 +133,95 @@ def LEDdownBoundary(t,variety):
 
 def floraMicro(i, variety):
     "return that return the number of ml of this nutrient for week i according to climate recipe"
-        if variety == "tomato":
-            if i == 1 :
-                x = 2.5
-            elif i == 2 :
-                x = 7.5
-            elif i == 3 :
-                x = 10
-            elif i == 4 :
-                x = 7.5
-            elif i == 5 :
-                x = 7.5
-            elif i == 6 :
-                x = 7.5
-            elif i == 7 :
-                x = 7.5
-            elif i == 8 :
-                x = 7.5
-            elif i == 9 :
-                x = 7.5
-            elif i == 10 :
-                x = 7.5
-            elif i == 11 :
-                x = 5
-            elif i == 12 :
-                x = 0
+    if variety == "tomato":
+        if i == 1 :
+            x = 2.5
+        elif i == 2 :
+            x = 7.5
+        elif i == 3 :
+            x = 10
+        elif i == 4 :
+            x = 7.5
+        elif i == 5 :
+            x = 7.5
+        elif i == 6 :
+            x = 7.5
+        elif i == 7 :
+            x = 7.5
+        elif i == 8 :
+            x = 7.5
+        elif i == 9 :
+            x = 7.5
+        elif i == 10 :
+            x = 7.5
+        elif i == 11 :
+            x = 5
+        elif i == 12 :
+            x = 0
         else :         #limit case (no climate recipe)
             x = 0
-        return x
+    return x
 
 def floraGro(i, variety):
     "return that return the number of ml of this nutrient for week i according to climate recipe"
-        if variety == "tomato":
-            if i == 1 :
-                x = 2.5
-            elif i == 2 :
-                x = 10
-            elif i == 3 :
-                x = 10
-            elif i == 4 :
-                x = 7.5
-            elif i == 5 :
-                x = 2.5
-            elif i == 6 :
-                x = 2.5
-            elif i == 7 :
-                x = 2.5
-            elif i == 8 :
-                x = 2.5
-            elif i == 9 :
-                x = 0
-            elif i == 10 :
-                x = 0
-            elif i == 11 :
-                x = 0
-            elif i == 12 :
-                x = 0
-        else :         #limit case (no climate recipe)
+    if variety == "tomato":
+        if i == 1 :
+            x = 2.5
+        elif i == 2 :
+            x = 10
+        elif i == 3 :
+            x = 10
+        elif i == 4 :
+            x = 7.5
+        elif i == 5 :
+            x = 2.5
+        elif i == 6 :
+            x = 2.5
+        elif i == 7 :
+            x = 2.5
+        elif i == 8 :
+            x = 2.5
+        elif i == 9 :
             x = 0
-        return x
+        elif i == 10 :
+            x = 0
+        elif i == 11 :
+            x = 0
+        elif i == 12 :
+            x = 0
+    else :         #limit case (no climate recipe)
+        x = 0
+    return x
 def floraBloom(i, variety):
     "return that return the number of ml of this nutrient for week i according to climate recipe"
-        if variety == "tomato":
-            if i == 1 :
-                x = 2.5
-            elif i == 2 :
-                x = 7.5
-            elif i == 3 :
-                x = 10
-            elif i == 4 :
-                x = 7.5
-            elif i == 5 :
-                x = 7.5
-            elif i == 6 :
-                x = 7.5
-            elif i == 7 :
-                x = 7.5
-            elif i == 8 :
-                x = 7.5
-            elif i == 9 :
-                x = 7.5
-            elif i == 10 :
-                x = 7.5
-            elif i == 11 :
-                x = 5
-            elif i == 12 :
-                x = 0
-        else :         #limit case (no climate recipe)
+    if variety == "tomato":
+        if i == 1 :
+            x = 2.5
+        elif i == 2 :
+            x = 7.5
+        elif i == 3 :
+            x = 10
+        elif i == 4 :
+            x = 7.5
+        elif i == 5 :
+            x = 7.5
+        elif i == 6 :
+            x = 7.5
+        elif i == 7 :
+            x = 7.5
+        elif i == 8 :
+            x = 7.5
+        elif i == 9 :
+            x = 7.5
+        elif i == 10 :
+            x = 7.5
+        elif i == 11 :
+            x = 5
+        elif i == 12 :
             x = 0
-        return x
+    else :         #limit case (no climate recipe)
+        x = 0
+    return x
 
 
 ########## Watering Module ###########################

@@ -11,30 +11,38 @@ class Interface :
 
     def __init__(self) :
         self.activated_pins = [] #list of pins which are activate (hardware ON)
-        self.pins = [None]*nbPins #list of state by pin
+        self.pins = [False]*nbPins #list of state by pin
 
-    def verif_pin(pin):
-        return(pin in pin_list)
+    def verif_pin(self,pin,activate):
+        """this function check error on pin activation
+        take a pin and a bool indicating the info to communicate"""
+        if(pin not in pin_list):
+            raise PinExeption("Pin {} doesn't exist".format(pin))
+            return(false)
+        elif(activate and pin in self.activated_pins):
+            raise ActivateExeption("Pin {} already activated".format(pin))
+            return(false)
+        elif(not activate and pin not in self.activated_pins):
+            raise ActivateExeption("Pin {} not activated".format(pin))
+            return(false)
+        else:
+            return(True)
 
-    def activate(self,*pins,init=None):
+    def activate(self,*pins):
         for pin in pins:
-            if verif_pin(pin):
-                if pin not in self.activated_pins:
-                    self.activated_pins.append(pin)
-                    self.pins[pin]=init
-                else:
-                    raise ActivateExeption("Pin {} already activated".format(pin))
-            else:
-                raise PinExeption("Pin {} doesn't exist".format(pin))
+            if verif_pin(pin,True):
+                self.activated_pins.append(pin)
+                self.pins[pin]=True
 
-    def desactivate(pin):
-        if verif_pin(pin):
-            self.pins[pins]=None
-            self.activated_pins.remove(pin)
+    def desactivate(self,*pins):
+        for pin in pins:
+            if verif_pin(pin,False):
+                self.activated_pins.remove(pin)
+                self.pins[pins]=False
 
-    def output(pin,val):
-        if verif_pin(pin):
-            self.pins[pin]=val
+    #def output(pin,val):
+    #    if verif_pin(pin):
+    #        self.pins[pin]=val
 
     def input(pin):
         return(12)
