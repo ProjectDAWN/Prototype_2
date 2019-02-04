@@ -218,7 +218,6 @@ def growing_program(variety) :
 
         ###### loop
 
-        diff = datetime.datetime.now() - date_current
         atmospheric_loop(diff,nbdays,variety)
         #Decide waiting time
         lighting_loop(diff,variety)
