@@ -35,10 +35,11 @@
 #                        ventilateur waterproof
 #
 ##################### Importation section   #################################
-
-import RPi.GPIO as GPIO
+import sys
+sys.path.append(sys.path[0] + '/..')
+from out_in import Emulator
 import datetime
-import climate_recipe
+from climate_recipe import climate_recipe
 import time
 from am2315 import *
 from AtlasI2C import *
@@ -49,60 +50,51 @@ from AtlasI2C import *
 ######################## Modules loops #######################################
 
 ###Variable initialization
-ATMelectricwarmer_pin=0
-ATMmistmaker_pin=0
-ATMventilator_pin=0
+
 necessry_time=0
-LIGled_pin=0
 size_x_bac=0
 size_y_bac=0
-NUTpump1_pin=0
-NUTpump2_pin=0
-NUTpump3_pin=0
+
 pH_I2C_address = 0
 EC_I2C_address = 0
-WARpHdown_pin = 0
-WARpHup_pin =0
+
 WARwatermevel_pin=0
-WARventilator_pin =0
-WARmixer_pin = 0
-WARultrasonicmistmaker_pin = 0
-temp_I2C_addr = 0
+
 
 
 ####### Atmospheric module
+InOut = Emulator.Interface()
+AM2315 = am2315.AM2315()
 
 def atmospheric_loop(t,nbdays,variety):
     """atmospheric_loop i a function that maintain parameters (temperature, humidity) in a range define in climate recipe"""
 
     #Temperature
-    temp_device = am2315(temp_I2C_addr)
-    temperature = am2315.read_temperature() #get value of temperature
-    if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not GPIO.input(ATMelectricwarmer_pin): #too cold
-        GPIO.output(ATMelectricwarmer_pin, GPIO.HIGH) #turn on electric warmer
+    temperature = AM2315.read_temperature() #get value of temperature
+    if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not InOut.input(ATM_Warmer): #too cold
+        InOut.activate(ATM_Warmer, InOut.HIGH) #turn on electric warmer
     if temperature > climate_recipe.threshold_temp_max(t,nbdays,variety)+1:  #too warm
-        GPIO.output(ATMelectricwarmer_pin, GPIO.LOW) #turn off electric warmer
+        InOut.desactivate(ATM_Warmer, InOut.LOW) #turn off electric warmer
 
     #humidity
-    humidity = am2315.read_humidity() #get value of humidity
+    humidity = AM2315.read_humidity() #get value of humidity
     humidity_threshold = climate_recipe.thresholdd_humidity(t,variety) # get value of threshold from climate recipe
-    if humidity < humidity_threshold*(1-0.005) and not GPIO.input(ATMmistmaker_pin) and not GPIO.input(ATMventilator_pin):
+    if humidity < humidity_threshold*(1-0.005) and not InOut.input(ATM_MistMaker) and not InOut.input(ATM_Ventilator):
         # humidity is too low
-        GPIO.output(ATMmistmaker_pin, GPIO.HIGH) # turn on mistmaker
-        GPIO.output(ATMventilator_pin, GPIO.HIGH) #turn on ventilator
+        InOut.activate(ATM_MistMaker, ATM_Ventilator) # turn on mistmaker, ventilator
     if humidity < humidity_threshold*(1+0.005) : # humidity is too high
-        GPIO.output(ATMmistmaker_pin, GPIO.LOW) # turn off ATMmistmaker_pin
+        InOut.desactivate(ATM_MistMaker) # turn off ATM_MistMaker
         time.sleep(necessry_time) # decide how many time it gets to homogenize
-        GPIO.output(ATMmistmaker_pin, GPIO.LOW) #turn off ventilator
+        InOut.desactivate(ATM_MistMaker) #turn off ventilator
 
 ####### Lighting module
 def lighting_loop(t, variety):
     """lighting_loop i a function that control Leds acoording to climate recipe"""
 
-    if t(1) < climate_recipe.LEDupBoundary(t, variety) and GPIO.input(LIGled_pin): # end of the day for LEDs
-        GPIO.output(LIGled_pin, GPIO.LOW)
-    if t(1) > climate_recipe.LEDupBoundary(t,variety) and not GPIO.input(LIGled_pin):# beginning of the day for LEDs
-        GPIO.output(LIGled_pin, GPIO.HIGH)
+    if t(1) < climate_recipe.LEDupBoundary(t, variety) and InOut.input(LIG_Led): # end of the day for LEDs
+        InOut.desactivate(LIG_Led)
+    if t(1) > climate_recipe.LEDupBoundary(t,variety) and not InOut.input(LIG_Led):# beginning of the day for LEDs
+        InOut.activate(LIG_Led)
 
 ####### Nutrients module
 def nutrients_loop(nbdays, variety,nutrient_week):
@@ -115,17 +107,17 @@ def nutrients_loop(nbdays, variety,nutrient_week):
     if not nutrient_week[i]: # no nutrient for the current week
         nutrient_week[i]=True
         FloraMicro = climate_recipe.floraMicro(i, variety) #ml
-        GPIO.output(NUTpump1_pin, GPIO.HIGH)
+        InOut.activate(NUT_Pump_pHDown)
         time.sleep(FloraMicro/flow*coeff)
-        GPIO.output(NUTpump1_pin, GPIO.LOW)
+        InOut.desactivate(NUT_Pump_pHDown)
         FloraGro = climate_recipe.floraGro(i, variety) #ml
-        GPIO.output(NUTpump2_pin, GPIO.HIGH)
+        InOut.activate(NUT_Pump2)
         time.sleep(FloraGro/flow*coeff)
-        GPIO.output(NUTpump2_pin, GPIO.LOW)
+        InOut.desactivate(NUT_Pump2)
         FloraBloom = climate_recipe.floraBloop(i, variety) # ml
-        GPIO.output(NUTpump3_pin, GPIO.HIGH)
+        InOut.activate(NUT_Pump3)
         time.sleep(FloraBloom/flow*coeff)
-        GPIO.output(NUTpump3_pin, GPIO.LOW)
+        InOut.desactivate(NUT_Pump3)
 
 
 
@@ -143,59 +135,55 @@ def watering_loop(t, variety, nbdays):
 
     #pH regulation
     if pH < climate_recipe.pHlow(t, variety):
-        GPIO.output(WARpHdown_pin, GPIO.HIGH)
+        InOut.activate(NUT_Pump4)
         time.sleep(x) # find the right amount of time to reach the good value
-        GPIO.output(WARpHdown_pin, GPIO.LOW)
+        InOut.desactivate(NUT_Pump4)
 
     if pH > climate_recipe.pHtop(t, variety):
-        GPIO.output(WARpHup_pin, GPIO.HIGH)
+        InOut.activate(WARpHup_pin)
         time.sleep(x) # find the right amount of time to reach the good value
-        GPIO.output(WARpHup_pin, GPIO.LOW)
+        InOut.desactivate(WARpHup_pin)
 
     #watering
     if climate_recipe.watering_fistcycle(nbdays,variety):
-        GPIO.output(WARultrasonicmistmaker_pin, GPIO.HIGH)
-        GPIO.output(WARventilator_pin, GPIO.HIGH)
+        InOut.activate(WAR_MistMaker, WAR_Ventilator)
         time.sleep(climate_recipe.WAR_ON_FIRST(variety))
-        GPIO.output(WARultrasonicmistmaker_pin, GPIO.LOW)
-        GPIO.output(WARventilator_pin, GPIO.LOW)
+        InOut.desactivate(WAR_MistMaker, WAR_Ventilator)
 
-        GPIO.output(WARmixer_pin, GPIO.HIGH)
+        InOut.activate(WAR_Mixer)
         time.sleep(climate_recipe.WAR_OFF_FIRST(variety))
-        GPIO.output(WARmixer_pin, GPIO.LOW)
+        InOut.desactivate(WAR_Mixer)
 
     if not climate_recipe.watering_fistcycle(nbdays,variety):
-        GPIO.output(WARultrasonicmistmaker_pin, GPIO.HIGH)
-        GPIO.output(WARventilator_pin, GPIO.HIGH)
+        InOut.activate(WAR_MistMaker, WAR_Ventilator)
         time.sleep(climate_recipe.WAR_OFN_SECOND(variety))
-        GPIO.output(WARultrasonicmistmaker_pin, GPIO.LOW)
-        GPIO.output(WARventilator_pin, GPIO.LOW)
+        InOut.desactivate(WAR_MistMaker, WAR_Ventilator)
 
-        GPIO.output(WARmixer_pin, GPIO.HIGH)
+        InOut.activate(WAR_Mixer)
         time.sleep(climate_recipe.WAR_OFF_SECOND(variety))
-        GPIO.output(WARmixer_pin, GPIO.LOW)
+        InOut.desactivate(WAR_Mixer)
 
 ####### End of growth
 
 def end_loop():
-    """put all the GPIO pins at LOW value"""
+    """put all the InOut pins at LOW value"""
     #ATM module
-    GPIO.output(ATMventilator_pin, GPIO.LOW)
-    GPIO.output(ATMmistmaker_pin, GPIO.LOW)
-    GPIO.output(ATMelectricwarmer_pin, GPIO.LOW)
+    InOut.desactivate(ATM_Ventilator,
+                    ATM_MistMaker,
+                    ATM_Warmer)
     #LIG module
-    GPIO.output(LIGled_pin, GPIO.LOW)
+    InOut.desactivate(LIG_Led)
     #NUT module
-    GPIO.output(NUTpump1_pin, GPIO.LOW)
-    GPIO.output(NUTpump2_pin, GPIO.LOW)
-    GPIO.output(NUTpump3_pin, GPIO.LOW)
+    InOut.desactivate(NUT_Pump_pHDown,
+                    NUT_Pump2,
+                    NUT_Pump3)
     #WAT module
-    GPIO.output(WARultrasonicmistmaker_pin, GPIO.LOW)
-    GPIO.output(WARmixer_pin, GPIO.LOW)
-    GPIO.output(WARventilator_pin, GPIO.LOW)
-    GPIO.output(WARwatermevel_pin, GPIO.LOW)
-    GPIO.output(WARpHup_pin, GPIO.LOW)
-    GPIO.output(WARpHdown_pin, GPIO.LOW)
+    InOut.desactivate(WAR_MistMaker,
+                    WAR_Mixer,
+                    WAR_Ventilator,
+                    WARwatermevel_pin,
+                    WARpHup_pin,
+                    NUT_Pump4)
 
 ######################### Main loop ###########################################
 
@@ -203,28 +191,8 @@ def growing_program(variety) :
 
     ###################### Initialisation ########################################
 
-    GPIO.setmode(GPIO.BOARD)
+    #InOut.setmode(InOut.BOARD)
 
-    ####### Atmospheric module (ATM)
-    GPIO.setup(ATMventilator_pin, GPIO.OUT, initial = GPIO.LOW)
-    GPIO.setup(ATMmistmaker_pin, GPIO.OUT, initial = GPIO.LOW)
-    GPIO.setup(ATMelectricwarmer_pin, GPIO.OUT, initial = GPIO.LOW)
-
-    ####### Lighting module (LIG)
-    GPIO.setup(LIGled_pin, GPIO.OUT, initial = GPIO.LOW)
-    ####### Nutrients module (NUT)
-    GPIO.setup(NUTpump1_pin, GPIO.OUT, initial = GPIO.LOW) #Flora Micro/Mato
-    GPIO.setup(NUTpump2_pin, GPIO.OUT, initial = GPIO.LOW)  #FloraGro
-    GPIO.setup(NUTpump3_pin, GPIO.OUT, initial = GPIO.LOW) #FloraBloom
-    ####### Watering module (WAT)
-    GPIO.setup(WARultrasonicmistmaker_pin, GPIO.OUT, initial = GPIO.LOW)
-    GPIO.setup(WARmixer_pin, GPIO.OUT, initial = GPIO.LOW)
-    GPIO.setup(WARventilator_pin, GPIO.OUT, initial = GPIO.LOW)
-    GPIO.setup(WARpHup_pin, GPIO.OUT, initial = GPIO.LOW)
-    GPIO.setup(WARpHdown_pin, GPIO.OUT, initial = GPIO.LOW)
-
-    ####### Global variables
-    t = (0,0,0,0,0) # current value of Time
     ##### Global variables
     date_ini = datetime.datetime.now() # Get the value of time at the beginning of the growth
     T = climate_recipe.nb_days(variety) # Get the end value from climate_recipe (in matter of days)
@@ -250,20 +218,22 @@ def growing_program(variety) :
 
         ###### loop
 
-        atmospheric_loop(t,nbdays,variety)
+        diff = datetime.datetime.now() - date_current
+        atmospheric_loop(diff,nbdays,variety)
         #Decide waiting time
-        lighting_loop(t,variety)
+        lighting_loop(diff,variety)
         #Decide wainting Time
         nutrients_loop(nbdays,variety,nutrient_week)
         #Decide waiting Time
-        watering_loop(t,variety)
+        watering_loop(diff,variety)
         #Decide waiting time
         diff = datetime.datetime.now() - date_current
 
         if diff < datetime.timedelta(minutes=10):
-            time.sleep(diff.total_seconds())
+            time.sleep((datetime.timedelta(minutes=10) - diff).total_seconds())
         date_current = datetime.datetime.now()
 
     ###### End of loop
 
     end_loop()
+growing_program("tomates")
