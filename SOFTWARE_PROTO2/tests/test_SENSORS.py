@@ -14,7 +14,7 @@ EC_I2C_address= 0x64
 
 #ini ATM_T\H
 i2c = busio.I2C(board.SCL, board.SDA)
-am = adafruit_am2320.AM2320(i2c)
+
 
 #ini WAR_T
 ds18b20 = DS18B20()
@@ -35,6 +35,7 @@ print(EC)
 time.sleep(10)
 
 #Get ATM_T\H value
+am = adafruit_am2320.AM2320(i2c)
 print("Temperature: ", am.temperature)
 print("Humidity: ", am.relative_humidity)
 time.sleep(10)
