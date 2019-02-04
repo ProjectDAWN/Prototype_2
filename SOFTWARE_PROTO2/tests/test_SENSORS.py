@@ -22,28 +22,27 @@ ds18b20 = DS18B20()
 #ini WAR_level
 ###############
 
-while True :
-    #Get pH value
-    device = AtlasI2C(pH_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
-    pH = string.split(device.query("R"), ",")
-    print(pH)
-    time.sleep(10)
+#Get pH value
+device = AtlasI2C(pH_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
+pH = string.split(device.query("R"), ",")
+print(pH)
+time.sleep(10)
 
-    # Get EC value
-    device = AtlasI2C(EC_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
-    EC = string.split(device.query("R"), ",")
-    print(EC)
-    time.sleep(10)
+# Get EC value
+device = AtlasI2C(EC_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
+EC = string.split(device.query("R"), ",")
+print(EC)
+time.sleep(10)
 
-    #Get ATM_T\H value
-    print("Temperature: ", am.temperature)
-    print("Humidity: ", am.relative_humidity)
-    time.sleep(10)
+#Get ATM_T\H value
+print("Temperature: ", am.temperature)
+print("Humidity: ", am.relative_humidity)
+time.sleep(10)
 
-    # Get WAR_T
-    ds18b20.read_temp()
-    time.sleep(10)
+# Get WAR_T
+ds18b20.read_temp()
+time.sleep(10)
 
-    # Get WAR_level
-    ###############
-    time.sleep(10)
+# Get WAR_level
+###############
+time.sleep(10)
