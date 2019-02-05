@@ -5,6 +5,7 @@ import board
 import busio
 import adafruit_am2320
 from ds18b20 import *
+from mcp30008 import *
 
 #ini pH
 pH_I2C_address = 0x63
@@ -20,7 +21,7 @@ i2c = busio.I2C(board.SCL, board.SDA)
 ds18b20 = DS18B20()
 
 #ini WAR_level
-###############
+mcp30008 = MCP3008()
 
 #Get pH value
 device = AtlasI2C(pH_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
@@ -45,5 +46,5 @@ ds18b20.read_temp()
 time.sleep(10)
 
 # Get WAR_level
-###############
+mcp3008.read_waterlevel()
 time.sleep(10)
