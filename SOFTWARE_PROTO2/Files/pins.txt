@@ -5,4 +5,9 @@ NUT_Pump_Heaven 32
 NUT_Pump_TopMax 33
 NUT_Mixer 35
 WAR_Ventilator 36
-LIG_Led
+WAR_Mixer 11
+WAR_MistMaker 18
+ATM_Warmer 13
+ATM_Ventilator 15
+ATM_MistMaker 16
+LIG_Led 40
