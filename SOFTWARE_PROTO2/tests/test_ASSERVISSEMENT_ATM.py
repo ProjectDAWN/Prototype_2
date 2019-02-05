@@ -33,11 +33,11 @@ while True :
     if am.relative_humidity < 70 :
         pin=16
         print("MistMaker activé \n")
-        GPIO.setmode(GPIO.BOARD)
+
         GPIO.setup(pin, GPIO.OUT)
         GPIO.output(pin, GPIO.HIGH)
         pin1=15
-        GPIO.setmode(GPIO.BOARD)
+        
         GPIO.setup(pin1, GPIO.OUT)
         GPIO.output(pin1, GPIO.HIGH)
         print("Ventilateur activé")

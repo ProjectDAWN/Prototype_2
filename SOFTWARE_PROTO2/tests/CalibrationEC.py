@@ -12,8 +12,8 @@ print(EC)
 
 #Step 2
 
-EC = string.split(device.query("Cal,low,1413"), ",")
-print(EC)
+# EC = string.split(device.query("Cal,low,1413"), ",")
+# print(EC)
 
 #Step 3
 
