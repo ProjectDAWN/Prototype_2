@@ -15,9 +15,16 @@ class MCP3008:
 		self.cs = digitalio.DigitalInOut(board.D5)
  
 		# create the mcp object
-		self.mcp = MCP.MCP3008(spi, cs)
+		self.mcp = MCP.MCP3008(self.spi, self.cs)
+		self.Vmax = 1.5000
+		self.Vmin = 0.3500
+		self.Hmax = 213
 
 	def read_waterlevel(self):
 		chan = AnalogIn(self.mcp,MCP.P0)
+		V = chan.voltage
 		print('Raw ADC Value: ', chan.value)
-		print('ADC Voltage: ' + str(chan.voltage) + 'V')
+		print('ADC Voltage: ' + str(V) + 'V')
+		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
+		print ('Hauteur: ' + str(H) + ' mm')
+		
