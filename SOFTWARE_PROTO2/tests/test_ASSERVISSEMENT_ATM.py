@@ -8,7 +8,7 @@ GPIO.setmode(GPIO.BCM)
 #TEST ATMOSPHERIC Module
 
 
-am2320 = AM2320
+am2320 = AM2320()
 temperature,humidity = am2320.get()
 
 # loop on temperature
@@ -16,7 +16,7 @@ print("Temperature: ", temperature)
 
 if temperature < 25 :
     print("Chauffage activé \n")
-    pin=13
+    pin=27
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.HIGH)
 
@@ -28,13 +28,11 @@ else :
 print("Humidity: ",humidity,"\n")
 
 if humidity < 70 :
-    pin2=16
+    pin2=23
     print("MistMaker activé \n")
-    GPIO.setmode(GPIO.BOARD)
     GPIO.setup(pin2, GPIO.OUT)
     GPIO.output(pin2, GPIO.HIGH)
-    pin1=15
-    GPIO.setmode(GPIO.BOARD)
+    pin1=22
     GPIO.setup(pin1, GPIO.OUT)
     GPIO.output(pin1, GPIO.HIGH)
     print("Ventilateur activé")
