@@ -19,7 +19,7 @@ EC_value = EC.get()
 #test pH
 if pH_value > 6.5 :
 
-    pin5 =33
+    pin5 = 25
     GPIO.setup(pin5, GPIO.OUT)
     GPIO.output(pin5, GPIO.HIGH)
     print("Pompe pH Down allumée \n")
@@ -29,12 +29,12 @@ if pH_value > 6.5 :
 
 #watering test
 
-pin=18
+pin=24
 GPIO.setup(pin, GPIO.OUT)
 GPIO.output(pin, GPIO.HIGH)
 print("WAR_MistMaker allumé \n")
 
-pin2=36
+pin2=22
 GPIO.setup(pin2, GPIO.OUT)
 GPIO.output(pin2, GPIO.HIGH)
 print("WAR_Ventilator allumé \n")
@@ -46,7 +46,7 @@ GPIO.cleanup(pin2)
 print("WAR_MistMaker éteint \n")
 print("WAR_MVentilator éteint \n")
 
-pin3=11
+pin3=17
 
 GPIO.setup(pin3, GPIO.OUT)
 GPIO.output(pin3, GPIO.HIGH)

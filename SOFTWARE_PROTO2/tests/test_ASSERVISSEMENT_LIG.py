@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 
 t = datetime.datetime.now()
 if t.hour > 8 and t.hour < 20 :
-    pin=40
+    pin=21
     print("Leds allumée \n")
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(pin, GPIO.OUT)
