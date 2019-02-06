@@ -1,9 +1,9 @@
 import RPi.GPIO as GPIO
 import time
 
-pin=35
+pin=6
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.OUT)
 
 GPIO.output(pin, GPIO.HIGH)

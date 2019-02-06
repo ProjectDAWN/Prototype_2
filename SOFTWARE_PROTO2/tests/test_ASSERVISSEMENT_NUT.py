@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 
 #Tests pompes nutriments
 
-#Pompe 1
+#Pompe 1 : BioGrow
 pin=25
 GPIO.setup(pin, GPIO.OUT)
 GPIO.output(pin, GPIO.HIGH)
@@ -19,7 +19,7 @@ GPIO.cleanup(pin)
 print("Pompe 1 éteinte \n")
 time.sleep(10)
 
-#Pompe2
+#Pompe2 : BioBloom
 pin2=6
 GPIO.setup(pin2, GPIO.OUT)
 GPIO.output(pin2, GPIO.HIGH)
@@ -29,7 +29,7 @@ GPIO.cleanup(pin2)
 print("Pompe 2 éteinte \n")
 time.sleep(10)
 
-#Pompe3
+#Pompe3 : Heaven
 pin3=12
 GPIO.setup(pin3, GPIO.OUT)
 GPIO.output(pin3, GPIO.HIGH)
@@ -39,7 +39,7 @@ GPIO.cleanup(pin3)
 print("Pompe 3 éteinte \n")
 time.sleep(10)
 
-#Pompe4
+#Pompe4 : TopMax
 pin4=13
 GPIO.setup(pin4, GPIO.OUT)
 GPIO.output(pin4, GPIO.HIGH)
