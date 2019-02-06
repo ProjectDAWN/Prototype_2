@@ -1,16 +1,9 @@
 import time
-import board
-import busio
-import adafruit_am2320
+from am2320 import *
 
 #create the I2C shared bus
-i2c = busio.I2C(board.SCL, board.SDA)
-am = adafruit_am2320.AM2320(i2c)
+am2320 = AM2320()
 
 
-print("Temperature: ", am.temperature)
-print("Humidity: ", am.relative_humidity)
-time.sleep(2)
-print("Temperature: ", am.temperature)
-print("Humidity: ", am.relative_humidity)
+am2320.read()
 time.sleep(2)
