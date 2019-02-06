@@ -11,3 +11,4 @@ class AM2320:
 	def read(self):2
 		print("La température de l'air vaut " + str(self.am.temperature) + " °C")
 		print("L'humidité de l'air vaut " + str(self.am.relative_humidity) + " %")
+		return (self.am.temperature,self.am.relative_humidity)

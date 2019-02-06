@@ -33,13 +33,13 @@ class pH:
 		self.high()
 		print("La sonde est calibrée")
 
-	def put(self,solution)
+	def put(self,solution):
 		print("Mettre la sonde pH dans la solution " + solution)
 		isPut = False
-		while !isPut:
+		while not isPut:
 			rep = input("Rentrer y si c'est fait")
 			isPut = (rep=="y")
 
-	def wait(self)
+	def wait(self):
 		print("Attendre 2 minutes avec la sonde dans la solution")
 		time.sleep(120)

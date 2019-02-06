@@ -27,3 +27,4 @@ class DS18B20:
             temp_string = lines[1][equals_pos+2:]
             temp_c = float(temp_string) / 1000.0
         print("La température de l'eau est " +str(temp_c) +" °C")
+        return temp_c

@@ -27,4 +27,4 @@ class MCP3008:
 		#print('ADC Voltage: ' + str(V) + 'V')
 		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
 		print ("La hauteur immergée vaut" + str(H) + ' mm')
-		
+		return H

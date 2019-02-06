@@ -1,5 +1,5 @@
 from pH import *
 
-ph = pH()
+pH = pH()
 
 pH.read()
