@@ -1,0 +1,14 @@
+,pins
+NUT_Pump_pHDown,22
+NUT_Pump_BioGrow,29
+NUT_Pump_BioBloom,31
+NUT_Pump_Heaven,32
+NUT_Pump_TopMax,33
+NUT_Mixer,35
+WAR_Ventilator,36
+WAR_Mixer,11
+WAR_MistMaker,18
+ATM_Warmer,13
+ATM_Ventilator,15
+ATM_MistMaker,16
+LIG_Led,40
