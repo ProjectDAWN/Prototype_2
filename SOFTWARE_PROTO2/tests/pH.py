@@ -19,7 +19,7 @@ class pH:
 		self.device.query("Cal,mid,7.01")
 
 	def low(self):
-		self.put("de pH 4.01")
+                self.put("de pH 4.01")
 		self.wait()
 		self.device.query("Cal,low,4.01")
 

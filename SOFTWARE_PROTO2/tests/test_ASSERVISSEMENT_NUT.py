@@ -10,7 +10,7 @@ GPIO.setmode(GPIO.BCM)
 #Tests pompes nutriments
 
 #Pompe 1
-pin=5
+pin=25
 GPIO.setup(pin, GPIO.OUT)
 GPIO.output(pin, GPIO.HIGH)
 print("Pompe 1 allumée \n")
@@ -40,7 +40,7 @@ print("Pompe 3 éteinte \n")
 time.sleep(10)
 
 #Pompe4
-pin2=14
+pin4=13
 GPIO.setup(pin4, GPIO.OUT)
 GPIO.output(pin4, GPIO.HIGH)
 print("Pompe 4 allumée \n")
@@ -51,18 +51,17 @@ time.sleep(10)
 
 
 # pHDOWN
-ph = pH()
-value = pH.read()
+pH = pH()
+value = pH.get()
 
-if pH > 6.5 :
 
-    pin5 = 20
-    GPIO.setup(pin5, GPIO.OUT)
-    GPIO.output(pin5, GPIO.HIGH)
-    print("Pompe pH Down allumée \n")
-    time.sleep(10)
-    GPIO.cleanup(pin5)
-    print("Pompe pH Down éteinte \n")
+pin5 = 20
+GPIO.setup(pin5, GPIO.OUT)
+GPIO.output(pin5, GPIO.HIGH)
+print("Pompe pH Down allumée \n")
+time.sleep(10)
+GPIO.cleanup(pin5)
+print("Pompe pH Down éteinte \n")
 
 #test NUT mixer
 pin6=19
