@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-import datetime
 import time
 from pH import *
 
@@ -10,15 +9,15 @@ GPIO.setmode(GPIO.BCM)
 
 #get pHvalue
 
-ph = pH()
-pH_value = pH.read()
+pH = pH()
+pH_value = pH.get()
 
 #get EC value
 EC = EC()
-EC_value = EC.read()
+EC_value = EC.get()
 
 #test pH
-if pH > 6.5 :
+if pH_value > 6.5 :
 
     pin5 =33
     GPIO.setup(pin5, GPIO.OUT)

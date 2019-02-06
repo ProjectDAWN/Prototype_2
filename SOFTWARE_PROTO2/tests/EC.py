@@ -7,10 +7,11 @@ class EC:
 		self.EC_I2C_address= 0x64
 		self.device = AtlasI2C(self.EC_I2C_address)
 
+	def get(self):
+		return self.device.query("R").split()[2]
+
 	def read(self):
-		EC = self.device.query("R").split()[2]
-		print("La conductivité vaut " + str(EC) + " uS")
-		return EC
+		print("La conductivité vaut " + str(self.get) + " uS")
 
 	def dry(self):
 		self.device.query("Cal,dry")

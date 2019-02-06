@@ -20,11 +20,11 @@ class MCP3008:
 		self.Vmin = 0.3500
 		self.Hmax = 213
 
-	def read(self):
+	def get(self):
 		chan = AnalogIn(self.mcp,MCP.P0)
 		V = chan.voltage
-		#print('Raw ADC Value: ', chan.value)
-		#print('ADC Voltage: ' + str(V) + 'V')
 		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
-		print ("La hauteur immergée vaut" + str(H) + ' mm')
 		return H
+
+	def read(self):
+		print ("La hauteur immergée vaut" + str(self.H) + ' mm')

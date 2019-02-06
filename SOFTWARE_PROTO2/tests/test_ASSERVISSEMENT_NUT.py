@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-import datetime
 import time
 from pH import *
 
