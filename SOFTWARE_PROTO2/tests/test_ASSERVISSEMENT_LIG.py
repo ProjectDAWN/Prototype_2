@@ -1,21 +1,24 @@
 import RPi.GPIO as GPIO
 import datetime
+import time
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 ##########################################################################
 #TEST LIGHTING Module
 
-while True :
-    t = datetime.datetime.now()
-    if t.hour > 8 and t.hour < 20 :
-        pin=40
-        print("Leds allumée \n")
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(pin, GPIO.OUT)
-        GPIO.output(pin, GPIO.HIGH)
+t = datetime.datetime.now()
+if t.hour > 8 and t.hour < 20 :
+    pin=40
+    print("Leds allumée \n")
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, GPIO.HIGH)
 
-    else :
+else :
+    print("Leds éteintes \n")
+    GPIO.cleanup()
 
-        print("Leds éteintes \n")
-        GPIO.cleanup()
+time.slepp(30)
+GPIO.cleanup(pin)
+print("Leds éteintes \n")

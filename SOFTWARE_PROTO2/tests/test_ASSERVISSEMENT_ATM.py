@@ -6,7 +6,7 @@ import busio
 import adafruit_am2320
 from ds18b20 import *
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 ##########################################################################
 #TEST ATMOSPHERIC Module
@@ -14,7 +14,7 @@ GPIO.setmode(GPIO.BOARD)
 # loop on temperature
 i2c = busio.I2C(board.SCL, board.SDA)
 am = adafruit_am2320.AM2320(i2c)
-print("Temperature: ", am.temperature)
+print("Temperature: ", am.temperature,"\n")
 
 if am.temperature < 25 :
     print("Chauffage activé \n")
@@ -27,7 +27,7 @@ else :
     GPIO.cleanup(pin)
 
 #loop on humidity
-print("Humidity: ", am.relative_humidity)
+print("Humidity: ", am.relative_humidity,"\n")
 
 if am.relative_humidity < 70 :
     pin2=16

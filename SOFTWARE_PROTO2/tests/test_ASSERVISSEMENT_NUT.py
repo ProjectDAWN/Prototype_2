@@ -1,11 +1,75 @@
 import RPi.GPIO as GPIO
 import datetime
+import time
+from pH import *
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 ##########################################################################
 #TEST NUTRIENTS Module
 
-while True :
+#Tests pompes nutriments
 
-    
+#Pompe 1
+pin=22
+GPIO.setup(pin, GPIO.OUT)
+GPIO.output(pin, GPIO.HIGH)
+print("Pompe 1 allumée \n")
+time.sleep(5)
+GPIO.cleanup(pin)
+print("Pompe 1 éteinte \n")
+time.sleep(10)
+
+#Pompe2
+pin2=29
+GPIO.setup(pin2, GPIO.OUT)
+GPIO.output(pin2, GPIO.HIGH)
+print("Pompe 2 allumée \n")
+time.sleep(5)
+GPIO.cleanup(pin2)
+print("Pompe 2 éteinte \n")
+time.sleep(10)
+
+#Pompe3
+pin3=31
+GPIO.setup(pin3, GPIO.OUT)
+GPIO.output(pin3, GPIO.HIGH)
+print("Pompe 3 allumée \n")
+time.sleep(5)
+GPIO.cleanup(pin3)
+print("Pompe 3 éteinte \n")
+time.sleep(10)
+
+#Pompe4
+pin2=32
+GPIO.setup(pin4, GPIO.OUT)
+GPIO.output(pin4, GPIO.HIGH)
+print("Pompe 4 allumée \n")
+time.sleep(5)
+GPIO.cleanup(pin4)
+print("Pompe 4 éteinte \n")
+time.sleep(10)
+
+
+# pHDOWN
+ph = pH()
+value = pH.read()
+
+if pH > 6.5 :
+
+    pin5 =33
+    GPIO.setup(pin5, GPIO.OUT)
+    GPIO.output(pin5, GPIO.HIGH)
+    print("Pompe pH Down allumée \n")
+    time.sleep(10)
+    GPIO.cleanup(pin5)
+    print("Pompe pH Down éteinte \n")
+
+#test NUT mixer
+pin6=35
+GPIO.setup(pin6, GPIO.OUT)
+GPIO.output(pin6, GPIO.HIGH)
+print("NUT Mixer allumé \n")
+time.sleep(15)
+GPIO.cleanup(pin6)
+print("NUTMixer éteinte \n")

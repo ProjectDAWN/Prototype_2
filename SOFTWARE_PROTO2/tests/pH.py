@@ -10,6 +10,7 @@ class pH:
 	def read(self):
 		pH = self.device.query("R").split()[2]
 		print("Le ph vaut " +str(pH))
+		return pH
 
 	def mid(self):
 		self.put("de pH 7.01")

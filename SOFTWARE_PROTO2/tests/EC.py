@@ -10,6 +10,7 @@ class EC:
 	def read(self):
 		EC = self.device.query("R").split()[2]
 		print("La conductivité vaut " + str(EC) + " uS")
+		return EC
 
 	def dry(self):
 		self.device.query("Cal,dry")

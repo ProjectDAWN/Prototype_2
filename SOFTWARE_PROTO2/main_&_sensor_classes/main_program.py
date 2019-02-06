@@ -1,4 +1,4 @@
-#  Python 2.7
+#  Python 3.6
 #  main_program.py
 #  SOFTWARE_PROTO2
 #  V1.0
