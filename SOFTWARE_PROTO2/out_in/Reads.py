@@ -1,11 +1,18 @@
 import numpy as np
 import pandas as pd
 
-class Actuactors :
+class Actuators :
 
-    def init(self,file_name):
-        self.df = pd.read_csv(file_name)
-        
+    def __init__(self,file_name):
+        self.df = pd.read_csv(file_name,index_col=0)
+        self.nbPins = self.df.shape[0]
+    def get_pin(self,actuator):
+        return(self.df.at[actuator,"pin"])
+    def get_GPIO(self,actuator):
+        return(self.df.at[actuator,"GPIO"])
+    def get_Relay(self,actuator):
+        return(self.df.at[actuator,"Relay"])
+
     def print_pins(file_name):
         pins_file = open(file_name,'r')
         names,pins = [],[]
@@ -15,3 +22,4 @@ class Actuactors :
             pins.append(int(pin[1]))
         df = pd.DataFrame(pins, index=names, columns = ['pins'])
         df.to_csv("../Files/share_holder.csv")
+        return(df)

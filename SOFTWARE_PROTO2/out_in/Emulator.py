@@ -7,15 +7,14 @@ import Reads
 pin_list = (11,13,15,16,18,22,29,31,32,33,35,36,40)
 
 # faire fichier pour dictionnaire pin-nomActionneur
-nbPins = len(pin_list)
 
 class Interface :
 
-    Actuactors = Reads.Actuactors("../Files/Actuactors.csv")
+    Actuactors = Reads.Actuactors("../Files/Actuactors.csv") #instantiation of the actuators manager class
 
     def __init__(self) :
         self.activated_pins = [] #list of pins which are activate (hardware ON)
-        self.pins = [False]*nbPins #list of state by pin
+        self.pins = [False]*Actuactors.nbPins #list of state by pin
 
     def verif_pin(self,pin,activate):
         """this function check error on pin activation
@@ -33,8 +32,8 @@ class Interface :
             return(True)
 
     def activate(self,*actuators):
-        for act in actuators:
-            pin = Actuactors.pin(act)
+        for act in actuators: #actuators is a list of string representing actuators
+            pin = Actuactors.get_pin(act)
             if verif_pin(pin,True):
                 self.activated_pins.append(pin)
                 self.pins[pin]=True
