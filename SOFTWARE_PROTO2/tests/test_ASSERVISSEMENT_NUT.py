@@ -54,14 +54,14 @@ time.sleep(10)
 pH = pH()
 value = pH.get()
 
-
-pin5 = 20
-GPIO.setup(pin5, GPIO.OUT)
-GPIO.output(pin5, GPIO.HIGH)
-print("Pompe pH Down allumée \n")
-time.sleep(10)
-GPIO.cleanup(pin5)
-print("Pompe pH Down éteinte \n")
+if value > str(1):
+    pin5 = 20
+    GPIO.setup(pin5, GPIO.OUT)
+    GPIO.output(pin5, GPIO.HIGH)
+    print("Pompe pH Down allumée \n")
+    time.sleep(10)
+    GPIO.cleanup(pin5)
+    print("Pompe pH Down éteinte \n")
 
 #test NUT mixer
 pin6=19

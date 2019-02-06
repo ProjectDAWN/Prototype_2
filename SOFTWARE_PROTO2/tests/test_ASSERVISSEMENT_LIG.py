@@ -11,7 +11,6 @@ t = datetime.datetime.now()
 if t.hour > 8 and t.hour < 20 :
     pin=21
     print("Leds allumée \n")
-    GPIO.setmode(GPIO.BOARD)
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.HIGH)
 
@@ -19,6 +18,6 @@ else :
     print("Leds éteintes \n")
     GPIO.cleanup()
 
-time.slepp(30)
+time.sleep(30)
 GPIO.cleanup(pin)
 print("Leds éteintes \n")

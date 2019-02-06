@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 from pH import *
+from EC import *
 
 GPIO.setmode(GPIO.BCM)
 
@@ -17,7 +18,7 @@ EC = EC()
 EC_value = EC.get()
 
 #test pH
-if pH_value > 6.5 :
+if pH_value > str(6.5) :
 
     pin5 = 25
     GPIO.setup(pin5, GPIO.OUT)
@@ -34,7 +35,7 @@ GPIO.setup(pin, GPIO.OUT)
 GPIO.output(pin, GPIO.HIGH)
 print("WAR_MistMaker allumé \n")
 
-pin2=22
+pin2=16
 GPIO.setup(pin2, GPIO.OUT)
 GPIO.output(pin2, GPIO.HIGH)
 print("WAR_Ventilator allumé \n")
