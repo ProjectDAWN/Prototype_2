@@ -8,7 +8,7 @@ class pH:
 		self.device = AtlasI2C(self.pH_I2C_address)
 
 	def read(self):
-		print("Le ph vaut " +str(self.get))
+		print("Le ph vaut " +str(self.get()))
 
 	def get(self):
 		return self.device.query("R").split()[2]

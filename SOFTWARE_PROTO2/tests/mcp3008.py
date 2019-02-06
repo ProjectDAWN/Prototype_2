@@ -27,4 +27,4 @@ class MCP3008:
 		return H
 
 	def read(self):
-		print ("La hauteur immergée vaut" + str(self.H) + ' mm')
+		print ("La hauteur immergée vaut" + str(self.get()) + ' mm')

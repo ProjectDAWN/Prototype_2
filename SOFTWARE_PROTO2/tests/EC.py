@@ -11,7 +11,7 @@ class EC:
 		return self.device.query("R").split()[2]
 
 	def read(self):
-		print("La conductivité vaut " + str(self.get) + " uS")
+		print("La conductivité vaut " + str(self.get()) + " uS")
 
 	def dry(self):
 		self.device.query("Cal,dry")

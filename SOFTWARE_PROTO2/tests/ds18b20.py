@@ -29,4 +29,4 @@ class DS18B20:
         return temp_c
 
     def read(self):
-        print("La température de l'eau est " +str(self.get) +" °C")
+        print("La température de l'eau est " +str(self.get()) +" °C")
