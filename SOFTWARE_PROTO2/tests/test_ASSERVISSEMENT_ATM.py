@@ -45,7 +45,9 @@ else:
 
 time.sleep(30)
 
-GPIO.cleanup()
+GPIO.cleanup(pin)
+GPIO.cleanup(pin1)
+GPIO.cleanup(pin2)
 print("MistMaker désactivé \n")
 print("Ventilateur désactivé \n")
 print("Chauffage desactivé \n")

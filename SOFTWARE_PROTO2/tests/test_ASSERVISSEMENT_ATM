@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo python3 ~/Desktop/Prototype_2/SOFTWARE_PROTO2/tests/test_ASSERVISSEMENT_ATM.py
