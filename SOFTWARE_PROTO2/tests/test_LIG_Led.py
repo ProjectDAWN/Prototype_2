@@ -8,8 +8,10 @@ GPIO.setup(pin, GPIO.OUT)
 
 GPIO.output(pin, GPIO.HIGH)
 
-time.sleep(15)
+print("LED éteintes")
 
-GPIO.output(pin, GPIO.LOW)
+time.sleep(35)
 
 GPIO.cleanup()
+
+print("LED allumées")
