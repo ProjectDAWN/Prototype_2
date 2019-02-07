@@ -18,15 +18,12 @@ EC = EC()
 EC_value = EC.get()
 
 #test pH
-if pH_value > str(6.5) :
+if pH_value < str(6.5) :
 
     pin5 = 25
     GPIO.setup(pin5, GPIO.OUT)
     GPIO.output(pin5, GPIO.HIGH)
     print("Pompe pH Down allumée \n")
-    time.sleep(10)
-    GPIO.cleanup(pin5)
-    print("Pompe pH Down éteinte \n")
 
 #watering test
 
@@ -40,12 +37,7 @@ GPIO.setup(pin2, GPIO.OUT)
 GPIO.output(pin2, GPIO.HIGH)
 print("WAR_Ventilator allumé \n")
 
-time.sleep(20)
-
-GPIO.cleanup(pin)
-GPIO.cleanup(pin2)
-print("WAR_MistMaker éteint \n")
-print("WAR_MVentilator éteint \n")
+time.sleep(10)
 
 pin3=17
 
@@ -53,7 +45,30 @@ GPIO.setup(pin3, GPIO.OUT)
 GPIO.output(pin3, GPIO.HIGH)
 print("WAR_Mixer allumé \n")
 
-time.sleep(15)
+GPIO.cleanup(pin)
+GPIO.cleanup(pin2)
+print("WAR_MistMaker éteint \n")
+print("WAR_MVentilator éteint \n")
+
+time.sleep(10)
+
+GPIO.setup(pin, GPIO.OUT)
+GPIO.output(pin, GPIO.HIGH)
+print("WAR_MistMaker allumé \n")
+
+GPIO.setup(pin2, GPIO.OUT)
+GPIO.output(pin2, GPIO.HIGH)
+print("WAR_Ventilator allumé \n")
 
 GPIO.cleanup(pin3)
 print("WAR_Mixer éteint \n")
+
+time.sleep(10)
+
+GPIO.cleanup(pin)
+GPIO.cleanup(pin2)
+print("WAR_MistMaker éteint \n")
+print("WAR_MVentilator éteint \n")
+
+GPIO.cleanup(pin5)
+print("Pompe pH Down éteinte \n")

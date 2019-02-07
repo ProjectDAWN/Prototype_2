@@ -3,21 +3,29 @@ import datetime
 import time
 
 GPIO.setmode(GPIO.BCM)
+print("Leds allumée \n")
+
+pin=21
 
 ##########################################################################
 #TEST LIGHTING Module
 
-t = datetime.datetime.now()
-if t.hour > 8 and t.hour < 20 :
-    pin=21
-    print("Leds allumée \n")
-    GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.HIGH)
-
-else :
-    print("Leds éteintes \n")
-    GPIO.cleanup()
-
-time.sleep(30)
-GPIO.cleanup(pin)
+GPIO.setup(pin, GPIO.OUT)
+GPIO.output(pin, GPIO.HIGH)
 print("Leds éteintes \n")
+
+time.sleep(15)
+
+GPIO.cleanup(pin)
+print("Leds allumée \n")
+
+time.sleep(15)
+
+GPIO.setup(pin, GPIO.OUT)
+GPIO.output(pin, GPIO.HIGH)
+print("Leds éteintes \n")
+
+time.sleep(15)
+
+GPIO.cleanup(pin)
+print("Leds allumée \n")
