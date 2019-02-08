@@ -70,22 +70,22 @@ def atmospheric_loop(t,nbdays,variety):
     """atmospheric_loop i a function that maintain parameters (temperature, humidity) in a range define in climate recipe"""
 
     #Temperature
-    temperature = AM2315.read_temperature() #get value of temperature
+    temperature = AM2315.read_temperature()
     if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not InOut.input(ATM_Warmer): #too cold
-        InOut.activate(ATM_Warmer, InOut.HIGH) #turn on electric warmer
+        InOut.activate(ATM_Warmer)
     if temperature > climate_recipe.threshold_temp_max(t,nbdays,variety)+1:  #too warm
-        InOut.desactivate(ATM_Warmer, InOut.LOW) #turn off electric warmer
+        InOut.desactivate(ATM_Warmer)
 
     #humidity
-    humidity = AM2315.read_humidity() #get value of humidity
-    humidity_threshold = climate_recipe.thresholdd_humidity(t,variety) # get value of threshold from climate recipe
+    humidity = AM2315.read_humidity()
+    humidity_threshold = climate_recipe.thresholdd_humidity(t,variety)
     if humidity < humidity_threshold*(1-0.005) and not InOut.input(ATM_MistMaker) and not InOut.input(ATM_Ventilator):
         # humidity is too low
-        InOut.activate(ATM_MistMaker, ATM_Ventilator) # turn on mistmaker, ventilator
+        InOut.activate(ATM_MistMaker, ATM_Ventilator)
     if humidity < humidity_threshold*(1+0.005) : # humidity is too high
-        InOut.desactivate(ATM_MistMaker) # turn off ATM_MistMaker
+        InOut.desactivate(ATM_MistMaker)
         time.sleep(necessry_time) # decide how many time it gets to homogenize
-        InOut.desactivate(ATM_MistMaker) #turn off ventilator
+        InOut.desactivate(ATM_MistMaker)
 
 ####### Lighting module
 def lighting_loop(t, variety):
@@ -194,7 +194,7 @@ def growing_program(variety) :
     #InOut.setmode(InOut.BOARD)
 
     ##### Global variables
-    date_ini = datetime.datetime.now() # Get the value of time at the beginning of the growth
+    date_ini = datetime.datetime.now()
     T = climate_recipe.nb_days(variety) # Get the end value from climate_recipe (in matter of days)
     date_end = date_ini + datetime.timedelta(days = T)
     nbdays = 0
