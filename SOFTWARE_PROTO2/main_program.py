@@ -35,12 +35,13 @@
 #
 ##################### Importation section   #################################
 import sys
-from out_in import Emulator
+import out_in
 import datetime
 from climate_recipe import climate_recipe
 import time
-from am2315 import *
-from AtlasI2C import *
+from out_in import Raspberry_GPIO
+from out_in.sensor_classes import am2315
+from out_in.sensor_classes import AtlasI2C
 #add sensors' and actuators' classes here
 
 
@@ -48,7 +49,8 @@ from AtlasI2C import *
 ######################## Modules loops #######################################
 
 ###Variable initialization
-
+pin_file = "Files/Actuators.csv"
+realMode = False
 necessry_time=0
 size_x_bac=0
 size_y_bac=0
@@ -61,7 +63,7 @@ WARwatermevel_pin=0
 
 
 ####### Atmospheric module
-InOut = Emulator.Interface()
+InOut = Raspberry_GPIO.Interface(pin_file,realMode)
 AM2315 = am2315.AM2315()
 
 def atmospheric_loop(t,nbdays,variety):
