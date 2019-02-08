@@ -7,12 +7,12 @@ import Reads
 
 # faire fichier pour dictionnaire pin-nomActionneur
 
-Actuators = Reads.Actuators("../Files/Actuators.csv") #instantiation of the actuators manager class
 class Interface :
 
+    Actuators = Reads.Actuators("../Files/Actuators.csv") #instantiation of the actuators manager class
     def __init__(self) :
         self.activated_pins = [] #list of pins which are activate (hardware ON)
-        self.pins_dict = dict(zip(Actuators.get_pin_list(),[None]*Actuators.nbPins)) #list of state by pin
+        self.pins_dict = dict(zip(Interface.Actuators.get_pin_list(),[None]*Interface.Actuators.nbPins)) #dict of state by pin
 
     def verif_pin(self,pin,activate):
         """this function check error on pin activation
@@ -31,8 +31,9 @@ class Interface :
             return(True)
 
     def activate(self,*actuators):
-        for act in actuators: #actuators is a list of string representing actuators
-            pin = Actuators.get_pin(act)
+        for pin in actuators: #actuators is a list of string representing actuators
+            if(not isinstance(pin,int)):
+                pin = Interface.Actuators.get_pin(act)
             if self.verif_pin(pin,True):
                 self.activated_pins.append(pin)
                 self.pins_dict[pin]=True
@@ -40,7 +41,7 @@ class Interface :
     def desactivate(self,*actuators):
         for pin in actuators: #actuators is a list of string representing actuators
             if(not isinstance(pin,int)):
-                pin = Actuators.get_pin(pin)
+                pin = Interface.Actuators.get_pin(pin)
             if self.verif_pin(pin,False):
                 self.activated_pins.remove(pin)
                 self.pins_dict[pin]=False
