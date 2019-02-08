@@ -26,16 +26,15 @@
 #          --> Arrosage : water level, pH, EC
 #
 # Actuactors :
-#          --> Atmosperique : ventilateur waterproof, mistmaker, rechauffeur
+#          --> Atmosperique-ATM : ventilateur waterproof, mistmaker, rechauffeur
 #                             electrique
-#          --> Eclairage : LED de croissance
-#          --> Nutriments : pompes peristatiques, ventilateurs melangeurs
-#          --> Arrosage: ultrasonic mixt maker, agitateur solution nutritive,
+#          --> Eclairage-LIG : LED de croissance
+#          --> Nutriments-NUT : pompes peristatiques, ventilateurs melangeurs
+#          --> Arrosage-WAR: ultrasonic mixt maker, agitateur solution nutritive,
 #                        ventilateur waterproof
 #
 ##################### Importation section   #################################
 import sys
-sys.path.append(sys.path[0] + '/..')
 from out_in import Emulator
 import datetime
 from climate_recipe import climate_recipe
@@ -201,21 +200,6 @@ def growing_program(variety) :
     date_current = datetime.datetime.now()
 
     while  date_current < date_end:  # loop until the current time reach T (in matter of days)
-
-        ###### Time update
-        #date = datetime.datetime.now()
-        #month = monthini - date.month
-        #day = monthini - date.day
-        #hour = hourini - date.hour
-        #minute = min_ini - date.minute
-        #former_t = t
-        #t = (month,day, hour, minute,second)
-
-        ## calculate the current number of days
-        #if t[1] != former_t(1):
-        #    nbdays+=1
-
-        ###### loop
 
         atmospheric_loop(diff,nbdays,variety)
         #Decide waiting time
