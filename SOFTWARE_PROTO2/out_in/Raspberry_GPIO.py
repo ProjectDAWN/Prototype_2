@@ -3,15 +3,16 @@
 #  SOFTWARE_PROTO2
 #  V1.0
 #  DAWN
-import RPi.GPIO as GPIO
 class Interface :
 
-    Actuators = Reads.Actuators("../Files/Actuators.csv") #instantiation of the actuators manager class
 
-    def __init__(self) :
+    def __init__(self,pin_file,realMode=True) :
+        self.actuators = Reads.Actuators("../Files/Actuators.csv") #instantiation of the actuators manager class
         self.activated_pins = [] #list of pins which are activate (hardware ON)
-        self.pins_dict = dict(zip(Interface.Actuators.get_pin_list(),[None]*Interface.Actuators.nbPins)) #dict of state by pin
-        GPIO.setmode(GPIO.BCM)
+        self.pins_dict = dict(zip(self.actuators.get_pin_list(),[None]*self.actuators.nbPins)) #dict of state by pin
+        if realMode:
+            import RPi.GPIO as GPIO
+            GPIO.setmode(GPIO.BCM)
 
     def verif_pin(self,pin,activate):
         """this function check error on pin activation
@@ -30,30 +31,29 @@ class Interface :
             return(True)
 
     def activate(self,*actuators):
+    """Given pins or actuators, check if the activation is possible and activate it"""
         for pin in actuators: #actuators is a list of string representing actuators
             if(not isinstance(pin,int)):
-                pin = Interface.Actuators.get_pin(act)
+                pin = self.actuators.get_pin(pin) # allow to the user (main) to choose between pin or actuator name
             if self.verif_pin(pin,True):
                 self.activated_pins.append(pin)
                 self.pins_dict[pin]=True
-                GPIO.setup(pin, GPIO.OUT)
-                GPIO.output(pin, GPIO.HIGH)
+                if(realMode):
+                    GPIO.setup(pin, GPIO.OUT)
+                    GPIO.output(pin, GPIO.HIGH)
 
     def desactivate(self,*actuators):
+    """Given pins or actuators, check if the desactivation is possible and desactivate it"""
         for pin in actuators: #actuators is a list of string representing actuators
             if(not isinstance(pin,int)):
-                pin = Interface.Actuators.get_pin(pin)
+                pin = self.actuators.get_pin(pin) # allow to the user (main) to choose between pin or actuator name
             if self.verif_pin(pin,False):
                 self.activated_pins.remove(pin)
                 self.pins_dict[pin]=False
-                GPIO.cleanup(pin)
+                if(realMode):
+                    GPIO.cleanup(pin)
 
-
-    #def output(pin,val):
-    #    if verif_pin(pin):
-    #        self.pins[pin]=val
-
-    def input(pin):
+    def input(self.pin):
         return(12)
 
     def cleanup(self):
