@@ -17,7 +17,7 @@ class DS18B20:
         f.close()
         return lines
     
-    def read_temp(self):
+    def get(self):
         lines = self.read_temp_raw()
         while lines[0].strip()[-3:] != 'YES':
             time.sleep(0.2)
@@ -26,4 +26,7 @@ class DS18B20:
         if equals_pos != -1:
             temp_string = lines[1][equals_pos+2:]
             temp_c = float(temp_string) / 1000.0
-        print(temp_c)
+        return temp_c
+
+    def read(self):
+        print("La température de l'eau est " +str(self.get()) +" °C")
