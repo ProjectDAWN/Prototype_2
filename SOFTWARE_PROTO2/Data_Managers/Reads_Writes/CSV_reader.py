@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-class Actuators :
+class CSV_reader :
 
     def __init__(self,file_name):
         self.df = pd.read_csv(file_name,index_col=0)
