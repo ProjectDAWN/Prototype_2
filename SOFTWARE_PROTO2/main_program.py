@@ -14,10 +14,10 @@
 # recipes. All the threshold are defined in climate_recipe.py and this code
 # only control the automation between sensors, actuators and climate recipes.
 #
-# Modules : - Atmospherique
-#           - Eclairage
-#           - Nutriments
-#           - Arrosage
+# Modules : - Atmospherique : ATM
+#           - Eclairage : LIG
+#           - Nutriments : NUT
+#           - Arrosage : WAR
 #
 # Sensors :
 #          --> Atmospherique : Temperature, humidite (same probe)
@@ -26,11 +26,11 @@
 #          --> Arrosage : water level, pH, EC
 #
 # Actuactors :
-#          --> Atmosperique-ATM : ventilateur waterproof, mistmaker, rechauffeur
+#          --> ATM : ventilateur waterproof, mistmaker, rechauffeur
 #                             electrique
-#          --> Eclairage-LIG : LED de croissance
-#          --> Nutriments-NUT : pompes peristatiques, ventilateurs melangeurs
-#          --> Arrosage-WAR: ultrasonic mixt maker, agitateur solution nutritive,
+#          --> LIG : LED de croissance
+#          --> NUT : pompes peristatiques, ventilateurs melangeurs
+#          --> WAR: ultrasonic mixt maker, agitateur solution nutritive,
 #                        ventilateur waterproof
 #
 ##################### Importation section   #################################
@@ -67,7 +67,7 @@ InOut = Raspberry_GPIO.Interface(pin_file,realMode)
 AM2315 = am2315.AM2315()
 
 def atmospheric_loop(t,nbdays,variety):
-    """atmospheric_loop i a function that maintain parameters (temperature, humidity) in a range define in climate recipe"""
+    """maintain parameters (temperature, humidity) in a range define in climate recipe"""
 
     #Temperature
     temperature = AM2315.read_temperature()
@@ -190,8 +190,6 @@ def end_loop():
 def growing_program(variety) :
 
     ###################### Initialisation ########################################
-
-    #InOut.setmode(InOut.BOARD)
 
     ##### Global variables
     date_ini = datetime.datetime.now()
