@@ -2,8 +2,7 @@
 #  climate_recipe.py
 #  SOFTWARE_PROTO2
 #  V1.0
-#  DAWN ©
-#  Antoine PINAUD
+#  DAWN
 #
 ###############################################################################
 #
@@ -16,24 +15,25 @@
 #
 #
 # Possible varieties : - tomato
+#                       - lettuce
 #
 
 
 
 ###############################################################################
+import numpy as np
+import pandas as pd
+class Climate_recipe:
 
-######## End of growth function
+    CR_folder = "Files/climate_recipes/"
 
-def nb_days(variety):
-    "This function return the number of days before the end of the growth according to the variety"
-
-    if variety == "tomato":
-        T = 60
-    elif variety == "salade" :
-        T = 50
-    else :
-        T = 60
-    return T
+    __init__(self,variety):
+        self.df = pd.read_csv(Climate_recipe.CR_folder+"caracteristics.csv",index_col=0).variety
+        self.variety = variety
+        self.nb_days = self.df["nb_days"] #number of days needed for the entire growth
+        self.pH_down = self.df["pH_down"]
+        self.pH_up = self.df["pH_up"]
+        self.recipe = pd.read_csv(CR_folder+ variety +".csv",index_col=0)
 
 ###################################
 
@@ -133,7 +133,7 @@ def LEDdownBoundary(t,variety):
 ############### Functions for Nutrients Module ######################
 
 def floraMicro(i, variety):
-    "return that return the number of ml of this nutrient for week i according to climate recipe"
+    "return the number of ml of this nutrient for week i according to climate recipe"
     if variety == "tomato":
         if i == 1 :
             x = 2.5
