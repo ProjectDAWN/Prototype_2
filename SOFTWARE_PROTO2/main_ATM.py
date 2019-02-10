@@ -59,7 +59,7 @@ def atmospheric_loop(t,nbdays,variety):
         InOut.desactivate(ATM_Warmer)
 
     #humidity
-    humidity = AM2315.read_humidity()
+    humidity = 12#AM2315.read_humidity()
     humidity_threshold = climate_recipe.thresholdd_humidity(t,variety)
     if humidity < humidity_threshold*(1-0.005) and not InOut.input(ATM_MistMaker) and not InOut.input(ATM_Ventilator):
         # humidity is too low
@@ -73,49 +73,9 @@ def atmospheric_loop(t,nbdays,variety):
 
 def end_loop():
     """put all the InOut pins at LOW value"""
-    #ATM module
     InOut.desactivate(ATM_Ventilator,
                     ATM_MistMaker,
                     ATM_Warmer)
-    #LIG module
-    InOut.desactivate(LIG_Led)
-    #NUT module
-    InOut.desactivate(NUT_Pump_pHDown,
-                    NUT_Pump2,
-                    NUT_Pump3)
-    #WAT module
-    InOut.desactivate(WAR_MistMaker,
-                    WAR_Mixer,
-                    WAR_Ventilator,
-                    WARwatermevel_pin,
-                    WARpHup_pin,
-                    NUT_Pump4)
 
-######################### Main loop ###########################################
 
-def growing_program(variety) :
-
-    ###################### Initialisation ########################################
-
-    ##### Global variables
-    date_ini = datetime.datetime.now()
-    T = climate_recipe.nb_days(variety) # Get the end value from climate_recipe (in matter of days)
-    date_end = date_ini + datetime.timedelta(days = T)
-    nbdays = 0
-    nutrient_week = [False]*(T//7 + 1)
-    date_current = datetime.datetime.now()
-
-    while  date_current < date_end:  # loop until the current time reach T (in matter of days)
-
-        atmospheric_loop(diff,nbdays,variety)
-
-        diff = datetime.datetime.now() - date_current
-
-        if diff < datetime.timedelta(minutes=10):
-            time.sleep((datetime.timedelta(minutes=10) - diff).total_seconds())
-        date_current = datetime.datetime.now()
-
-    ###### End of loop
-
-    end_loop()
-growing_program("tomates")
+growing_program("tomato")

@@ -218,4 +218,4 @@ def growing_program(variety) :
     ###### End of loop
 
     end_loop()
-growing_program("tomates")
+growing_program("tomato")
