@@ -22,7 +22,7 @@
 import sys
 import out_in
 import datetime
-from climate_recipe import climate_recipe
+from Climate_recipe import Climate_recipe
 import time
 from out_in import Raspberry_GPIO
 from out_in.sensor_classes import am2315
@@ -36,6 +36,7 @@ from out_in.sensor_classes import AtlasI2C
 ###Variable initialization
 pin_file = "Files/Actuators.csv"
 realMode = False
+variety = tomato
 necessry_time=0
 size_x_bac=0
 size_y_bac=0
@@ -43,24 +44,23 @@ size_y_bac=0
 pH_I2C_address = 0
 EC_I2C_address = 0
 
-WARwatermevel_pin=0
-
 InOut = Raspberry_GPIO.Interface(pin_file,realMode)
+climate_recipe = Climate_recipe(variety)
 AM2315 = am2315.AM2315()
 
-def atmospheric_loop(t,nbdays,variety):
+def atmospheric_loop(date_current,climate_recipe):
     """maintain parameters (temperature, humidity) in a range define in climate recipe"""
 
     #Temperature
     temperature = 12#AM2315.read_temperature()
-    if temperature < climate_recipe.threshold_temp_min(t,nbdays,variety)-1 and not InOut.input(ATM_Warmer): #too cold
+    if temperature < climate_recipe.threshold_temp_min(date_current,variety)-1 and not InOut.input(ATM_Warmer): #too cold
         InOut.activate(ATM_Warmer)
-    if temperature > climate_recipe.threshold_temp_max(t,nbdays,variety)+1:  #too warm
+    if temperature > climate_recipe.threshold_temp_max(date_current,variety)+1:  #too warm
         InOut.desactivate(ATM_Warmer)
 
     #humidity
     humidity = 12#AM2315.read_humidity()
-    humidity_threshold = climate_recipe.thresholdd_humidity(t,variety)
+    humidity_threshold = climate_recipe.thresholdd_humidity(date_current,variety)
     if humidity < humidity_threshold*(1-0.005) and not InOut.input(ATM_MistMaker) and not InOut.input(ATM_Ventilator):
         # humidity is too low
         InOut.activate(ATM_MistMaker, ATM_Ventilator)
@@ -77,5 +77,5 @@ def end_loop():
                     ATM_MistMaker,
                     ATM_Warmer)
 
-
-growing_program("tomato")
+date_current = datetime.datetime.now()
+atmospheric_loop(date_current)
