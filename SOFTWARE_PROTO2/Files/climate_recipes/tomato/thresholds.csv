@@ -1,9 +1,9 @@
-period,temp_min,temp_max
-germination_day,
-germination_night,
-growth_day,
-growth_night,
-flowering_day,
-flowering_night,
-fructification_day,
-fructification_night,
+period, temp, humidity, vaporization, break
+germination_day, 28, 85, 0.55, 52.5
+germination_night, 28, 85, 0.55, 52.5
+growth_day,26, 75, 0.55, 52.5
+growth_night,19, 75, 0.55, 52.5
+flowering_day,26, 70, 1.5, 50
+flowering_night,19, 70, 1.5, 50
+fructification_day,26, 70, 1.5, 50
+fructification_night,19, 70, 1.5, 50
