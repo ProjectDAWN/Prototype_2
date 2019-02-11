@@ -8,10 +8,10 @@ class EC:
 		self.device = AtlasI2C(self.EC_I2C_address)
 
 	def get(self):
-		value = self.device.query("R").split(" ")
+		value = self.device.query("R").split( )[2]
 		print(value)
-		print(type(value))
-		value_2 = value[2].split("\x00")
+		value_2 = value.split("\x00")[0]
+		float(value_2)
 		print(value_2)
 		return value
 
