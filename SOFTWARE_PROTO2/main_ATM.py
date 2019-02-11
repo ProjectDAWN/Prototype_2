@@ -53,14 +53,14 @@ def atmospheric_loop(date_current,climate_recipe):
 
     #Temperature
     temperature = 12#AM2315.read_temperature()
-    if temperature < climate_recipe.threshold_temp_min(date_current,variety)-1 and not InOut.input(ATM_Warmer): #too cold
+    if temperature < climate_recipe.threshold_temp_min(date_current)-1 and not InOut.input(ATM_Warmer): #too cold
         InOut.activate(ATM_Warmer)
-    if temperature > climate_recipe.threshold_temp_max(date_current,variety)+1:  #too warm
+    if temperature > climate_recipe.threshold_temp_max(date_current)+1:  #too warm
         InOut.desactivate(ATM_Warmer)
 
     #humidity
     humidity = 12#AM2315.read_humidity()
-    humidity_threshold = climate_recipe.thresholdd_humidity(date_current,variety)
+    humidity_threshold = climate_recipe.thresholdd_humidity(date_current)
     if humidity < humidity_threshold*(1-0.005) and not InOut.input(ATM_MistMaker) and not InOut.input(ATM_Ventilator):
         # humidity is too low
         InOut.activate(ATM_MistMaker, ATM_Ventilator)
