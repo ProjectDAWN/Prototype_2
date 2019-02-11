@@ -11,10 +11,11 @@ class EC:
 		value = self.device.query("R").split()[2]
 		print(value)
 		print(type(value))
+		float(value)
 		return value
 
 	def read(self):
-		print("La conductivité vaut" + self.get() + "uS")
+		print("La conductivité vaut " + self.get() + " uS")
 
 	def dry(self):
 		self.device.query("Cal,dry")
