@@ -9,10 +9,13 @@ class EC:
 
 	def get(self):
 		value = self.device.query("R").split()[2]
+		value_2 = value.split("\\")
 		print(value)
 		print(type(value))
-		float(value)
-		return value
+		print(value_2)
+		print(type(value_2))
+		float(value_2)
+		return value_2
 
 	def read(self):
 		print("La conductivité vaut " + self.get() + " uS")
