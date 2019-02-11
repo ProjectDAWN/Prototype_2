@@ -15,25 +15,22 @@
 #
 #
 # Possible varieties : - tomato
-#                       - lettuce
+#                      - lettuce
 #
 
 
 
 ###############################################################################
-import numpy as np
-import pandas as pd
+from CSV_reader import CSV_reader
 class Climate_recipe:
 
     CR_folder = "Files/climate_recipes/"
 
     __init__(self,variety):
-        self.df = pd.read_csv(Climate_recipe.CR_folder+"caracteristics.csv",index_col=0).variety
+        self.caracteristics = CSV_reader(Climate_recipe.CR_folder+"caracteristics.csv").get_infos(variety)
+        self.recipe = CSV_reader(Climate_recipe.CR_folder+ variety +".csv")
         self.variety = variety
-        self.nb_days = self.df["nb_days"] #number of days needed for the entire growth
-        self.pH_down = self.df["pH_down"]
-        self.pH_up = self.df["pH_up"]
-        self.recipe = pd.read_csv(CR_folder+ variety +".csv",index_col=0)
+        
 
 ###################################
 
@@ -68,7 +65,7 @@ def threshold_temp_max(t,nbdays,variety):
     """return the max acceptable value at t"""
     if variety == "tomato":
         if nbdys <= 7 : # "germination" time
-                x = 28
+           x = 28
         elif nbdays > 7 and t <= 21 : # "croissance" time
             if t(2)<23 and t(2)>5 : #day
                 x = 26
@@ -133,104 +130,18 @@ def LEDdownBoundary(t,variety):
 ############### Functions for Nutrients Module ######################
 
 def floraMicro(i, variety):
-    "return the number of ml of this nutrient for week i according to climate recipe"
-    if variety == "tomato":
-        if i == 1 :
-            x = 2.5
-        elif i == 2 :
-            x = 7.5
-        elif i == 3 :
-            x = 10
-        elif i == 4 :
-            x = 7.5
-        elif i == 5 :
-            x = 7.5
-        elif i == 6 :
-            x = 7.5
-        elif i == 7 :
-            x = 7.5
-        elif i == 8 :
-            x = 7.5
-        elif i == 9 :
-            x = 7.5
-        elif i == 10 :
-            x = 7.5
-        elif i == 11 :
-            x = 5
-        elif i == 12 :
-            x = 0
-        else :         #limit case (no climate recipe)
-            x = 0
-    return x
+    """return the number of ml of this nutrient for week i according to climate recipe"""
+
 
 def floraGro(i, variety):
-    "return that return the number of ml of this nutrient for week i according to climate recipe"
-    if variety == "tomato":
-        if i == 1 :
-            x = 2.5
-        elif i == 2 :
-            x = 10
-        elif i == 3 :
-            x = 10
-        elif i == 4 :
-            x = 7.5
-        elif i == 5 :
-            x = 2.5
-        elif i == 6 :
-            x = 2.5
-        elif i == 7 :
-            x = 2.5
-        elif i == 8 :
-            x = 2.5
-        elif i == 9 :
-            x = 0
-        elif i == 10 :
-            x = 0
-        elif i == 11 :
-            x = 0
-        elif i == 12 :
-            x = 0
-    else :         #limit case (no climate recipe)
-        x = 0
-    return x
+    """ return the number of ml of this nutrient for week i according to climate recipe"""
+
 def floraBloom(i, variety):
-    "return that return the number of ml of this nutrient for week i according to climate recipe"
-    if variety == "tomato":
-        if i == 1 :
-            x = 2.5
-        elif i == 2 :
-            x = 7.5
-        elif i == 3 :
-            x = 10
-        elif i == 4 :
-            x = 7.5
-        elif i == 5 :
-            x = 7.5
-        elif i == 6 :
-            x = 7.5
-        elif i == 7 :
-            x = 7.5
-        elif i == 8 :
-            x = 7.5
-        elif i == 9 :
-            x = 7.5
-        elif i == 10 :
-            x = 7.5
-        elif i == 11 :
-            x = 5
-        elif i == 12 :
-            x = 0
-    else :         #limit case (no climate recipe)
-        x = 0
-    return x
+    """return the number of ml of this nutrient for week i according to climate recipe"""
 
 
-########## Watering Module ###########################
 
-def pHlow(t,variety):
-    return 5.8
-def pHup(t,variety):
-    return 6.2
+########## Watering Module #########################
 
 def watering_first_cycle(t, variety,nbdays):
     if nbdays <= 21 :
