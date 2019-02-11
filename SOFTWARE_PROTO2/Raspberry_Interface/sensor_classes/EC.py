@@ -8,7 +8,10 @@ class EC:
 		self.device = AtlasI2C(self.EC_I2C_address)
 
 	def get(self):
-		return self.device.query("R").split()[2]
+		msg = self.device.query("R")
+		list_msg = msg.split( )
+		EC_value = list_msg[2].split("\x00")[0]
+		return float(EC_value)
 
 	def read(self):
 		print("La conductivité vaut " + str(self.get()) + " uS")
