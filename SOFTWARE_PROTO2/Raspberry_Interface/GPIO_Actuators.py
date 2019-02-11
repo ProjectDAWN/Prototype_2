@@ -61,8 +61,6 @@ class GPIO_Actuators :
                 if(self.realMode):
                     GPIO.cleanup(pin)
 
-    def input(pin):
-        return(12)
 
     def cleanup(self):
         for pin in self.activated_pins:
