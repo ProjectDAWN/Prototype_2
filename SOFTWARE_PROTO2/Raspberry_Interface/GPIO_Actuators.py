@@ -3,15 +3,18 @@
 #  SOFTWARE_PROTO2
 #  V1.0
 #  DAWN
-from . import Reads
+import sys
+sys.path.append(sys.path[0]+"/..")
+from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
 
-class Interface :
+class GPIO_Actuators :
 
 
     def __init__(self,pin_file,realMode=True) :
-        self.actuators = Reads.Actuators(pin_file) #instantiation of the actuators manager class
+        self.actuators = CSV_reader(pin_file) #instantiation of the actuators manager class
         self.activated_pins = [] #list of pins which are activate (hardware ON)
-        self.pins_dict = dict(zip(self.actuators.get_pin_list(),[None]*self.actuators.nbPins)) #dict of state by pin
+        self.nb_pins = self.actuators.nb_index
+        self.pins_dict = dict(zip(self.actuators.get_list("pin"),[None]*self.nb_pins)) #dict of state by pin
         self.realMode = realMode
         if self.realMode:
             import RPi.GPIO as GPIO
@@ -38,7 +41,7 @@ class Interface :
         check if the activation is possible and activate it"""
         for pin in actuators: #actuators is a list of string representing actuators
             if(not isinstance(pin,int)):
-                pin = self.actuators.get_pin(pin) # allow to the user (main) to choose between pin or actuator name
+                pin = self.actuators.get(pin,"pin") # allow to the user (main) to choose between pin or actuator name
             if self.verif_pin(pin,True):
                 self.activated_pins.append(pin)
                 self.pins_dict[pin]=True
@@ -65,8 +68,8 @@ class Interface :
         for pin in self.activated_pins:
             self.desactivate(pin)
 
-#In = Interface("../Files/Actuators.csv",False)
-#In.activate("NUT_Mixer")
+In = GPIO_Actuators("../Files/Actuators.csv",False)
+In.activate("NUT_Mixer")
 
-#In.activate(31)
-#In.cleanup()
+In.activate(31)
+In.cleanup()
