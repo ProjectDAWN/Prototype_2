@@ -9,7 +9,7 @@ class EC:
 
 	def get(self):
 		value = self.device.query("R")
-		List = value.decode("Hex")
+		List = decode(value,"Hex")
 		print(List)
 		print(type(List))
 		return value
