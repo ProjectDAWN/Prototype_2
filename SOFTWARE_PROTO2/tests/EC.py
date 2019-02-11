@@ -11,8 +11,8 @@ class EC:
 		value = self.device.query("R").split( )[2]
 		print(value)
 		value_2 = value.split("\x00")[0]
-		float(value_2)
-		print(value_2)
+		value_2 = float(value_2)
+		print(type(value_2))
 		return value_2
 
 	def read(self):
