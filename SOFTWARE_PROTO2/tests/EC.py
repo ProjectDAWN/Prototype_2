@@ -14,7 +14,7 @@ class EC:
 		return value
 
 	def read(self):
-		print("La conductivité vaut " + str(self.get()) + "uS")
+		print("La conductivité vaut" + self.get() + "uS")
 
 	def dry(self):
 		self.device.query("Cal,dry")
