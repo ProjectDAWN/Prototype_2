@@ -13,7 +13,7 @@ class EC:
 		value_2 = value.split("\x00")[0]
 		float(value_2)
 		print(value_2)
-		return value
+		return value_2
 
 	def read(self):
 		print("La conductivité vaut " + self.get() + " uS")
