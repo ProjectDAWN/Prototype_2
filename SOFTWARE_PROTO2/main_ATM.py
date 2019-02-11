@@ -36,7 +36,7 @@ from out_in.sensor_classes import AtlasI2C
 ###Variable initialization
 pin_file = "Files/Actuators.csv"
 realMode = False
-variety = tomato
+variety = "tomato"
 necessry_time=0
 size_x_bac=0
 size_y_bac=0

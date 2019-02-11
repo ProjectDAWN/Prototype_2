@@ -1,3 +1,9 @@
 period,temp_min,temp_max
-,
-,
+germination_day,
+germination_night,
+growth_day,
+growth_night,
+flowering_day,
+flowering_night,
+fructification_day,
+fructification_night,

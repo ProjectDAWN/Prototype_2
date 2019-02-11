@@ -32,14 +32,14 @@ class Climate_recipe:
         self.nutrients = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"nutrients.csv")
         self.variety = variety
 
-    def threshold_temp_min(t):
+    def threshold_temp_min():
         """return the min acceptable value at t"""
         nb_days = self.caracteristics["nb_days"]
 
         if self.variety == "tomato":
-            if nb_days <= 7 : # "germination" time
+            if date_current <= 7 : # "germination" time
                 x = 28
-            elif nb_days > 7 and t <= 21 : # "croissance" time
+            elif nb_days > 7 and date_current <= 21 : # "croissance" time
                 if t(2)<23 and t(2)>5 : #day
                     x = 26
                 else : # night
