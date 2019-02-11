@@ -8,7 +8,7 @@ class EC:
 		self.device = AtlasI2C(self.EC_I2C_address)
 
 	def get(self):
-		value = self.device.query("R")[18:]
+		value = self.device.query("R")[17:]
 		print(value)
 		print(type(value))
 		return value
