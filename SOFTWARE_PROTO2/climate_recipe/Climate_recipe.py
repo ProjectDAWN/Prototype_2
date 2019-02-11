@@ -28,12 +28,14 @@ class Climate_recipe:
 
     __init__(self,variety):
         self.caracteristics = CSV_reader(Climate_recipe.CR_folder+"caracteristics.csv").get_infos(variety)
-        self.recipe = CSV_reader(Climate_recipe.CR_folder+ variety +".csv")
+        self.thresholds = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"thresholds.csv")
+        self.nutrients = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"nutrients.csv")
         self.variety = variety
 
     def threshold_temp_min(t):
-        "return the min acceptable value at t"
+        """return the min acceptable value at t"""
         nb_days = self.caracteristics["nb_days"]
+
         if self.variety == "tomato":
             if nb_days <= 7 : # "germination" time
                 x = 28
@@ -126,14 +128,16 @@ class Climate_recipe:
     ############### Functions for Nutrients Module ######################
 
     def floraMicro(i):
-        """return the number of ml of this nutrient for week i according to climate recipe"""
-
+        """return the quantity in ml of this nutrient for week i according to climate recipe"""
+        return(self.nutrients.get(i,"micro"))
 
     def floraGro(i):
         """return the number of ml of this nutrient for week i according to climate recipe"""
+        return(self.nutrients.get(i,"gro"))
 
     def floraBloom(i):
         """return the number of ml of this nutrient for week i according to climate recipe"""
+        return(self.nutrients.get(i,"bloom"))
 
 
 
