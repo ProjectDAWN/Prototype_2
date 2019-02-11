@@ -11,7 +11,10 @@ class pH:
 		print("Le ph vaut " +str(self.get()))
 
 	def get(self):
-		return self.device.query("R").split()[2]
+		msg = self.device.query("R")
+		list_msg = msg.split( )
+		pH_value = list_msg[2].split("\x00")[0]
+		return float(pH_value)
 
 	def mid(self):
 		self.put("de pH 7.01")
