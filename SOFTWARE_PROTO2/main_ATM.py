@@ -36,12 +36,6 @@ from Raspberry_Interface.sensor_classes import AtlasI2C
 pin_file = "Files/Actuators.csv"
 realMode = False
 variety = "tomato"
-necessry_time=0
-size_x_bac=0
-size_y_bac=0
-
-pH_I2C_address = 0
-EC_I2C_address = 0
 
 InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
 climate_recipe = Climate_recipe(variety)

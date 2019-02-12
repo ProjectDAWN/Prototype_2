@@ -36,17 +36,6 @@ pin_file = "Files/Actuators.csv"
 realMode = False
 variety = "tomato"
 
-necessry_time=0
-size_x_bac=0
-size_y_bac=0
-
-pH_I2C_address = 0
-EC_I2C_address = 0
-
-WARwatermevel_pin=0
-
-
-
 ####### Atmospheric module
 InOut = Raspberry_GPIO.Interface(pin_file,realMode)
 climate_recipe = Climate_recipe(variety)
