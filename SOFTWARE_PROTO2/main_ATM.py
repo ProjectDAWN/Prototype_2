@@ -60,14 +60,13 @@ def atmospheric_loop(date_current,climate_recipe):
 
     #humidity
     humidity = 12#AM2315.read_humidity()
-    humidity_threshold = climate_recipe.thresholdd_humidity(date_current)
-    if humidity < humidity_threshold*(1-0.005) and not InOut.input(ATM_MistMaker) and not InOut.input(ATM_Ventilator):
+    humidity_threshold = climate_recipe.thresholdd_humidity(date_current.hours,date_current.days)
+    if humidity < humidity_threshold*(1-0.005):
         # humidity is too low
         InOut.activate(ATM_MistMaker, ATM_Ventilator)
-    if humidity < humidity_threshold*(1+0.005) : # humidity is too high
+    if humidity > humidity_threshold*(1+0.005) : # humidity is too high
         InOut.desactivate(ATM_MistMaker)
-        time.sleep(necessry_time) # decide how many time it gets to homogenize
-        InOut.desactivate(ATM_MistMaker)
+
 
 ####### End of growth
 
@@ -78,4 +77,4 @@ def end_loop():
                     ATM_Warmer)
 
 date_current = datetime.datetime.now()
-atmospheric_loop(date_current)
+atmospheric_loop(date_current,climate_recipe)
