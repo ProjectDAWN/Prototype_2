@@ -45,6 +45,7 @@ class GPIO_Actuators :
             if self.verif_pin(pin,True):
                 self.activated_pins.append(pin)
                 self.pins_dict[pin]=True
+                print("activation {}".format(pin))
                 if(self.realMode):
                     GPIO.setup(pin, GPIO.OUT)
                     GPIO.output(pin, GPIO.HIGH)
@@ -58,6 +59,7 @@ class GPIO_Actuators :
             if self.verif_pin(pin,False):
                 self.activated_pins.remove(pin)
                 self.pins_dict[pin]=False
+                print("desactivation {}".format(pin))
                 if(self.realMode):
                     GPIO.cleanup(pin)
 

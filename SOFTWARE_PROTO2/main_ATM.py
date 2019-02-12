@@ -45,28 +45,28 @@ def atmospheric_loop(date_current,climate_recipe):
 
     #Temperature
     temperature = 12#AM2315.read_temperature()
-    if temperature < climate_recipe.threshold_temp_min(date_current)-1 and not InOut.input(ATM_Warmer): #too cold
-        InOut.activate(ATM_Warmer)
-    if temperature > climate_recipe.threshold_temp_max(date_current)+1:  #too warm
-        InOut.desactivate(ATM_Warmer)
+    if temperature < climate_recipe.threshold_temp(date_current.hour, date_current.day)-1 : #too cold
+        InOut.activate("ATM_Warmer")
+    if temperature > climate_recipe.threshold_temp(date_current.hour, date_current.day)+1:  #too warm
+        InOut.desactivate("ATM_Warmer")
 
     #humidity
     humidity = 12#AM2315.read_humidity()
-    humidity_threshold = climate_recipe.thresholdd_humidity(date_current.hours,date_current.days)
+    humidity_threshold = climate_recipe.thresholdd_humidity(date_current.hour,date_current.day)
     if humidity < humidity_threshold*(1-0.005):
         # humidity is too low
-        InOut.activate(ATM_MistMaker, ATM_Ventilator)
+        InOut.activate("ATM_MistMaker", "ATM_Ventilator")
     if humidity > humidity_threshold*(1+0.005) : # humidity is too high
-        InOut.desactivate(ATM_MistMaker)
+        InOut.desactivate("ATM_MistMaker")
 
 
 ####### End of growth
 
 def end_loop():
     """put all the InOut pins at LOW value"""
-    InOut.desactivate(ATM_Ventilator,
-                    ATM_MistMaker,
-                    ATM_Warmer)
+    InOut.desactivate("ATM_Ventilator",
+                    "ATM_MistMaker",
+                    "ATM_Warmer")
 
 date_current = datetime.datetime.now()
 atmospheric_loop(date_current,climate_recipe)

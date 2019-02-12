@@ -8,7 +8,7 @@ class CSV_reader :
         self.nb_index = self.df.shape[0]
 
     def get(self,id, caracteristic):
-        return(int(self.df.at[id,caracteristic]))
+        return(self.df.at[id,caracteristic])
 
     def get_list(self,caracteristic):
         return(list(self.df[caracteristic]))

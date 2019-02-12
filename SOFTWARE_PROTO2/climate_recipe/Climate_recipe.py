@@ -35,11 +35,12 @@ class Climate_recipe:
     def get_period(self,day):
         """return current period according to day"""
         period = "germination"
-        for p in list("growth","flowering","fructification"):
-            if self.caracteristic[p]<=day:
+        for p in ["growth","flowering","fructification"]:
+            if self.caracteristics[p]<=day:
                 period = p
             else:
                 break
+            return(period)
 
     def get_cycle(self,hour,day):
         """return day or night according to hour"""
@@ -49,20 +50,14 @@ class Climate_recipe:
         else:
             return("night")
 
-    def threshold_temp_min(self,hour,day):
-        """return the min acceptable value at t"""
-        period = self.get_period(day) + "_" + self.get_cycle(hour)
+    def threshold_temp(self,hour,day):
+        """return the acceptable value at t"""
+        period = self.get_period(day) + "_" + self.get_cycle(hour,day)
         return(self.thresholds.get(period,"temp"))
-
-
-    def threshold_temp_max(self):
-        """return the max acceptable value at t"""
-        return(12)
-
 
     def thresholdd_humidity(self,hour,day):
         """return the average value needed at t"""
-        period = self.get_period(day) + "_" + self.get_cycle(hour)
+        period = self.get_period(day) + "_" + self.get_cycle(hour,day)
         return(self.thresholds.get(period,"humidity"))
 
 
