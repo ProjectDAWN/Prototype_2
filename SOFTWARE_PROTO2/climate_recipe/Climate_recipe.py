@@ -32,97 +32,49 @@ class Climate_recipe:
         self.nutrients = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"nutrients.csv")
         self.variety = variety
 
-    def threshold_temp_min():
+    def get_period(self,day):
+        """return current period according to day"""
+        period = "germination"
+        for p in list("growth","flowering","fructification"):
+            if self.caracteristic[p]>day:
+                period = p
+            else:
+                break
+
+    def get_cycle(self,hour,day):
+        """return day or night according to hour"""
+        if hour >= self.caracteristics[hour_day] and hour <= self.caracteristics[hour_night]:
+             return("day")
+        else:
+            return("night")
+
+    def threshold_temp_min(self,hour,day):
         """return the min acceptable value at t"""
-        nb_days = self.caracteristics["nb_days"]
+        period = self.get_period(day) + "_" + self.get_cycle(hour)
+        return(self.thresholds.get(period,"temp")
 
-        if self.variety == "tomato":
-            if date_current <= 7 : # "germination" time
-                x = 28
-            elif nb_days > 7 and date_current <= 21 : # "croissance" time
-                if t(2)<23 and t(2)>5 : #day
-                    x = 26
-                else : # night
-                    x = 19
-            elif nb_days > 21 and t <= 51:# "floraison" Time
-                if t(2)<19 and t(2)>7 : #day
-                    x = 26
-                else : # night
-                    x = 19
-            elif nb_days > 51 : # "fructification" time
-                if t(2)<19 and t(2)>7 : #day
-                    x = 26
-                else : # night
-                    x = 19
-        else:        #limit case (no climate recipe)
-            x = -1
-        return x
 
-    def threshold_temp_max(t):
+    def threshold_temp_max(self):
         """return the max acceptable value at t"""
-        nb_days = self.caracteristics["nb_days"]
-        if self.variety == "tomato":
-            if nbdys <= 7 : # "germination" time
-               x = 28
-            elif nb_days > 7 and t <= 21 : # "croissance" time
-                if t(2)<23 and t(2)>5 : #day
-                    x = 26
-                else : # night
-                    x = 19
-            elif nb_days > 21 and t <= 51: # "floraison" Time
-                if t(2)<19 and t(2)>7 : #day
-                    x = 26
-                else : # night
-                    x = 19
-            elif nb_days > 51 : # "fructification" time
-                if t(2)<19 and t(2)>7 : #day
-                    x = 26
-                else : # night
-                    x = 19
-        else :         #limit case (no climate recipe)
-            x = -1
-        return x
 
 
-    def thresholdd_humidity(t):
+
+    def thresholdd_humidity(self,hour,day):
         """return the average value needed at t"""
-        if self.variety == "tomato":
-            if t <= 7 : # "germination" time
-                x = 85
-            elif t > 7 and t <= 21 : # "croissance" time
-                x = 75
-            elif t > 21 and t <= 51: # "floraison" Time
-                x = 70
-            elif t > 51 : # "fructification" time
-                x = 70
-        else :         #limit case (no climate recipe)
-            x = -1
-        return x    # x is an %
+        period = self.get_period(day) + "_" + self.get_cycle(hour)
+        return(self.thresholds.get(period,"humidity"))
+
 
 
     ####### Functions for Lighting module ##########################
 
-    def LEDupBoundary(t):
-        #return the hour when LEDs should be turned off
-        if self.variety == "tomato":
-            if t <= 21 : # "growth" time
-                x = 23
-            elif t > 21 : # "bloom" time
-                x = 19
-        else :         #limit case (no climate recipe)
-            x = -1
-        return x
+    def LEDupBoundary(self):
+        """return the hour when LEDs should be turned off"""
+        return(self.caracteristics["hour_day"])
 
     def LEDdownBoundary(t):
-        #return the hour when LEDs should be turned on
-        if variety == "tomato":
-            if t <= 21 : # "growth" time
-                x = 5
-            elif t > 21 : # "bloom" time
-                x = 7
-        else :         #limit case (no climate recipe)
-            x = -1
-        return x
+        """return the hour when LEDs should be turned on"""
+        return(self.caracteristics["hour_night"])
 
 
     ############### Functions for Nutrients Module ######################

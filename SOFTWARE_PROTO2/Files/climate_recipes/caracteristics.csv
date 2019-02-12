@@ -1,3 +1,3 @@
-variety,nb_days,pH_down,pH_up
-tomato,60,5.8,6.2
-lettuce,50,5.8,6.2
+variety,nb_days,pH_down,pH_up,growth,flowering,fructification
+tomato,60,5.8,6.2,7,21,51
+lettuce,50,5.8,6.2,
