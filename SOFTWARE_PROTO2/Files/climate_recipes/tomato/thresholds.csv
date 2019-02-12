@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 period,temp,humidity,vaporization,break
 germination_day,28,85,0.55,52.5
 germination_night,28,85,0.55,52.5
@@ -7,3 +8,14 @@ flowering_day,26,70,1.5,50
 flowering_night,19,70,1.5,50
 fructification_day,26,70,1.5,50
 fructification_night,19,70,1.5,50
+=======
+period, temp, humidity, vaporization, break, hour
+germination_day, 28, 85, 0.55, 52.5,5
+germination_night, 28, 85, 0.55, 52.5,23
+growth_day,26, 75, 0.55, 52.5,5
+growth_night,19, 75, 0.55, 52.5,23
+flowering_day,26, 70, 1.5, 50,7
+flowering_night,19, 70, 1.5, 50,19
+fructification_day,26, 70, 1.5, 50,7
+fructification_night,19, 70, 1.5, 50,19
+>>>>>>> 2612245203254cd3096532b11522110ed2d68ab1

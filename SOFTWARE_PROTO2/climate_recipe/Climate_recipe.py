@@ -21,12 +21,12 @@
 
 
 ###############################################################################
-from CSV_reader import CSV_reader
+from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
 class Climate_recipe:
 
     CR_folder = "Files/climate_recipes/"
 
-    __init__(self,variety):
+    def __init__(self,variety):
         self.caracteristics = CSV_reader(Climate_recipe.CR_folder+"caracteristics.csv").get_infos(variety)
         self.thresholds = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"thresholds.csv")
         self.nutrients = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"nutrients.csv")
@@ -36,14 +36,15 @@ class Climate_recipe:
         """return current period according to day"""
         period = "germination"
         for p in list("growth","flowering","fructification"):
-            if self.caracteristic[p]>day:
+            if self.caracteristic[p]<=day:
                 period = p
             else:
                 break
 
     def get_cycle(self,hour,day):
         """return day or night according to hour"""
-        if hour >= self.caracteristics[hour_day] and hour <= self.caracteristics[hour_night]:
+        period = self.get_period(day)
+        if hour >= self.thresholds.get(period+"_day","hour") and hour <= self.thresholds.get(period+"_day","hour"):
              return("day")
         else:
             return("night")
@@ -51,12 +52,12 @@ class Climate_recipe:
     def threshold_temp_min(self,hour,day):
         """return the min acceptable value at t"""
         period = self.get_period(day) + "_" + self.get_cycle(hour)
-        return(self.thresholds.get(period,"temp")
+        return(self.thresholds.get(period,"temp"))
 
 
     def threshold_temp_max(self):
         """return the max acceptable value at t"""
-
+        return(12)
 
 
     def thresholdd_humidity(self,hour,day):

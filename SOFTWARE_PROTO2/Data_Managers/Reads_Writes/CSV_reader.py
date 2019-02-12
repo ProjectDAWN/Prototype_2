@@ -14,7 +14,7 @@ class CSV_reader :
         return(list(self.df[caracteristic]))
 
     def get_infos(self,key):
-        return(dict(zip(list(self.df),list(self.df[key]))))
+        return(dict(zip(list(self.df),list(self.df.loc[key]))))
 
     def print_pins(file_name):
         pins_file = open(file_name,'r')
