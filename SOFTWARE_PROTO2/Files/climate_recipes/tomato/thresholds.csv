@@ -1,4 +1,4 @@
-period, temp, humidity, vaporization, break, hour
+period,temp,humidity,vaporization,break,hour
 germination_day, 28, 85, 0.55, 52.5,5
 germination_night, 28, 85, 0.55, 52.5,23
 growth_day,26, 75, 0.55, 52.5,5
