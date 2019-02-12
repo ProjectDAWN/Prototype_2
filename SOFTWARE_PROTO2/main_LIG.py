@@ -53,7 +53,7 @@ climate_recipe = Climate_recipe(variety)
 AM2315 = am2315.AM2315()
 
 ####### Lighting module
-def lighting_loop(t, variety):
+def lighting_loop(date_current,climate_recipe):
     """lighting_loop i a function that control Leds acoording to climate recipe"""
 
     if t(1) < climate_recipe.LEDupBoundary(t, variety) and InOut.input(LIG_Led): # end of the day for LEDs
@@ -73,4 +73,4 @@ def end_loop():
 ######################### Main loop ###########################################
 
 date_current = datetime.datetime.now()
-lighting_loop(date_current)
+lighting_loop(date_current,climate_recipe)

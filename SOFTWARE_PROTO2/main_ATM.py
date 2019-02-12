@@ -20,13 +20,12 @@
 #
 ##################### Importation section   #################################
 import sys
-import out_in
+import Raspberry_Interface
 import datetime
-from Climate_recipe import Climate_recipe
+from climate_recipe.Climate_recipe import Climate_recipe
 import time
-from out_in import Raspberry_GPIO
-from out_in.sensor_classes import am2315
-from out_in.sensor_classes import AtlasI2C
+from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
+from Raspberry_Interface.sensor_classes import AtlasI2C
 #add sensors' and actuators' classes here
 
 
@@ -44,9 +43,8 @@ size_y_bac=0
 pH_I2C_address = 0
 EC_I2C_address = 0
 
-InOut = Raspberry_GPIO.Interface(pin_file,realMode)
+InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
 climate_recipe = Climate_recipe(variety)
-AM2315 = am2315.AM2315()
 
 def atmospheric_loop(date_current,climate_recipe):
     """maintain parameters (temperature, humidity) in a range define in climate recipe"""
