@@ -1,4 +1,4 @@
-from AtlasI2C import *
+from Raspberry_Interface.sensor_classes.AtlasI2C import *
 import time
 
 class EC:

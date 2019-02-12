@@ -22,6 +22,7 @@
 import sys
 import Raspberry_Interface
 import datetime
+import pickle
 from climate_recipe.Climate_recipe import Climate_recipe
 import time
 from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
@@ -36,18 +37,20 @@ from Raspberry_Interface.sensor_classes import AtlasI2C
 pin_file = "Files/Actuators.csv"
 realMode = False
 variety = "tomato"
-
+date_file = open("Files/date_ini",'rb')
+depickler = pickle.Unpickler(date_file)
+date_ini = depickler.load()
 InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
 climate_recipe = Climate_recipe(variety)
 
-def atmospheric_loop(date_current,climate_recipe):
+def atmospheric_loop(hour,day,climate_recipe):
     """maintain parameters (temperature, humidity) in a range define in climate recipe"""
 
     #Temperature
     temperature = 12#AM2315.read_temperature()
-    if temperature < climate_recipe.threshold_temp(date_current.hour, date_current.day)-1 : #too cold
+    if temperature < climate_recipe.threshold_temp(hour, day)-1 : #too cold
         InOut.activate("ATM_Warmer")
-    if temperature > climate_recipe.threshold_temp(date_current.hour, date_current.day)+1:  #too warm
+    if temperature > climate_recipe.threshold_temp(hour, day)+1:  #too warm
         InOut.desactivate("ATM_Warmer")
 
     #humidity
@@ -69,4 +72,5 @@ def end_loop():
                     "ATM_Warmer")
 
 date_current = datetime.datetime.now()
-atmospheric_loop(date_current,climate_recipe)
+diff = datetime.datetime.now() - date_ini
+atmospheric_loop(date_current.hour,diff.days,climate_recipe)

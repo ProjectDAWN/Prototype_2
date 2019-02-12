@@ -22,6 +22,7 @@
 
 ###############################################################################
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
+import math
 class Climate_recipe:
 
     CR_folder = "Files/climate_recipes/"
@@ -40,7 +41,7 @@ class Climate_recipe:
                 period = p
             else:
                 break
-            return(period)
+        return(period)
 
     def get_cycle(self,hour,day):
         """return day or night according to hour"""
@@ -75,17 +76,20 @@ class Climate_recipe:
 
     ############### Functions for Nutrients Module ######################
 
-    def floraMicro(i):
+    def floraMicro(day):
         """return the quantity in ml of this nutrient for week i according to climate recipe"""
-        return(self.nutrients.get(i,"micro"))
+        week = math.ceil(day/7)
+        return(self.nutrients.get(week,"micro"))
 
-    def floraGro(i):
+    def floraGro(day):
         """return the number of ml of this nutrient for week i according to climate recipe"""
-        return(self.nutrients.get(i,"gro"))
+        week = math.ceil(day/7)
+        return(self.nutrients.get(week,"gro"))
 
-    def floraBloom(i):
+    def floraBloom(day):
         """return the number of ml of this nutrient for week i according to climate recipe"""
-        return(self.nutrients.get(i,"bloom"))
+        week = math.ceil(day/7)
+        return(self.nutrients.get(week,"bloom"))
 
 
 
