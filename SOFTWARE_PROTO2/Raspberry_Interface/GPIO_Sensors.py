@@ -1,14 +1,4 @@
 
-<<<<<<< HEAD
-=======
-from sensor_classes.pH import pH
-from sensor_classes.EC import EC
-from sensor_classes.mcp3008 import MCP3008
-from sensor_classes.ds18b20 import DS18B20
-from sensor_classes.am2320_Humidity import AM2320_Humidity
-from sensor_classes.am2320_Temperature import AM2320_Temperature
-
->>>>>>> 70f259cc03bce0fda20e2870a48cda46024b7055
 import sys
 sys.path.append(sys.path[0]+"/..")
 sys.path.append(sys.path[0]+"/Raspberry_Interface")
@@ -50,6 +40,7 @@ class GPIO_Sensors :
         check if the reading is possible and get the value"""
         if self.verif_name_sensor(name_sensor):
             output =  -1
+            print("lecture {}".format(name_sensor))
             if(self.realMode):
                 sensor_class = GPIO_Sensors.class_dict[nom_capteur]
                 output = sensor_class.get()
