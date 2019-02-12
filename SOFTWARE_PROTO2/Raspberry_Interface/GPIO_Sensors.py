@@ -6,7 +6,6 @@ from sensor_classes.ds18b20 import DS18B20
 from sensor_classes.am2320_Humidity import AM2320_Humidity
 from sensor_classes.am2320_Temperature import AM2320_Temperature
 
-from sensor_classes.ds18b20 import
 import sys
 sys.path.append(sys.path[0]+"/..")
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
@@ -44,7 +43,7 @@ class GPIO_Sensors :
                 sensor_class = GPIO_Sensors.class_dict[nom_capteur]
                 output = sensor_class.get()
 
-        return output 
+        return output
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
 #In.read("NUT_Mixer")
