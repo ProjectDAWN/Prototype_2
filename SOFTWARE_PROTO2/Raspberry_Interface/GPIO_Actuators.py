@@ -66,8 +66,8 @@ class GPIO_Actuators :
         for pin in self.activated_pins:
             self.desactivate(pin)
 
-In = GPIO_Actuators("../Files/Actuators.csv",False)
-In.activate("NUT_Mixer")
+#In = GPIO_Actuators("../Files/Actuators.csv",False)
+#In.activate("NUT_Mixer")
 
-In.activate(31)
-In.cleanup()
+#In.activate(31)
+#In.cleanup()
