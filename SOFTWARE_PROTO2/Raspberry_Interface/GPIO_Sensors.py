@@ -1,4 +1,12 @@
 
+from sensor_classes.pH import pH
+from sensor_classes.EC import EC
+from sensor_classes.mcp3008 import MCP3008
+from sensor_classes.ds18b20 import DS18B20
+from sensor_classes.am2320_Humidity import AM2320_Humidity
+from sensor_classes.am2320_Temperature import AM2320_Temperature
+
+from sensor_classes.ds18b20 import
 import sys
 sys.path.append(sys.path[0]+"/..")
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
@@ -6,7 +14,8 @@ from Raspberry_Interface.sensor_classes import *
 
 class GPIO_Sensors :
 
-    class_dict = {"nom_capteur" : class_capteur}
+    class_dict = {"pH" : pH(), "conductivity" : EC(), "waterlevel" : MCP3008(), "water_temperature" : DS18B20(),
+    "temperature" : AM2320_Temperature(), "humidity" : AM2320_Temperature()}
 
     def __init__(self,pin_file,realMode=True) :
         self.sensors = CSV_reader(pin_file) #instantiation of the actuators manager class
@@ -16,26 +25,26 @@ class GPIO_Sensors :
             import RPi.GPIO as GPIO
             GPIO.setmode(GPIO.BCM)
 
-    def verif_pin(self,pin,activate):
-        """this function check error on pin activation
-        take a pin and a bool indicating the info to communicate"""
+    def verif_sensor(self,name):
+        """this function check if the name exists
+        take a name (str)"""
 
-        if(pin not in GPIO_Sensors.class_dict.keys()):
-            print("captor {} doesn't exist".format(pin))
+        if(name not in GPIO_Sensors.class_dict.keys()):
+            print("sensor {} doesn't exist".format(name))
             return(False)
         else:
             return(True)
 
-    def read(self,pin):
-        """Given pins or sensor,
-        check if the activation is possible and activate it"""
-        if(not isinstance(pin,int)):
-            pin = self.sensors.get(pin,"pin") # allow to the user (main) to choose between pin or actuator name
-        if self.verif_pin(pin,True):
-            self.pins_dict[pin]=-1
+    def read(self,name_sensor):
+        """Given name_sensor
+        check if the reading is possible and get the value"""
+        if self.verif_name_sensor(name_sensor):
+            output =  -1
             if(self.realMode):
-                class = GPIO_Sensors.class_dict[nom_capteur]
-                self.pins_dict[pin]=-1
+                sensor_class = GPIO_Sensors.class_dict[nom_capteur]
+                output = sensor_class.get()
+
+        return output 
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
 #In.read("NUT_Mixer")
