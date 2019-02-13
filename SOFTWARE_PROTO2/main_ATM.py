@@ -37,11 +37,12 @@ from Raspberry_Interface.sensor_classes import AtlasI2C
 pin_file = "Files/Actuators.csv"
 realMode = True
 variety = "tomato"
+InOutMode = "GPIO"
 date_file = open("Files/date_ini",'rb')
 depickler = pickle.Unpickler(date_file)
 date_ini = depickler.load()
-actuators = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
-sensors = GPIO_Sensors.GPIO_Sensors(realMode)
+actuators = GPIO_Actuators.GPIO_Actuators(pin_file,realMode,InOutMode)
+sensors = GPIO_Sensors.GPIO_Sensors(realMode,InOutMode)
 climate_recipe = Climate_recipe(variety)
 
 def atmospheric_loop(hour,day,climate_recipe):
@@ -75,3 +76,5 @@ def end_loop():
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
 atmospheric_loop(date_current.hour,diff.days,climate_recipe)
+time.sleep(10)
+end_loop()

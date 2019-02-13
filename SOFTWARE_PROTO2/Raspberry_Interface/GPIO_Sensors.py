@@ -9,7 +9,7 @@ class GPIO_Sensors :
 
     class_dict = dict.fromkeys(["pH","conductivity","waterlevel","water_temperature","temperature","humidity"])
 
-    def __init__(self,realMode=True) :
+    def __init__(self,realMode=True,InOutMode) :
         self.realMode = realMode
         if self.realMode:
             import RPi.GPIO as GPIO
@@ -53,11 +53,12 @@ class GPIO_Sensors :
             output =  -1
             print("lecture {}".format(name_sensor))
             if(self.realMode):
-                sensor_class = GPIO_Sensors.class_dict[nom_capteur]
-                output = sensor_class.print()
+                sensor_class = GPIO_Sensors.class_dict[name_sensor]
+                output = sensor_class.get()
+                sensor_class.print()
 
         return output
-        
+
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
 #In.read("NUT_Mixer")
