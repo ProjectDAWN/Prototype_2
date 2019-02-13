@@ -7,10 +7,9 @@ from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
 
 class GPIO_Sensors :
 
+    class_dict = dict.fromkeys(["pH","conductivity","waterlevel","water_temperature","temperature","humidity"])
 
-    def __init__(self,pin_file,realMode=True) :
-        self.sensors = CSV_reader(pin_file) #instantiation of the actuators manager class
-        self.nb_pins = self.actuators.nb_index
+    def __init__(self,realMode=True) :
         self.realMode = realMode
         if self.realMode:
             import RPi.GPIO as GPIO
@@ -38,7 +37,7 @@ class GPIO_Sensors :
     def read(self,name_sensor):
         """Given name_sensor
         check if the reading is possible and get the value"""
-        if self.verif_name_sensor(name_sensor):
+        if self.verif_sensor(name_sensor):
             output =  -1
             print("lecture {}".format(name_sensor))
             if(self.realMode):

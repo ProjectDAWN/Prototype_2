@@ -42,7 +42,8 @@ variety = "tomato"
 date_file = open("Files/date_ini",'rb')
 depickler = pickle.Unpickler(date_file)
 date_ini = depickler.load()
-InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
+actuators = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
+sensors = GPIO_Sensors.GPIO_Sensors(realMode)
 climate_recipe = Climate_recipe(variety)
 
 
@@ -60,40 +61,40 @@ def watering_loop(variety,climate_recipe):
 
     #pH regulation
     if pH < climate_recipe.pHlow(t, variety):
-        InOut.activate(NUT_Pump4)
+        actuators.activate(NUT_Pump4)
         time.sleep(x) # find the right amount of time to reach the good value
-        InOut.desactivate(NUT_Pump4)
+        actuators.desactivate(NUT_Pump4)
 
     if pH > climate_recipe.pHtop(t, variety):
-        InOut.activate(WARpHup_pin)
+        actuators.activate(WARpHup_pin)
         time.sleep(x) # find the right amount of time to reach the good value
-        InOut.desactivate(WARpHup_pin)
+        actuators.desactivate(WARpHup_pin)
 
     #watering
     if climate_recipe.watering_fistcycle(nbdays,variety):
-        InOut.activate(WAR_MistMaker, WAR_Ventilator)
+        actuators.activate(WAR_MistMaker, WAR_Ventilator)
         time.sleep(climate_recipe.WAR_ON_FIRST(variety))
-        InOut.desactivate(WAR_MistMaker, WAR_Ventilator)
+        actuators.desactivate(WAR_MistMaker, WAR_Ventilator)
 
-        InOut.activate(WAR_Mixer)
+        actuators.activate(WAR_Mixer)
         time.sleep(climate_recipe.WAR_OFF_FIRST(variety))
-        InOut.desactivate(WAR_Mixer)
+        actuators.desactivate(WAR_Mixer)
 
     if not climate_recipe.watering_fistcycle(nbdays,variety):
-        InOut.activate(WAR_MistMaker, WAR_Ventilator)
+        actuators.activate(WAR_MistMaker, WAR_Ventilator)
         time.sleep(climate_recipe.WAR_OFN_SECOND(variety))
-        InOut.desactivate(WAR_MistMaker, WAR_Ventilator)
+        actuators.desactivate(WAR_MistMaker, WAR_Ventilator)
 
-        InOut.activate(WAR_Mixer)
+        actuators.activate(WAR_Mixer)
         time.sleep(climate_recipe.WAR_OFF_SECOND(variety))
-        InOut.desactivate(WAR_Mixer)
+        actuators.desactivate(WAR_Mixer)
 
 ####### End of growth
 
 def end_loop():
-    """put all the InOut pins at LOW value"""
+    """put all the actuators pins at LOW value"""
 
-    InOut.desactivate(WAR_MistMaker,
+    actuators.desactivate(WAR_MistMaker,
                     WAR_Mixer,
                     WAR_Ventilator,
                     WARwatermevel_pin,
