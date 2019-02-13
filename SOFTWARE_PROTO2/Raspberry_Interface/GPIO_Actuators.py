@@ -11,7 +11,7 @@ import RPi.GPIO as GPIO
 class GPIO_Actuators :
 
 
-    def __init__(self,chanel_file,realMode=True,InOutMode) :
+    def __init__(self,chanel_file,InOutMode,realMode=True) :
         self.actuators = CSV_reader(chanel_file) #instantiation of the actuators manager class
         self.activated_chanels = [] #list of chanels which are activate (hardware ON)
         self.nb_chanels = self.actuators.nb_index

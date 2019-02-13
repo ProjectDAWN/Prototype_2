@@ -9,7 +9,7 @@ class GPIO_Sensors :
 
     class_dict = dict.fromkeys(["pH","conductivity","waterlevel","water_temperature","temperature","humidity"])
 
-    def __init__(self,realMode=True,InOutMode) :
+    def __init__(self,InOutMode,realMode=True) :
         self.realMode = realMode
         if self.realMode:
             import RPi.GPIO as GPIO
