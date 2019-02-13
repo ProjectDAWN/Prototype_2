@@ -42,7 +42,7 @@ class GPIO_Sensors :
             print("lecture {}".format(name_sensor))
             if(self.realMode):
                 sensor_class = GPIO_Sensors.class_dict[nom_capteur]
-                output = sensor_class.get()
+                output = sensor_class.read()
 
         return output
 

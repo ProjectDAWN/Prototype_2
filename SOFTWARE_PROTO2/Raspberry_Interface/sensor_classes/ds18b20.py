@@ -20,7 +20,7 @@ class DS18B20:
         f.close()
         return lines
     
-    def get(self):
+    def read(self):
         """Get the temperature, it's in Celsius""" 
         lines = self.read_temp_raw()
         while lines[0].strip()[-3:] != 'YES':
@@ -32,6 +32,6 @@ class DS18B20:
             temp_c = float(temp_string) / 1000.0
         return temp_c
 
-    def read(self):
+    def print(self):
         """Print the value in terminal"""
-        print("La température de l'eau est " +str(self.get()) +" °C")
+        print("La température de l'eau est " +str(self.read()) +" °C")
