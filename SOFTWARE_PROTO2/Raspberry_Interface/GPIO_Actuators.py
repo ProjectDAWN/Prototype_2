@@ -57,7 +57,7 @@ class GPIO_Actuators :
         check if the desactivation is possible and desactivate it"""
         for chanel in actuators: #actuators is a list of string representing actuators
             if(not isinstance(chanel,int)):
-                chanel = self.actuators.get(chanel,self.InOutMode) # allow to the user (main) to choose between chanel or actuator name
+                chanel = int(self.actuators.get(chanel,self.InOutMode)) # allow to the user (main) to choose between chanel or actuator name
             if self.verif_chanel(chanel,False):
                 self.activated_chanels.remove(chanel)
                 self.chanels_dict[chanel]=False

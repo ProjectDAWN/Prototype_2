@@ -50,14 +50,10 @@ class GPIO_Sensors :
         """Given name_sensor
         check if the reading is possible and print the value"""
         if self.verif_sensor(name_sensor):
-            output =  -1
-            print("lecture {}".format(name_sensor))
             if(self.realMode):
                 sensor_class = GPIO_Sensors.class_dict[name_sensor]
-                output = sensor_class.get()
                 sensor_class.print()
 
-        return output
 
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
