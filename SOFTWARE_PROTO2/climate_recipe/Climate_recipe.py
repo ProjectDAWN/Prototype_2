@@ -77,17 +77,17 @@ class Climate_recipe:
     ############### Functions for Nutrients Module ######################
 
     def floraMicro(day):
-        """return the quantity in ml of this nutrient for week i according to climate recipe"""
+        """return the quantity in ml of this nutrient according to climate recipe"""
         week = math.ceil(day/7)
         return(self.nutrients.get(week,"micro"))
 
     def floraGro(day):
-        """return the number of ml of this nutrient for week i according to climate recipe"""
+        """return the number of ml of this nutrient according to climate recipe"""
         week = math.ceil(day/7)
         return(self.nutrients.get(week,"gro"))
 
     def floraBloom(day):
-        """return the number of ml of this nutrient for week i according to climate recipe"""
+        """return the number of ml of this nutrient according to climate recipe"""
         week = math.ceil(day/7)
         return(self.nutrients.get(week,"bloom"))
 
