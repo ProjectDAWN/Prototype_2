@@ -6,6 +6,7 @@
 import sys
 sys.path.append(sys.path[0]+"/..")
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
+import RPi.GPIO as GPIO
 
 class GPIO_Actuators :
 
@@ -17,7 +18,6 @@ class GPIO_Actuators :
         self.pins_dict = dict(zip(self.actuators.get_list("pin"),[None]*self.nb_pins)) #dict of state by pin
         self.realMode = realMode
         if realMode:
-            import RPi.GPIO as GPIO
             GPIO.setmode(GPIO.BCM)
             print("GPIO imported")
 
