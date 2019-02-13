@@ -22,13 +22,13 @@ class MCP3008:
 		self.Vmin = 0.3500
 		self.Hmax = 213
 
-	def get(self):
+	def read(self):
 		"""Get the water level, it's in millimeter""" 
 		chan = AnalogIn(self.mcp,MCP.P0)
 		V = chan.voltage
 		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
 		return H
 
-	def read(self):
+	def print(self):
 		"""Print the value in terminal"""
-		print ("La hauteur immergée vaut" + str(self.get()) + ' mm')
+		print ("La hauteur immergée vaut" + str(self.read()) + ' mm')

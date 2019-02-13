@@ -1,5 +1,4 @@
 from EC import *
 
 EC = EC()
-
-EC.read()
+EC.print()

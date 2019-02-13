@@ -9,11 +9,11 @@ class pH:
 		self.pH_I2C_address = 0x63
 		self.device = AtlasI2C(self.pH_I2C_address)
 
-	def read(self):
+	def print(self):
 		"""Print the value in terminal"""
-		print("Le ph vaut " +str(self.get()))
+		print("Le ph vaut " +str(self.read()))
 
-	def get(self):
+	def read(self):
 		"""Get the pH value"""
 		msg = self.device.query("R") #Get a message from the sensor, it's in a String and it contains the value
 		list_msg = msg.split( ) #Parse the string with a blanck a space
