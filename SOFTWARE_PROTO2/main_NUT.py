@@ -47,7 +47,7 @@ size_y_bac = 1
 water_level = GPIO_Sensors.read("waterlevel")
 flow= 1.6 #pump's flow = 1.6ml.s-1
 volume = size_x_bac*size_y_bac*water_level
-coeff = volume/3.79
+coeff = volume/3.79 #3.79 --> conversion L/Gallons
 
 
 
