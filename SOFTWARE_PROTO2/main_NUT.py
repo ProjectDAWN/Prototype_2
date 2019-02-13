@@ -44,7 +44,7 @@ climate_recipe = Climate_recipe(variety)
 
 size_x_bac = 1
 size_y_bac = 1
-water_level = 1 #Add the fonction
+water_level = GPIO_Sensors.read("waterlevel")
 flow= 1.6 #pump's flow = 1.6ml.s-1
 volume = size_x_bac*size_y_bac*water_level
 coeff = volume/3.79
