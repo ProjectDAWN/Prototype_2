@@ -40,7 +40,8 @@ variety = "tomato"
 date_file = open("Files/date_ini",'rb')
 depickler = pickle.Unpickler(date_file)
 date_ini = depickler.load()
-InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
+actuators = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
+sensors = GPIO_Sensors.GPIO_Sensors(realMode)
 climate_recipe = Climate_recipe(variety)
 
 
@@ -48,15 +49,15 @@ def lighting_loop(hour,day,climate_recipe):
     """lighting_loop i a function that control Leds acoording to climate recipe"""
 
     if(hour<climate_recipe.LEDupBoundary(day)) and (hour>=climate_recipe.LEDdownBoundary(day)):
-        InOut.activate("LIG_Led")
+        actuators.activate("LIG_Led")
     else:
-        InOut.desactivate("LIG_Led")
+        actuators.desactivate("LIG_Led")
 
 ####### End of growth
 
 def end_loop():
-    """put all the InOut pins at LOW value"""
-    InOut.desactivate("LIG_Led")
+    """put all the actuators pins at LOW value"""
+    actuators.desactivate("LIG_Led")
 
 
 ######################### Main loop ###########################################

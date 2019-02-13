@@ -39,7 +39,8 @@ variety = "tomato"
 date_file = open("Files/date_ini",'rb')
 depickler = pickle.Unpickler(date_file)
 date_ini = depickler.load()
-InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
+actuators = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
+sensors = GPIO_Sensors.GPIO_Sensors(realMode)
 climate_recipe = Climate_recipe(variety)
 
 size_x_bac = 1
@@ -55,23 +56,23 @@ coeff = volume/3.79 #3.79 --> conversion L/Gallons
 def nutrients_loop(day,climate_recipe):
     """nutrients_loop is a function that control the release of nutrients according to climate recipe"""
     FloraMicro = climate_recipe.floraMicro(day) #ml
-    InOut.activate("NUT_Pump_pHDown")
+    actuators.activate("NUT_Pump_pHDown")
     time.sleep(FloraMicro/flow*coeff)
-    InOut.desactivate("NUT_Pump_pHDown")
+    actuators.desactivate("NUT_Pump_pHDown")
     FloraGro = climate_recipe.floraGro(day) #ml
-    InOut.activate("NUT_Pump_BioGrow")
+    actuators.activate("NUT_Pump_BioGrow")
     time.sleep(FloraGro/flow*coeff)
-    InOut.desactivate("NUT_Pump_BioGrow")
+    actuators.desactivate("NUT_Pump_BioGrow")
     FloraBloom = climate_recipe.floraBloom(day) # ml
-    InOut.activate("NUT_Pump_BioBloom")
+    actuators.activate("NUT_Pump_BioBloom")
     time.sleep(FloraBloom/flow*coeff)
-    InOut.desactivate("NUT_Pump_BioBloom")
+    actuators.desactivate("NUT_Pump_BioBloom")
 
 ####### End of growth
 
 def end_loop():
-    """put all the InOut pins at LOW value"""
-    InOut.desactivate(NUT_Pump_pHDown,
+    """put all the actuators pins at LOW value"""
+    actuators.desactivate(NUT_Pump_pHDown,
                     NUT_Pump2,
                     NUT_Pump3)
 

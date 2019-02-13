@@ -40,34 +40,35 @@ variety = "tomato"
 date_file = open("Files/date_ini",'rb')
 depickler = pickle.Unpickler(date_file)
 date_ini = depickler.load()
-InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
+actuators = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
+sensors = GPIO_Sensors.GPIO_Sensors(realMode)
 climate_recipe = Climate_recipe(variety)
 
 def atmospheric_loop(hour,day,climate_recipe):
     """maintain parameters (temperature, humidity) in a range define in climate recipe"""
 
     #Temperature
-    temperature = 12#AM2315.read_temperature()
+    temperature = sensors.read("temperature")
     if temperature < climate_recipe.threshold_temp(hour, day)-1 : #too cold
-        InOut.activate("ATM_Warmer")
+        actuators.activate("ATM_Warmer")
     if temperature > climate_recipe.threshold_temp(hour, day)+1:  #too warm
-        InOut.desactivate("ATM_Warmer")
+        actuators.desactivate("ATM_Warmer")
 
     #humidity
-    humidity = 12#AM2315.read_humidity()
+    humidity = sensors.read("humidity")
     humidity_threshold = climate_recipe.thresholdd_humidity(date_current.hour,date_current.day)
     if humidity < humidity_threshold*(1-0.005):
         # humidity is too low
-        InOut.activate("ATM_MistMaker", "ATM_Ventilator")
+        actuators.activate("ATM_MistMaker", "ATM_Ventilator")
     if humidity > humidity_threshold*(1+0.005) : # humidity is too high
-        InOut.desactivate("ATM_MistMaker")
+        actuators.desactivate("ATM_MistMaker")
 
 
 ####### End of growth
 
 def end_loop():
-    """put all the InOut pins at LOW value"""
-    InOut.desactivate("ATM_Ventilator",
+    """put all the actuators pins at LOW value"""
+    actuators.desactivate("ATM_Ventilator",
                     "ATM_MistMaker",
                     "ATM_Warmer")
 
