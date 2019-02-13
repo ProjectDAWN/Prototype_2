@@ -29,8 +29,10 @@ from climate_recipe.Climate_recipe import Climate_recipe
 import time
 from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
 from Raspberry_Interface.sensor_classes import AtlasI2C
-#add sensors' and actuators' classes here
 
+#add sensors' and actuators' classes here
+from Raspberry_Interface.sensor_classes import pH
+from Raspberry_Interface.sensor_classes import EC
 
 
 ######################## Modules loops #######################################
@@ -48,46 +50,39 @@ climate_recipe = Climate_recipe(variety)
 
 
 
-def watering_loop(variety,climate_recipe):
+def watering_loop(day,climate_recipe):
     """water_loop control level_water, pH, EC, hydroponic system"""
+    count = 0
+    bool = True
+    
+    while bool=True :
+        #get pH value
+        pH_value = pH.read()
 
-    #get pH value
-    device = AtlasI2C(pH_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
-    pH = string.split(device.query("I"), ",")[1]
+        #get EC value
+        EC_value = EC.read()
 
-    #get EC value
-    device = AtlasI2C(EC_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
-    EC = string.split(device.query("I"), ",")[1]
+        #pH regulation
+        if pH_value > climate_recipe.pH_max():
+            actuators.activate("NUT_Pump_pHDown")
+            time.sleep(5) # find the right amount of time to reach the good value
+            actuators.desactivate("NUT_Pump_pHDown")
 
-    #pH regulation
-    if pH < climate_recipe.pHlow(t, variety):
-        actuators.activate(NUT_Pump4)
-        time.sleep(x) # find the right amount of time to reach the good value
-        actuators.desactivate(NUT_Pump4)
+        #watering
 
-    if pH > climate_recipe.pHtop(t, variety):
-        actuators.activate(WARpHup_pin)
-        time.sleep(x) # find the right amount of time to reach the good value
-        actuators.desactivate(WARpHup_pin)
+        #break time with activation of the mixer
+        actuators.activate("WAR_Mixer")
+        time.sleep(climate_recipe.OFF_time(day)-5)
+        actuators.desactivate("WAR_Mixer")
 
-    #watering
-    if climate_recipe.watering_fistcycle(nbdays,variety):
+        #vaporization time
         actuators.activate(WAR_MistMaker, WAR_Ventilator)
-        time.sleep(climate_recipe.WAR_ON_FIRST(variety))
+        time.sleep(climate_recipe.ON_time(day))
         actuators.desactivate(WAR_MistMaker, WAR_Ventilator)
 
-        actuators.activate(WAR_Mixer)
-        time.sleep(climate_recipe.WAR_OFF_FIRST(variety))
-        actuators.desactivate(WAR_Mixer)
-
-    if not climate_recipe.watering_fistcycle(nbdays,variety):
-        actuators.activate(WAR_MistMaker, WAR_Ventilator)
-        time.sleep(climate_recipe.WAR_OFN_SECOND(variety))
-        actuators.desactivate(WAR_MistMaker, WAR_Ventilator)
-
-        actuators.activate(WAR_Mixer)
-        time.sleep(climate_recipe.WAR_OFF_SECOND(variety))
-        actuators.desactivate(WAR_Mixer)
+        count+=1
+        if count = 5 :
+            bool = False
 
 ####### End of growth
 
@@ -97,12 +92,10 @@ def end_loop():
     actuators.desactivate(WAR_MistMaker,
                     WAR_Mixer,
                     WAR_Ventilator,
-                    WARwatermevel_pin,
-                    WARpHup_pin,
-                    NUT_Pump4)
+                    NUT_Pump_pHDown)
 
 ######################### Main loop ###########################################
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
-watering_loop(date_current.hour,diff.days,climate_recipe)
+watering_loop(diff.days,climate_recipe)

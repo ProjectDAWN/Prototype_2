@@ -93,27 +93,18 @@ class Climate_recipe:
         return(self.nutrients.get(week,"bloom"))
 
 
-    ########## Watering Module #########################
+    ########## Functions for Watering Module #########################
 
-    def watering_first_cycle(t):
+    def pH_max(self):
+        "returns the value of the minimumu value for pH"
+        return(self.caracteristics.get("pH_up"))
 
-        nb_days = self.caracteristics["nb_days"]
 
-        if nb_days <= 21 :
-            #bool = lectrique
-            bool = True
-        elif nb_days > 21 :
-            bool = False
-        return bool
+    def ON_time(self,day):
+        period = self.get_period(day) + "_day"
+        return(self.thresholds.get(period,"ON"))
 
-    def WAR_ON_FIRST():
-        return 0.75
 
-    def WAR_OFF_FIRST():
-        return 52.5
-
-    def WAR_ON_SECOND():
-        return 1.5
-
-    def WAR_OFF_SECOND():
-        return 50
+    def OFF_time(self,day):
+        period = self.get_period(day) + "_day"
+        return(self.thresholds.get(period,"OFF"))
