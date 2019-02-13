@@ -55,7 +55,7 @@ class GPIO_Actuators :
         check if the desactivation is possible and desactivate it"""
         for pin in actuators: #actuators is a list of string representing actuators
             if(not isinstance(pin,int)):
-                pin = self.actuators.get_pin(pin) # allow to the user (main) to choose between pin or actuator name
+                pin = self.actuators.get(pin,"pin") # allow to the user (main) to choose between pin or actuator name
             if self.verif_pin(pin,False):
                 self.activated_pins.remove(pin)
                 self.pins_dict[pin]=False

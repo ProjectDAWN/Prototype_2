@@ -18,13 +18,15 @@
 #
 ##################### Importation section   #################################
 import sys
-import out_in
+import Raspberry_Interface
 import datetime
-from climate_recipe import climate_recipe
+import pickle
+from climate_recipe.Climate_recipe import Climate_recipe
 import time
-from out_in import Raspberry_GPIO
-from out_in.sensor_classes import am2315
-from out_in.sensor_classes import AtlasI2C
+from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
+from Raspberry_Interface.sensor_classes import AtlasI2C
+#add sensors' and actuators' classes here
+
 
 
 
@@ -35,31 +37,30 @@ from out_in.sensor_classes import AtlasI2C
 pin_file = "Files/Actuators.csv"
 realMode = False
 variety = "tomato"
-
-####### Atmospheric module
-InOut = Raspberry_GPIO.Interface(pin_file,realMode)
+date_file = open("Files/date_ini",'rb')
+depickler = pickle.Unpickler(date_file)
+date_ini = depickler.load()
+InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
 climate_recipe = Climate_recipe(variety)
-AM2315 = am2315.AM2315()
 
-####### Lighting module
-def lighting_loop(date_current,climate_recipe):
+
+def lighting_loop(hour,day,climate_recipe):
     """lighting_loop i a function that control Leds acoording to climate recipe"""
 
-    if t(1) < climate_recipe.LEDupBoundary(t, variety) and InOut.input(LIG_Led): # end of the day for LEDs
-        InOut.desactivate(LIG_Led)
-    if t(1) > climate_recipe.LEDupBoundary(t,variety) and not InOut.input(LIG_Led):# beginning of the day for LEDs
-        InOut.activate(LIG_Led)
-
-####### Nutrients module
+    if(hour<climate_recipe.LEDupBoundary(day)) and (hour>=climate_recipe.LEDdownBoundary(day)):
+        InOut.activate("LIG_Led")
+    else:
+        InOut.desactivate("LIG_Led")
 
 ####### End of growth
 
 def end_loop():
     """put all the InOut pins at LOW value"""
-    InOut.desactivate(LIG_Led)
+    InOut.desactivate("LIG_Led")
 
 
 ######################### Main loop ###########################################
 
 date_current = datetime.datetime.now()
-lighting_loop(date_current,climate_recipe)
+diff = datetime.datetime.now() - date_ini
+lighting_loop(date_current.hour,diff.days,climate_recipe)

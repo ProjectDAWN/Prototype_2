@@ -100,6 +100,6 @@ def end_loop():
 
 ######################### Main loop ###########################################
 
-
 date_current = datetime.datetime.now()
-water_loop(date_current,climate_recipe)
+diff = datetime.datetime.now() - date_ini
+atmospheric_loop(date_current.hour,diff.days,climate_recipe)

@@ -22,7 +22,6 @@
 
 ###############################################################################
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
-import math
 class Climate_recipe:
 
     CR_folder = "Files/climate_recipes/"
@@ -65,30 +64,32 @@ class Climate_recipe:
 
     ####### Functions for Lighting module ##########################
 
-    def LEDupBoundary(self):
+    def LEDupBoundary(self,day):
         """return the hour when LEDs should be turned off"""
-        return(self.caracteristics["hour_day"])
+        period = self.get_period(day) + "_night"
+        return(self.thresholds.get(period,"hour"))
 
-    def LEDdownBoundary(t):
+    def LEDdownBoundary(self,day):
         """return the hour when LEDs should be turned on"""
-        return(self.caracteristics["hour_night"])
+        period = self.get_period(day)+"_day"
+        return(self.thresholds.get(period,"hour"))
 
 
     ############### Functions for Nutrients Module ######################
 
-    def floraMicro(day):
+    def floraMicro(self,day):
         """return the quantity in ml of this nutrient according to climate recipe"""
-        week = math.ceil(day/7)
+        week = day//7+1
         return(self.nutrients.get(week,"micro"))
 
-    def floraGro(day):
+    def floraGro(self,day):
         """return the number of ml of this nutrient according to climate recipe"""
-        week = math.ceil(day/7)
+        week = day//7+1
         return(self.nutrients.get(week,"gro"))
 
-    def floraBloom(day):
+    def floraBloom(self,day):
         """return the number of ml of this nutrient according to climate recipe"""
-        week = math.ceil(day/7)
+        week = day//7+1
         return(self.nutrients.get(week,"bloom"))
 
 

@@ -19,13 +19,13 @@
 #
 ##################### Importation section   #################################
 import sys
-import out_in
+import Raspberry_Interface
 import datetime
-from climate_recipe import climate_recipe
+import pickle
+from climate_recipe.Climate_recipe import Climate_recipe
 import time
-from out_in import Raspberry_GPIO
-from out_in.sensor_classes import am2315
-from out_in.sensor_classes import AtlasI2C
+from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
+from Raspberry_Interface.sensor_classes import AtlasI2C
 #add sensors' and actuators' classes here
 
 
@@ -36,49 +36,45 @@ from out_in.sensor_classes import AtlasI2C
 pin_file = "Files/Actuators.csv"
 realMode = False
 variety = "tomato"
-
-InOut = Raspberry_GPIO.Interface(pin_file,realMode)
+date_file = open("Files/date_ini",'rb')
+depickler = pickle.Unpickler(date_file)
+date_ini = depickler.load()
+InOut = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
 climate_recipe = Climate_recipe(variety)
-AM2315 = am2315.AM2315()
 
-####### Atmospheric module
-InOut = Raspberry_GPIO.Interface(pin_file,realMode)
-AM2315 = am2315.AM2315()
+size_x_bac = 1
+size_y_bac = 1
+water_level = 1 #Add the fonction
+flow= 1.6 #pump's flow = 1.6ml.s-1
+volume = size_x_bac*size_y_bac*water_level
+coeff = volume/3.79
 
 
 
 ####### Nutrients module
-def nutrients_loop(date_current,climate_recipe):
+def nutrients_loop(day,climate_recipe):
     """nutrients_loop is a function that control the release of nutrients according to climate recipe"""
-    flow= 1.6 #pump's flow = 1.6ml.s-1
-    water_level = 0 #Add the fonction
-    volume = size_x_bac*size_y_bac*water_level
-    coeff = volume/3.79
-    i = nbdays//7 # week index
-    if not nutrient_week[i]: # no nutrient for the current week
-        nutrient_week[i]=True
-        FloraMicro = climate_recipe.floraMicro(i, variety) #ml
-        InOut.activate("NUT_Pump_pHDown")
-        time.sleep(FloraMicro/flow*coeff)
-        InOut.desactivate("NUT_Pump_pHDown")
-        FloraGro = climate_recipe.floraGro(i, variety) #ml
-        InOut.activate(NUT_Pump2)
-        time.sleep(FloraGro/flow*coeff)
-        InOut.desactivate(NUT_Pump2)
-        FloraBloom = climate_recipe.floraBloop(i, variety) # ml
-        InOut.activate(NUT_Pump3)
-        time.sleep(FloraBloom/flow*coeff)
-        InOut.desactivate(NUT_Pump3)
+    FloraMicro = climate_recipe.floraMicro(day) #ml
+    InOut.activate("NUT_Pump_pHDown")
+    time.sleep(FloraMicro/flow*coeff)
+    InOut.desactivate("NUT_Pump_pHDown")
+    FloraGro = climate_recipe.floraGro(day) #ml
+    InOut.activate("NUT_Pump_BioGrow")
+    time.sleep(FloraGro/flow*coeff)
+    InOut.desactivate("NUT_Pump_BioGrow")
+    FloraBloom = climate_recipe.floraBloom(day) # ml
+    InOut.activate("NUT_Pump_BioBloom")
+    time.sleep(FloraBloom/flow*coeff)
+    InOut.desactivate("NUT_Pump_BioBloom")
 
 ####### End of growth
 
 def end_loop():
     """put all the InOut pins at LOW value"""
-
     InOut.desactivate(NUT_Pump_pHDown,
                     NUT_Pump2,
                     NUT_Pump3)
 
-
 date_current = datetime.datetime.now()
-atmospheric_loop(date_current,climate_recipe)
+diff = datetime.datetime.now() - date_ini
+nutrients_loop(diff.days,climate_recipe)
