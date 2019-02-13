@@ -38,10 +38,10 @@ class GPIO_Sensors :
         """Given name_sensor
         check if the reading is possible and get the value"""
         if self.verif_sensor(name_sensor):
-            output =  -1
+            output = -1
             print("lecture {}".format(name_sensor))
             if(self.realMode):
-                sensor_class = GPIO_Sensors.class_dict[nom_capteur]
+                sensor_class = GPIO_Sensors.class_dict[name_sensor]
                 output = sensor_class.read()
 
         return output
