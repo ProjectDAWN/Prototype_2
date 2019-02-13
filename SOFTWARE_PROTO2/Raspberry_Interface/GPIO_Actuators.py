@@ -15,7 +15,7 @@ class GPIO_Actuators :
         self.actuators = CSV_reader(pin_file) #instantiation of the actuators manager class
         self.activated_pins = [] #list of pins which are activate (hardware ON)
         self.nb_pins = self.actuators.nb_index
-        self.pins_dict = dict(zip(self.actuators.get_list("pin"),[None]*self.nb_pins)) #dict of state by pin
+        self.pins_dict = dict(zip(self.actuators.get_list("GPIO"),[None]*self.nb_pins)) #dict of state by pin
         self.realMode = realMode
         if realMode:
             GPIO.setmode(GPIO.BCM)
