@@ -16,9 +16,10 @@ class GPIO_Actuators :
         self.nb_pins = self.actuators.nb_index
         self.pins_dict = dict(zip(self.actuators.get_list("pin"),[None]*self.nb_pins)) #dict of state by pin
         self.realMode = realMode
-        if self.realMode:
+        if realMode:
             import RPi.GPIO as GPIO
             GPIO.setmode(GPIO.BCM)
+            print("GPIO imported")
 
     def verif_pin(self,pin,activate):
         """this function check error on pin activation
