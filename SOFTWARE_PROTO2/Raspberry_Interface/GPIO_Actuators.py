@@ -42,7 +42,7 @@ class GPIO_Actuators :
         check if the activation is possible and activate it"""
         for pin in actuators: #actuators is a list of string representing actuators
             if(not isinstance(pin,int)):
-                pin = int(self.actuators.get(pin,"pin")) # allow to the user (main) to choose between pin or actuator name
+                pin = int(self.actuators.get(pin,"GPIO")) # allow to the user (main) to choose between pin or actuator name
             if self.verif_pin(pin,True):
                 self.activated_pins.append(pin)
                 self.pins_dict[pin]=True
