@@ -93,7 +93,6 @@ class Climate_recipe:
         return(self.nutrients.get(week,"bloom"))
 
 
-
     ########## Watering Module #########################
 
     def watering_first_cycle(t):
