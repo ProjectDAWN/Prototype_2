@@ -51,21 +51,16 @@ climate_recipe = Climate_recipe(variety)
 def watering_loop(variety,climate_recipe):
     """water_loop control level_water, pH, EC, hydroponic system"""
 
-    #get pH value
-    device = AtlasI2C(pH_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
-    pH = string.split(device.query("I"), ",")[1]
+    pH = sensors.read("pH")
 
-    #get EC value
-    device = AtlasI2C(EC_I2C_address)     # creates the I2C port object, specify the address or bus if necessary
-    EC = string.split(device.query("I"), ",")[1]
-
+    EC = sensors.read("conductivity")
     #pH regulation
-    if pH < climate_recipe.pHlow(t, variety):
+    if pH < climate_recipe.caracteristics["pH_down"]:
         actuators.activate(NUT_Pump4)
         time.sleep(x) # find the right amount of time to reach the good value
         actuators.desactivate(NUT_Pump4)
 
-    if pH > climate_recipe.pHtop(t, variety):
+    if pH > climate_recipe.caracteristics["pH_up"]:
         actuators.activate(WARpHup_pin)
         time.sleep(x) # find the right amount of time to reach the good value
         actuators.desactivate(WARpHup_pin)
