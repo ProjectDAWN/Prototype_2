@@ -29,6 +29,6 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator1)
 	print("Eteint")
 
-	plot(Values, ti)
+	plot(values, ti)
 
 test("ATM_MistMaker","ATM_Ventilator")

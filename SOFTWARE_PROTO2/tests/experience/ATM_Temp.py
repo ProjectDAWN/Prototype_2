@@ -27,6 +27,6 @@ def test(actuator):
 	InOut.desactivate(actuator)
 	print("Eteint")
 
-	plot(Values, ti)
+	plot(values, ti)
 
 test("ATM_Warmer")
