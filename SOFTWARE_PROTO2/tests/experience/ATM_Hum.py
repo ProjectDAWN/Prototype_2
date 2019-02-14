@@ -14,11 +14,10 @@ sensors = GPIO_Sensors(InOutMode,realMode)
 
 def test(actuator1, actuator2):
 	values=[]
-	ti = np.linspace(0,300,300)
+	ti = np.linspace(0,60,60)
 
 	t = time.time()
-	t_empty = t + 60
-	t_fin = t+ 300
+	t_empty = t + 30
 
 	print("Test sans actionneurs")
 	while time.time() < t_empty :
@@ -29,7 +28,8 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator2)
 	print("Allumé")
 
-	print("Testt avec actionneurs")
+	t_fin = time.time() + 30
+	print("Test avec actionneurs")
 	while time.time() < t_fin :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
@@ -38,6 +38,7 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator2)
 	print("Eteint")
 
+	plt.grid()
 	plt.plot(ti,values)
 	plt.show()
 
