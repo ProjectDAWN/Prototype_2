@@ -10,66 +10,66 @@ from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
 class GPIO_Actuators :
 
 
-    def __init__(self,chanel_file,InOutMode,realMode=True) :
-        self.actuators = CSV_reader(chanel_file) #instantiation of the actuators manager class
-        self.activated_chanels = [] #list of chanels which are activate (hardware ON)
-        self.nb_chanels = self.actuators.nb_index
-        self.chanels_dict = dict(zip(self.actuators.get_list("GPIO"),[None]*self.nb_chanels)) #dict of state by chanel
+    def __init__(self,channel_file,InOutMode,realMode=True) :
+        self.actuators = CSV_reader(channel_file) #instantiation of the actuators manager class
+        self.activated_channels = [] #list of channels which are activate (hardware ON)
+        self.nb_channels = self.actuators.nb_index
+        self.channels_dict = dict(zip(self.actuators.get_list("GPIO"),[None]*self.nb_channels)) #dict of state by channel
         self.realMode = realMode
-        self.InOutMode = InOutMode #determine which kind of chanel the interface use
+        self.InOutMode = InOutMode #determine which kind of channel the interface use
 
 
-    def verif_chanel(self,chanel,activate):
-        """this function check error on chanel activation
-        take a chanel and a bool indicating the info to communicate"""
+    def verif_channel(self,channel,activate):
+        """this function check error on channel activation
+        take a channel and a bool indicating the info to communicate"""
 
-        if(chanel not in self.chanels_dict.keys()):
-            print("Pin {} doesn't exist".format(chanel))
+        if(channel not in self.channels_dict.keys()):
+            print("Pin {} doesn't exist".format(channel))
             return(False)
-        #elif(activate and chanel in self.activated_chanels):
-        #    print("Pin {} already activated".format(chanel))
+        #elif(activate and channel in self.activated_channels):
+        #    print("Pin {} already activated".format(channel))
         #    return(False)
-        #elif(not activate and chanel not in self.activated_chanels):
-        #    print("Pin {} not activated".format(chanel))
+        #elif(not activate and channel not in self.activated_channels):
+        #    print("Pin {} not activated".format(channel))
         #    return(False)
         else:
             return(True)
 
     def activate(self,*actuators):
-        """Given chanels or actuators,
+        """Given channels or actuators,
         check if the activation is possible and activate it"""
-        for chanel in actuators: #actuators is a list of string representing actuators
-            if(not isinstance(chanel,int)):
-                chanel = int(self.actuators.get(chanel,self.InOutMode)) # allow to the user (main) to choose between chanel or actuator name
-            if self.verif_chanel(chanel,True):
-                self.activated_chanels.append(chanel)
-                self.chanels_dict[chanel]=True
-                print("activation {}".format(chanel))
+        for channel in actuators: #actuators is a list of string representing actuators
+            if(not isinstance(channel,int)):
+                channel = int(self.actuators.get(channel,self.InOutMode)) # allow to the user (main) to choose between channel or actuator name
+            if self.verif_channel(channel,True):
+                self.activated_channels.append(channel)
+                self.channels_dict[channel]=True
+                print("activation {}".format(channel))
                 if(self.realMode):
                     import RPi.GPIO as GPIO
                     GPIO.setmode(GPIO.BCM)
-                    GPIO.setup(chanel, GPIO.OUT)
-                    GPIO.output(chanel, GPIO.HIGH)
+                    GPIO.setup(channel, GPIO.OUT)
+                    GPIO.output(channel, GPIO.HIGH)
 
     def desactivate(self,*actuators):
-        """Given chanels or actuators,
+        """Given channels or actuators,
         check if the desactivation is possible and desactivate it"""
-        for chanel in actuators: #actuators is a list of string representing actuators
-            if(not isinstance(chanel,int)):
-                chanel = int(self.actuators.get(chanel,self.InOutMode)) # allow to the user (main) to choose between chanel or actuator name
-            if self.verif_chanel(chanel,False):
-                #self.activated_chanels.remove(chanel)
-                self.chanels_dict[chanel]=False
-                print("desactivation {}".format(chanel))
+        for channel in actuators: #actuators is a list of string representing actuators
+            if(not isinstance(channel,int)):
+                channel = int(self.actuators.get(channel,self.InOutMode)) # allow to the user (main) to choose between channel or actuator name
+            if self.verif_channel(channel,False):
+                #self.activated_channels.remove(channel)
+                self.channels_dict[channel]=False
+                print("desactivation {}".format(channel))
                 if(self.realMode):
                     import RPi.GPIO as GPIO
                     GPIO.setmode(GPIO.BCM)
-                    GPIO.setup(chanel, GPIO.OUT)
-                    GPIO.cleanup(chanel)
+                    GPIO.setup(channel, GPIO.OUT)
+                    GPIO.cleanup(channel)
 
     def cleanup(self):
-        for chanel in self.activated_chanels:
-            self.desactivate(chanel)
+        for channel in self.activated_channels:
+            self.desactivate(channel)
 
 #In = GPIO_Actuators("../Files/Actuators.csv",False)
 #In.activate("NUT_Mixer")

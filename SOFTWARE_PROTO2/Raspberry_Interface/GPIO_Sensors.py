@@ -44,7 +44,6 @@ class GPIO_Sensors :
                 output = sensor_class.read()
             else:
                 output = 20
-
         return output
 
     def print(self,name_sensor):
@@ -53,7 +52,7 @@ class GPIO_Sensors :
         if self.verif_sensor(name_sensor):
             if(self.realMode):
                 sensor_class = GPIO_Sensors.class_dict[name_sensor]
-                sensor_class.print()
+                print(name_sensor+" : {}".format(output))
 
 
 
