@@ -13,7 +13,7 @@ class GPIO_Sensors :
         self.realMode = realMode
         if self.realMode:
             import RPi.GPIO as GPIO
-            from sensor_classes.pH import pH
+            from Raspberry_Interface.sensor_classes.pH import pH
             from sensor_classes.EC import EC
             from sensor_classes.mcp3008 import MCP3008
             from sensor_classes.ds18b20 import DS18B20
