@@ -75,9 +75,9 @@ def nutrients_loop(day,climate_recipe):
 
 def end_loop():
     """put all the actuators pins at LOW value"""
-    actuators.desactivate(NUT_Pump_pHDown,
-                    NUT_Pump2,
-                    NUT_Pump3)
+    actuators.desactivate("NUT_Pump_pHDown",
+                    "NUT_Pump2",
+                    "NUT_Pump3")
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
