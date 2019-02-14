@@ -81,4 +81,5 @@ def end_loop():
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
-nutrients_loop(diff.days,climate_recipe)
+end_loop()
+#nutrients_loop(diff.days,climate_recipe)
