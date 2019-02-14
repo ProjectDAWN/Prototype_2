@@ -14,11 +14,11 @@ class GPIO_Sensors :
         if self.realMode:
             import RPi.GPIO as GPIO
             from Raspberry_Interface.sensor_classes.pH import pH
-            from sensor_classes.EC import EC
-            from sensor_classes.mcp3008 import MCP3008
-            from sensor_classes.ds18b20 import DS18B20
-            from sensor_classes.am2320_Humidity import AM2320_Humidity
-            from sensor_classes.am2320_Temperature import AM2320_Temperature
+            from Raspberry_Interface.sensor_classes.EC import EC
+            from Raspberry_Interface.sensor_classes.mcp3008 import MCP3008
+            from Raspberry_Interface.sensor_classes.ds18b20 import DS18B20
+            from Raspberry_Interface.sensor_classes.am2320_Humidity import AM2320_Humidity
+            from Raspberry_Interface.sensor_classes.am2320_Temperature import AM2320_Temperature
             GPIO_Sensors.class_dict = {"pH" : pH(), "conductivity" : EC(), "waterlevel" : MCP3008(), "water_temperature" : DS18B20(),
             "temperature" : AM2320_Temperature(), "humidity" : AM2320_Temperature()}
 
