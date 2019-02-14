@@ -50,15 +50,15 @@ def lighting_loop(hour,day,climate_recipe):
     """lighting_loop i a function that control Leds acoording to climate recipe"""
 
     if(hour<climate_recipe.LEDupBoundary(day)) and (hour>=climate_recipe.LEDdownBoundary(day)):
-        actuators.activate("LIG_Led")
-    else:
         actuators.desactivate("LIG_Led")
+    else:
+        actuators.activate("LIG_Led")
 
 ####### End of growth
 
 def end_loop():
     """put all the actuators pins at LOW value"""
-    actuators.desactivate("LIG_Led")
+    actuators.activate("LIG_Led")
 
 
 ######################### Main loop ###########################################
