@@ -6,7 +6,6 @@
 import sys
 sys.path.append(sys.path[0]+"/..")
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
-import RPi.GPIO as GPIO
 
 class GPIO_Actuators :
 
@@ -17,8 +16,9 @@ class GPIO_Actuators :
         self.nb_chanels = self.actuators.nb_index
         self.chanels_dict = dict(zip(self.actuators.get_list("GPIO"),[None]*self.nb_chanels)) #dict of state by chanel
         self.realMode = realMode
-        self.InOutMode = InOutMode
+        self.InOutMode = InOutMode #determine which kind of chanel the interface use
         if realMode:
+            import RPi.GPIO as GPIO
             GPIO.setmode(GPIO.BCM)
             print("GPIO imported")
 
