@@ -50,12 +50,14 @@ flow= 1.6 #pump's flow = 1.6ml.s-1
 water_level = sensors.read("waterlevel")
 volume = size_x_bac*size_y_bac*water_level/1000
 coef = volume/flow
+print(coef)
 
 
 ####### Nutrients module
 def nutrients_loop(day,climate_recipe):
     """nutrients_loop is a function that control the release of nutrients according to climate recipe"""
     FloraMicro = climate_recipe.floraMicro(day) #ml
+    print("FloraMicro : {}".format(FloraMicro))
     actuators.activate("NUT_Pump_Micro")
     time.sleep(FloraMicro*coef)
     print(FloraMicro*coef)
