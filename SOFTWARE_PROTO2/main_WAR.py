@@ -41,11 +41,12 @@ from Raspberry_Interface.sensor_classes import EC
 pin_file = "Files/Actuators.csv"
 realMode = False
 variety = "tomato"
+InOutMode = "GPIO"
 date_file = open("Files/date_ini",'rb')
 depickler = pickle.Unpickler(date_file)
 date_ini = depickler.load()
-actuators = GPIO_Actuators.GPIO_Actuators(pin_file,realMode)
-sensors = GPIO_Sensors.GPIO_Sensors(realMode)
+actuators = GPIO_Actuators.GPIO_Actuators(pin_file,InOutMode,realMode)
+sensors = GPIO_Sensors.GPIO_Sensors(InOutMode,realMode)
 climate_recipe = Climate_recipe(variety)
 
 
@@ -54,13 +55,13 @@ def watering_loop(day,climate_recipe):
     """water_loop control level_water, pH, EC, hydroponic system"""
     count = 0
     bool = True
-    
-    while bool=True :
+
+    while bool==True :
         #get pH value
-        pH_value = pH.read()
+        pH_value = sensors.read("pH")
 
         #get EC value
-        EC_value = EC.read()
+        EC_value = sensors.read("conductivity")
 
         #pH regulation
         if pH_value > climate_recipe.pH_max():
@@ -76,12 +77,12 @@ def watering_loop(day,climate_recipe):
         actuators.desactivate("WAR_Mixer")
 
         #vaporization time
-        actuators.activate(WAR_MistMaker, WAR_Ventilator)
+        actuators.activate("WAR_MistMaker", "WAR_Ventilator")
         time.sleep(climate_recipe.ON_time(day))
-        actuators.desactivate(WAR_MistMaker, WAR_Ventilator)
+        actuators.desactivate("WAR_MistMaker", "WAR_Ventilator")
 
         count+=1
-        if count = 5 :
+        if count == 5 :
             bool = False
 
 ####### End of growth
@@ -89,10 +90,10 @@ def watering_loop(day,climate_recipe):
 def end_loop():
     """put all the actuators pins at LOW value"""
 
-    actuators.desactivate(WAR_MistMaker,
-                    WAR_Mixer,
-                    WAR_Ventilator,
-                    NUT_Pump_pHDown)
+    actuators.desactivate("WAR_MistMaker",
+                    "WAR_Mixer",
+                    "WAR_Ventilator",
+                    "NUT_Pump_pHDown")
 
 ######################### Main loop ###########################################
 
