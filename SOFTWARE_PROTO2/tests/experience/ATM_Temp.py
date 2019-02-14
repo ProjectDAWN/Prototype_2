@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt 
-import nummpy as np
+import numpy as np
 import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
