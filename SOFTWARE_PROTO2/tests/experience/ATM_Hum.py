@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
@@ -13,23 +14,31 @@ sensors = GPIO_Sensors(InOutMode,realMode)
 
 def test(actuator1, actuator2):
 	values=[]
-	ti = [x for x in range(0,300,5)]
+	ti = np.linspace(0,300,300)
+
+	t = time.time()
+	t_empty = t + 60
+	t_fin = t+ 300
+
+	print("Test sans actionneurs")
+	while time.time() < t_empty :
+		values.append(sensors.read("humidity"))
+		time.sleep(1)
+
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
 
-	t = time.time()
-	t_fin = t+ 300
-
+	print("Testt avec actionneurs")
 	while time.time() < t_fin :
 		values.append(sensors.read("humidity"))
-		time.sleep(5)
+		time.sleep(1)
 
 	InOut.desactivate(actuator1)
 	InOut.desactivate(actuator2)
 	print("Eteint")
 
-	plt.plot(values, ti)
+	plt.plot(ti,values)
 	plt.show()
 
 test("ATM_MistMaker","ATM_Ventilator")
