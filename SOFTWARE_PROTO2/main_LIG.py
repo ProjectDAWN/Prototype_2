@@ -66,5 +66,3 @@ def end_loop():
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
 lighting_loop(date_current.hour,diff.days,climate_recipe)
-time.sleep(25)
-end_loop()
