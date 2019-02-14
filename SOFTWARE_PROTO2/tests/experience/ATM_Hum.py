@@ -26,7 +26,7 @@ def test(actuator1, actuator2):
 		time.sleep(10)
 
 	InOut.desactivate(actuator1)
-	InOut.desactivate(actuator1)
+	InOut.desactivate(actuator2)
 	print("Eteint")
 
 	plot(values, ti)
