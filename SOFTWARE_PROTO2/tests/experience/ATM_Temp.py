@@ -14,7 +14,6 @@ sensors = GPIO_Sensors(InOutMode,realMode)
 
 def test(actuator):
 	values=[]
-	ti = np.linspace(0,300,300)
 
 	t = time.time()
 	t_empty = t + 60
@@ -36,6 +35,7 @@ def test(actuator):
 	InOut.desactivate(actuator)
 	print("Eteint")
 
+	ti = np.linspace(0,len(values),len(values))
 	plt.grid()
 	plt.plot(ti,values)
 	plt.show()
