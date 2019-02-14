@@ -3,28 +3,30 @@ import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Raspberry_Interface.GPIO_Actuators import GPIO_Actuators
-from Raspberry_Interface.GPIO_Actuators import GPIO_Sensors
+from Raspberry_Interface.GPIO_Sensors import GPIO_Sensors
 pin_file = path + "/Files/Actuators.csv"
+InOutMode = "GPIO"
 realMode = False
 import time
-InOut = GPIO_Actuators(pin_file,realMode)
+InOut = GPIO_Actuators(pin_file,InOutMode,realMode)
+sensors = GPIO_Sensors(InOutMode,realMode)
 
 def test(actuator):
 	values=[]
-	time = [xfor x in range(0,180,10)]
+	ti = [x for x in range(0,180,10)]
 	InOut.activate(actuator)
 	print("Allumé")
 
 	t = time.time()
-	t_fin = time.time + 180
+	t_fin = t + 180
 
 	while time.time() < t_fin :
-		values.append(GPIO_Sensors.read("pH"))
+		values.append(sensors.read("pH"))
 		time.sleep(10)
 
 	InOut.desactivate(actuator)
 	print("Eteint")
 
-	plot(Values, time)
+	plot(Values, ti)
 
 test("ATM_Warmer")
