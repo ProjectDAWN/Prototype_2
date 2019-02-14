@@ -20,7 +20,7 @@ class GPIO_Sensors :
             from Raspberry_Interface.sensor_classes.am2320_Humidity import AM2320_Humidity
             from Raspberry_Interface.sensor_classes.am2320_Temperature import AM2320_Temperature
             GPIO_Sensors.class_dict = {"pH" : pH(), "conductivity" : EC(), "waterlevel" : MCP3008(), "water_temperature" : DS18B20(),
-            "temperature" : AM2320_Temperature(), "humidity" : AM2320_Temperature()}
+            "temperature" : AM2320_Temperature(), "humidity" : AM2320_Humidity()}
 
             GPIO.setmode(GPIO.BCM)
 
