@@ -1,9 +1,9 @@
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
 import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Raspberry_Interface.GPIO_Actuators import GPIO_Actuators
-from Raspberry_Interface.GPIO_Actuators import GPIO_Sensors
+from Raspberry_Interface.GPIO_Sensors import GPIO_Sensors
 pin_file = path + "/Files/Actuators.csv"
 InOutMode = "GPIO"
 realMode = False
@@ -29,6 +29,7 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator2)
 	print("Eteint")
 
-	plot(values, ti)
+	plt.plot(values, ti)
+	plt.show()
 
 test("ATM_MistMaker","ATM_Ventilator")
