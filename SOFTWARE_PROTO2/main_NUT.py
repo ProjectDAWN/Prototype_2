@@ -75,6 +75,9 @@ def nutrients_loop(day,climate_recipe):
 
 def end_loop():
     """put all the actuators pins at LOW value"""
+    actuators.activate("NUT_Pump_BioGro",
+                    "NUT_Pump_Micro",
+                    "NUT_Pump_BioBloom")
     actuators.desactivate("NUT_Pump_BioGro",
                     "NUT_Pump_Micro",
                     "NUT_Pump_BioBloom")
