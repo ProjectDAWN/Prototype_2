@@ -38,13 +38,12 @@ class GPIO_Actuators :
     def activate(self,*actuators):
         """Given channels or actuators,
         check if the activation is possible and activate it"""
-        for channel in actuators: #actuators is a list of string representing actuators
-            if(not isinstance(channel,int)):
-                channel = int(self.actuators.get(channel,self.InOutMode)) # allow to the user (main) to choose between channel or actuator name
+        for actuator in actuators: #actuators is a list of string representing actuators
+            channel = int(self.actuators.get(actuator,self.InOutMode)) # allow to the user (main) to choose between channel or actuator name
             if self.verif_channel(channel,True):
                 self.activated_channels.append(channel)
                 self.channels_dict[channel]=True
-                print("activation {}".format(channel))
+                print("activation {} : {}".format(actuator,channel))
                 if(self.realMode):
                     import RPi.GPIO as GPIO
                     GPIO.setmode(GPIO.BCM)
@@ -54,13 +53,12 @@ class GPIO_Actuators :
     def desactivate(self,*actuators):
         """Given channels or actuators,
         check if the desactivation is possible and desactivate it"""
-        for channel in actuators: #actuators is a list of string representing actuators
-            if(not isinstance(channel,int)):
-                channel = int(self.actuators.get(channel,self.InOutMode)) # allow to the user (main) to choose between channel or actuator name
+        for actuator in actuators: #actuators is a list of string representing actuators
+            channel = int(self.actuators.get(actuator,self.InOutMode)) # allow to the user (main) to choose between channel or actuator name
             if self.verif_channel(channel,False):
                 #self.activated_channels.remove(channel)
                 self.channels_dict[channel]=False
-                print("desactivation {}".format(channel))
+                print("desactivation {} : {}".format(actuator,channel))
                 if(self.realMode):
                     import RPi.GPIO as GPIO
                     GPIO.setmode(GPIO.BCM)
