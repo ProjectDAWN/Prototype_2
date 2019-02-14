@@ -17,10 +17,7 @@ class GPIO_Actuators :
         self.chanels_dict = dict(zip(self.actuators.get_list("GPIO"),[None]*self.nb_chanels)) #dict of state by chanel
         self.realMode = realMode
         self.InOutMode = InOutMode #determine which kind of chanel the interface use
-        if realMode:
-            import RPi.GPIO as GPIO
-            GPIO.setmode(GPIO.BCM)
-            print("GPIO imported")
+
 
     def verif_chanel(self,chanel,activate):
         """this function check error on chanel activation
@@ -49,6 +46,8 @@ class GPIO_Actuators :
                 self.chanels_dict[chanel]=True
                 print("activation {}".format(chanel))
                 if(self.realMode):
+                    import RPi.GPIO as GPIO
+                    GPIO.setmode(GPIO.BCM)
                     GPIO.setup(chanel, GPIO.OUT)
                     GPIO.output(chanel, GPIO.HIGH)
 
@@ -63,6 +62,8 @@ class GPIO_Actuators :
                 self.chanels_dict[chanel]=False
                 print("desactivation {}".format(chanel))
                 if(self.realMode):
+                    import RPi.GPIO as GPIO
+                    GPIO.setmode(GPIO.BCM)
                     GPIO.setup(chanel, GPIO.OUT)
                     GPIO.cleanup(chanel)
 
