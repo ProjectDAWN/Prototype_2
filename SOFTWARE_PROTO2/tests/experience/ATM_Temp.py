@@ -26,14 +26,21 @@ def test(actuator):
 	InOut.activate(actuator)
 	print("Allumé")
 
-	t_fin = time.time() + 180
+	t_act = time.time() + 240
 	print("Test avec actionneurs")
-	while time.time() < t_fin :
+	while time.time() < t_act :
 		values.append(sensors.read("temperature"))
 		time.sleep(1)
 
 	InOut.desactivate(actuator)
 	print("Eteint")
+
+
+	t_fin = time.time() + 240
+	print("Test sans actionneurs")
+	while time.time() < t_fin :
+		values.append(sensors.read("temperature"))
+		time.sleep(1)
 
 	ti = np.linspace(0,len(values),len(values))
 	plt.grid()
