@@ -26,12 +26,12 @@ class GPIO_Actuators :
         if(chanel not in self.chanels_dict.keys()):
             print("Pin {} doesn't exist".format(chanel))
             return(False)
-        elif(activate and chanel in self.activated_chanels):
-            print("Pin {} already activated".format(chanel))
-            return(False)
-        elif(not activate and chanel not in self.activated_chanels):
-            print("Pin {} not activated".format(chanel))
-            return(False)
+        #elif(activate and chanel in self.activated_chanels):
+        #    print("Pin {} already activated".format(chanel))
+        #    return(False)
+        #elif(not activate and chanel not in self.activated_chanels):
+        #    print("Pin {} not activated".format(chanel))
+        #    return(False)
         else:
             return(True)
 
