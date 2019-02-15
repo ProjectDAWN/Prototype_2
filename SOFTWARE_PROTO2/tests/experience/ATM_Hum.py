@@ -27,7 +27,7 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator2)
 	print("Allumé")
 
-	t_act = time.time() + 240
+	t_act = time.time() + 360
 	print("Test avec actionneurs")
 	while time.time() < t_act :
 		values.append(sensors.read("humidity"))
