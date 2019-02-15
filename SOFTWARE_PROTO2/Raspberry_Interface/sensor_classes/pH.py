@@ -35,7 +35,7 @@ class pH:
 		self.wait()
 		self.device.query("Cal,high,10.01")
 
-	def calibration(self):
+	def calibrate(self):
 		self.mid()
 		self.low()
 		self.high()

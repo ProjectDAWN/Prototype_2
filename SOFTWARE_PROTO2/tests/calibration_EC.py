@@ -5,4 +5,4 @@ from Raspberry_Interface.sensor_classes.EC import *
 
 EC = EC()
 
-EC.calibration()
+EC.calibrate()

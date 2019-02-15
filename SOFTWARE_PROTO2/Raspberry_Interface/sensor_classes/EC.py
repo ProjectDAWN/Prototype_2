@@ -33,7 +33,7 @@ class EC:
 		self.wait()
 		self.device.query("Cal,high,12880")
 
-	def calibration(self):
+	def calibrate(self):
 		self.dry()
 		self.low()
 		self.high()

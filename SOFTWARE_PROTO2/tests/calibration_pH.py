@@ -5,4 +5,4 @@ from Raspberry_Interface.sensor_classes.pH import *
 
 pH = pH()
 
-pH.calibration()
+pH.calibrate()

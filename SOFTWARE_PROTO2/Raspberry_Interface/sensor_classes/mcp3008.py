@@ -18,8 +18,8 @@ class MCP3008:
  
 		# create the mcp object
 		self.mcp = MCP.MCP3008(self.spi, self.cs)
-		self.Vmax = 1.5000
-		self.Vmin = 0.3500
+		self.Vmax = 0
+		self.Vmin = 0
 		self.Hmax = 213
 
 	def read(self):
@@ -32,3 +32,26 @@ class MCP3008:
 	def print(self):
 		"""Print the value in terminal"""
 		print ("La hauteur immergée vaut" + str(self.read()) + ' mm')
+
+
+	def voltage(self):
+		chan = AnalogIn(self.mcp,MCP.P0)
+		V = chan.voltage
+		return V
+
+	def low(self):
+		print("Récupération de la tension à vide")
+		self.Vmax = self.voltage()
+
+	def high(self):
+		print("Remplir de l'eau jusqu'en haut du capteur")
+		isPut = False
+		while not isPut:
+			rep = input("Rentrer y si c'est fait")
+			isPut = (rep=="y")
+		self.Vmin = self.voltage()
+
+	def calibrate(self):
+		self.low()
+		self.high()
+		print("Le capteur de niveau d'eau est calibré")
