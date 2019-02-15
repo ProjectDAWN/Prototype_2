@@ -48,6 +48,7 @@ class GPIO_Actuators :
                 print("activation {} : {}".format(actuator,channel))
                 if(self.realMode):
                     import RPi.GPIO as GPIO
+                    print("realMode true")
                     GPIO.setmode(GPIO.BCM)
                     GPIO.setup(channel, GPIO.OUT)
                     GPIO.output(channel, GPIO.HIGH)

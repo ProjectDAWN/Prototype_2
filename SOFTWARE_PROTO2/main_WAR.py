@@ -48,6 +48,7 @@ date_ini = read_config.date_ini()
 def watering_loop(day,climate_recipe):
     """water_loop control level_water, pH, EC, hydroponic system"""
     count = 0
+    time_pH = 0
     bool = True
 
     while bool==True :
@@ -59,15 +60,16 @@ def watering_loop(day,climate_recipe):
 
         #pH regulation
         if pH_value > climate_recipe.pH_max():
+            time_pH = 5
             actuators.activate("NUT_Pump_pHDown")
-            time.sleep(5) # find the right amount of time to reach the good value
+            time.sleep(time_pH) # find the right amount of time to reach the good value
             actuators.desactivate("NUT_Pump_pHDown")
 
         #watering
 
         #break time with activation of the mixer
         actuators.activate("WAR_Mixer")
-        time.sleep(climate_recipe.OFF_time(day)-5)
+        time.sleep(climate_recipe.OFF_time(day)-time_pH)
         actuators.desactivate("WAR_Mixer")
 
         #vaporization time
