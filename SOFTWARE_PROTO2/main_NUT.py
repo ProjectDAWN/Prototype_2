@@ -21,11 +21,10 @@
 import sys
 import Raspberry_Interface
 import datetime
-import pickle
-from climate_recipe.Climate_recipe import Climate_recipe
 import time
-from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
+
 from Raspberry_Interface.sensor_classes import AtlasI2C
+from config import read_config
 #add sensors' and actuators' classes here
 
 
@@ -33,16 +32,11 @@ from Raspberry_Interface.sensor_classes import AtlasI2C
 ######################## Modules loops #######################################
 
 ###Variable initialization
-pin_file = "Files/Actuators.csv"
-realMode = True
-variety = "tomato"
-InOutMode = "GPIO"
-date_file = open("Files/date_ini",'rb')
-depickler = pickle.Unpickler(date_file)
-date_ini = depickler.load()
-actuators = GPIO_Actuators.GPIO_Actuators(pin_file,InOutMode,realMode)
-sensors = GPIO_Sensors.GPIO_Sensors(InOutMode,realMode)
-climate_recipe = Climate_recipe(variety)
+
+actuators = read_config.actuators()
+sensors = read_config.sensors()
+climate_recipe = read_config.recipe()
+date_ini = read_config.date_ini()
 
 size_x_bac = 80 #cm
 size_y_bac = 50 #cm
