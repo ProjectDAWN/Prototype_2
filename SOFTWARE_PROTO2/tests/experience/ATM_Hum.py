@@ -16,7 +16,7 @@ def test(actuator1, actuator2):
 	values=[]
 
 	t = time.time()
-	t_empty = t + 100
+	t_empty = t + 60
 
 	print("Test sans actionneurs")
 	while time.time() < t_empty :
