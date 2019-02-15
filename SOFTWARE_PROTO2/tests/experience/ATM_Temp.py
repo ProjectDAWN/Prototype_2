@@ -26,7 +26,7 @@ def test(actuator):
 	InOut.activate(actuator)
 	print("Allumé")
 
-	t_act = time.time() + 240
+	t_act = time.time() + 120
 	print("Test avec actionneurs")
 	while time.time() < t_act :
 		values.append(sensors.read("temperature"))
@@ -36,15 +36,19 @@ def test(actuator):
 	print("Eteint")
 
 
-	t_fin = time.time() + 240
+	t_fin = time.time() + 120
 	print("Test sans actionneurs")
 	while time.time() < t_fin :
 		values.append(sensors.read("temperature"))
 		time.sleep(1)
 
 	ti = np.linspace(0,len(values),len(values))
+	plt.figure()
+	plt.plot(ti,values,"k-")
+	plt.title("Evolution de la temperature de l'air en fonction du temps")
+	plt.xlabel("Temps en seconde")
+	plt.ylabel("Température de l'air en °C")
 	plt.grid()
-	plt.plot(ti,values)
 	plt.show()
 
 test("ATM_Warmer")
