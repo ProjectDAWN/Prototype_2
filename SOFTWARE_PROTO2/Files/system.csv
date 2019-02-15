@@ -1,3 +1,3 @@
-Model,time_pH,time_temp_regulation,time_hum_regulation,flux_NUT_Pump_pHDown,flux_NUT_Pump_BioGro,flux_NUT_Pump_BioBloom,flux_NUT_Pump_Micro,flux,NUT_Pump_Mato,size_tank,size_env
-Prototype_2,1,10,10,1.6,1.6,1.6,1.6,1.6,(50,80),(91,112,115)
-Prototype_3,1,10,10,1.6,1.6,1.6,1.6,1.6,(50,80),(91,112,115)
+Model,time_pH,time_temp_regulation,time_hum_regulation,flux_NUT_Pump_pHDown,flux_NUT_Pump_BioGro,flux_NUT_Pump_BioBloom,flux_NUT_Pump_Mato,flux,NUT_Pump_Micro,size_tank,size_env
+Prototype_2,1,10,10,1.9,1.9,1.9,1.9,1.9,(50,80),(91,112,115)
+Prototype_3,1,10,10,1.9,1.9,1.9,1.9,1.9,(50,80),(91,112,115)
