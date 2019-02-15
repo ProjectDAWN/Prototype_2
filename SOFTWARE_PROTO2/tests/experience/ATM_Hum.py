@@ -44,8 +44,12 @@ def test(actuator1, actuator2):
 		time.sleep(1)
 
 	ti = np.linspace(0,len(values),len(values))
+	plt.figure()
+	plt.plot(ti,values,"k-")
+	plt.title("Evolution de l'humidité de l'air en fonction du temps")
+	plt.xlabel("Temps en seconde")
+	plt.ylabel("Humidité de l'air en %")
 	plt.grid()
-	plt.plot(ti,values)
 	plt.show()
 
 test("ATM_MistMaker","ATM_Ventilator")

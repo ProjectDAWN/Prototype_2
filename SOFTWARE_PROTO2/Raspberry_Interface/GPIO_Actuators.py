@@ -45,7 +45,7 @@ class GPIO_Actuators :
             if self.verif_channel(channel,True):
                 self.activated_channels.append(channel)
                 self.channels_dict[channel]=True
-                print("desactivation {} : {}".format(actuator,channel))
+                print("activation {} : {}".format(actuator,channel))
                 if(self.realMode):
                     import RPi.GPIO as GPIO
                     print("realMode true")
