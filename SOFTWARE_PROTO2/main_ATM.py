@@ -35,7 +35,7 @@ from Raspberry_Interface.sensor_classes import AtlasI2C
 
 ###Variable initialization
 chanel_file = "Files/Actuators.csv"
-realMode = True
+realMode = False
 variety = "tomato"
 InOutMode = "GPIO"
 date_file = open("Files/date_ini",'rb')
