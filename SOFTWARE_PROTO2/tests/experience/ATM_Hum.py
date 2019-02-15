@@ -1,34 +1,51 @@
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
+import numpy as np
 import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Raspberry_Interface.GPIO_Actuators import GPIO_Actuators
-from Raspberry_Interface.GPIO_Actuators import GPIO_Sensors
+from Raspberry_Interface.GPIO_Sensors import GPIO_Sensors
 pin_file = path + "/Files/Actuators.csv"
 InOutMode = "GPIO"
-realMode = False
+realMode = True
 import time
 InOut = GPIO_Actuators(pin_file,InOutMode,realMode)
 sensors = GPIO_Sensors(InOutMode,realMode)
 
 def test(actuator1, actuator2):
 	values=[]
-	ti = [x for x in range(0,180,10)]
-	InOut.activate(actuator1)
-	InOut.activate(actuator2)
-	print("Allumé")
 
 	t = time.time()
-	t_fin = t+ 180
+	t_empty = t + 60
 
-	while time.time() < t_fin :
+	print("Test sans actionneurs")
+	while time.time() < t_empty :
 		values.append(sensors.read("humidity"))
-		time.sleep(10)
+		time.sleep(1)
 
-	InOut.desactivate(actuator1)
-	InOut.desactivate(actuator1)
-	print("Eteint")
+	#InOut.activate(actuator1)
+	#InOut.activate(actuator2)
+	#print("Allumé")
 
-	plot(values, ti)
+	#t_act = time.time() + 240
+	#print("Test avec actionneurs")
+	#while time.time() < t_act :
+		#values.append(sensors.read("humidity"))
+		#time.sleep(1)
+
+	#InOut.desactivate(actuator1)
+	#InOut.desactivate(actuator2)
+	#print("Eteint")
+
+	#t_fin = time.time() + 240
+	#print("Test sans actionneurs")
+	#while time.time() < t_fin :
+		#values.append(sensors.read("humidity"))
+		#time.sleep(1)
+
+	ti = np.linspace(0,len(values),len(values))
+	plt.grid()
+	plt.plot(ti,values)
+	plt.show()
 
 test("ATM_MistMaker","ATM_Ventilator")
