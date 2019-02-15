@@ -55,9 +55,10 @@ class GPIO_Actuators :
     def desactivate(self,*actuators):
         """Given channels or actuators,
         check if the desactivation is possible and desactivate it"""
-        for channel in actuators: #actuators is a list of string representing actuators
+        for actuator in actuators: #actuators is a list of string representing actuators
+            channel = actuator
             if(not isinstance(channel,int)):
-                channel = int(self.actuators.get(channel,self.InOutMode)) # allow to the user (main) to choose between channel or actuator name
+                channel = int(self.actuators.get(actuator,self.InOutMode)) # allow to the user (main) to choose between channel or actuator name
             if self.verif_channel(channel,False):
                 #self.activated_channels.remove(channel)
                 self.channels_dict[channel]=False
@@ -69,7 +70,7 @@ class GPIO_Actuators :
                     GPIO.cleanup(channel)
 
     def cleanup(self):
-        for actuator in self.actuators.get_list("Actuator"):
+        for actuator in self.actuators.get_list(self.InOutMode):
             self.desactivate(actuator)
 
 #In = GPIO_Actuators("../Files/Actuators.csv",False)

@@ -1,3 +1,5 @@
+import sys
+sys.path.append(sys.path[0]+"/..")
 from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
 import time
 
