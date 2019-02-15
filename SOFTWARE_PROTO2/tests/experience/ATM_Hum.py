@@ -23,25 +23,25 @@ def test(actuator1, actuator2):
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
-	#InOut.activate(actuator1)
-	#InOut.activate(actuator2)
-	#print("Allumé")
+	InOut.activate(actuator1)
+	InOut.activate(actuator2)
+	print("Allumé")
 
-	#t_act = time.time() + 240
-	#print("Test avec actionneurs")
-	#while time.time() < t_act :
-		#values.append(sensors.read("humidity"))
-		#time.sleep(1)
+	t_act = time.time() + 240
+	print("Test avec actionneurs")
+	while time.time() < t_act :
+		values.append(sensors.read("humidity"))
+		time.sleep(1)
 
-	#InOut.desactivate(actuator1)
-	#InOut.desactivate(actuator2)
-	#print("Eteint")
+	InOut.desactivate(actuator1)
+	InOut.desactivate(actuator2)
+	print("Eteint")
 
-	#t_fin = time.time() + 240
-	#print("Test sans actionneurs")
-	#while time.time() < t_fin :
-		#values.append(sensors.read("humidity"))
-		#time.sleep(1)
+	t_fin = time.time() + 240
+	print("Test sans actionneurs")
+	while time.time() < t_fin :
+		values.append(sensors.read("humidity"))
+		time.sleep(1)
 
 	ti = np.linspace(0,len(values),len(values))
 	plt.grid()
