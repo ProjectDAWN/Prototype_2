@@ -27,21 +27,18 @@ import datetime
 import time
 
 from Raspberry_Interface.sensor_classes import AtlasI2C
-from config import read_config
+from config import growth_config
 
-#add sensors' and actuators' classes here
-from Raspberry_Interface.sensor_classes import pH
-from Raspberry_Interface.sensor_classes import EC
 
 
 ######################## Modules loops #######################################
 
 ###Variable initialization
 
-actuators = read_config.actuators()
-sensors = read_config.sensors()
-climate_recipe = read_config.recipe()
-date_ini = read_config.date_ini()
+actuators = growth_config.actuators()
+sensors = growth_config.sensors()
+climate_recipe = growth_config.recipe()
+date_ini = growth_config.date_ini()
 
 
 

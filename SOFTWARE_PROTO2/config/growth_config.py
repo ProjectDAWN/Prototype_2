@@ -5,7 +5,7 @@ from climate_recipe.Climate_recipe import Climate_recipe
 ### config variables
 
 chanel_file = "Files/Actuators.csv"
-realMode = True
+realMode = False
 variety = "tomato"
 InOutMode = "GPIO"
 date_file = open("Files/date_ini",'rb')
