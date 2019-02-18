@@ -59,10 +59,27 @@ sensors = GPIO_Sensors(InOutMode,realMode)
 def test(actuator1, actuator2):
 	values=[]
 
+# On commence à 50% d'humidité. D'après nos données,le module humidité fait +3%/min. 
+# On veut donc arriver à 70% puis fluctuer autour de cette valeur.
+# On allume donc 7min = 420.
+	
+	
+	InOut.activate(actuator1)
+	InOut.activate(actuator2)
+	t_reach = time.time() + 420
+	print("Test atteindre valeur")
+	while time.time() < t_reach :
+		values.append(sensors.read("humidity"))
+		time.sleep(1)
+		
+		
+	InOut.desactivate(actuator1)
+	InOut.desactivate(actuator2)
+	print("Eteint")
 	t = time.time()
-	t_OFF_1 = t + 10
+	t_OFF_1 = t + 120
 	print("Test sans actionneurs")
-	while time.time() < t_OFF_1 :
+	while time.time() < t_OFF_2 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
