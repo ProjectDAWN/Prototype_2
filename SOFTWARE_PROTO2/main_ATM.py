@@ -48,9 +48,13 @@ def atmospheric_loop(hour,day,climate_recipe):
     #Temperature
     temperature = sensors.read("temperature")
     if temperature < climate_recipe.threshold_temp(hour, day)-1 : #too cold
-        actuators.activate("ATM_Warmer")
+        #actuators.activate("ATM_Warmer")
+        #sleep(climate_recipe.system[time_temp_regulation])
+        #actuator.desactivate("ATM_Warmer")
+        pass
     if temperature > climate_recipe.threshold_temp(hour, day)+1:  #too warm
-        actuators.desactivate("ATM_Warmer")
+        #actuators.activate("ATM_Cooler")
+        pass
 
     #humidity
     humidity = sensors.read("humidity")
@@ -58,14 +62,17 @@ def atmospheric_loop(hour,day,climate_recipe):
     if humidity < humidity_threshold*(1-0.005):
         # humidity is too low
         actuators.activate("ATM_MistMaker", "ATM_Ventilator")
+        sleep(climate_recipe.system[time_hum_regulation])
+        actuators.desactivate("ATM_MistMaker", "ATM_Ventilator")
     if humidity > humidity_threshold*(1+0.005) : # humidity is too high
-        actuators.desactivate("ATM_MistMaker")
+        #actuators.desactivate("ATM_MistMaker")
+        pass
 
 
 ####### End of growth
 
 def end_loop():
-    """put all the actuators chanels at LOW value"""
+    """desactivate every actuators"""
     actuators.desactivate("ATM_Ventilator",
                     "ATM_MistMaker",
                     "ATM_Warmer")

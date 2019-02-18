@@ -76,7 +76,7 @@ def watering_loop(day,climate_recipe):
         actuators.desactivate("WAR_MistMaker", "WAR_Ventilator")
 
         count+=1
-        if count == 2 :
+        if count == 3 :
             bool = False
 
 ####### End of growth
