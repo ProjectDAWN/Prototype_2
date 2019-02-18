@@ -79,7 +79,7 @@ def test(actuator1, actuator2):
 	t = time.time()
 	t_OFF_1 = t + 120
 	print("Test sans actionneurs")
-	while time.time() < t_OFF_2 :
+	while time.time() < t_OFF_1 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
