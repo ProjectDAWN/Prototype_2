@@ -60,63 +60,64 @@ def test(actuator1, actuator2):
 	values=[]
 
 	t = time.time()
-	t_OFF_1 = t + 60
-
+	t_OFF_1 = t + 10
 	print("Test sans actionneurs")
 	while time.time() < t_OFF_1 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
+		
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-
 	t_ON_1 = time.time() + 60
 	print("Test avec actionneurs")
 	while time.time() < t_ON_1 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
+		
 	InOut.desactivate(actuator1)
 	InOut.desactivate(actuator2)
 	print("Eteint")
-
 	t = time.time()
-	t_OFF_2 = t + 60
-
+	t_OFF_2 = t + 120
 	print("Test sans actionneurs")
 	while time.time() < t_OFF_2 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
+		
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-
 	t_ON_2 = time.time() + 60
 	print("Test avec actionneurs")
 	while time.time() < t_ON_2 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
-
 		
+		
+	InOut.desactivate(actuator1)
+	InOut.desactivate(actuator2)
+	print("Eteint")	
 	t = time.time()
-	t_OFF_3 = t + 60
-
+	t_OFF_3 = t + 120
 	print("Test sans actionneurs")
 	while time.time() < t_OFF_3 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
+		
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-
 	t_ON_3 = time.time() + 60
 	print("Test avec actionneurs")
 	while time.time() < t_ON_3 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
+		
 		
 	InOut.desactivate(actuator1)
 	InOut.desactivate(actuator2)
@@ -127,6 +128,7 @@ def test(actuator1, actuator2):
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
+		
 	ti = np.linspace(0,len(values),len(values))
 	plt.figure()
 	plt.plot(ti,values,"k-")
