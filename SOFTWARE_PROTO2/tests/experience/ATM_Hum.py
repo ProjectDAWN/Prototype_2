@@ -16,7 +16,7 @@ def test(actuator1, actuator2):
 	values=[]
 
 	t = time.time()
-	t_empty = t + 10
+	t_empty = t + 60
 
 	print("Test sans actionneurs")
 	while time.time() < t_empty :
@@ -27,7 +27,7 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator2)
 	print("Allumé")
 
-	t_act = time.time() + 60
+	t_act = time.time() + 600
 	print("Test avec actionneurs")
 	while time.time() < t_act :
 		values.append(sensors.read("humidity"))
@@ -37,7 +37,7 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator2)
 	print("Eteint")
 
-	t_fin = time.time() + 10
+	t_fin = time.time() + 1800
 	print("Test sans actionneurs")
 	while time.time() < t_fin :
 		values.append(sensors.read("humidity"))
