@@ -103,3 +103,6 @@ class Climate_recipe:
     def OFF_time(self,day):
         period = self.get_period(day) + "_day"
         return(self.thresholds.get(period,"OFF"))
+
+    def time_pH_regulation(self):
+        return(self.system["time_pH_regulation"])
