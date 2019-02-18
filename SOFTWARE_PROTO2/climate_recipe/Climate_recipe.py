@@ -17,20 +17,18 @@
 # Possible varieties : - tomato
 #                      - lettuce
 #
-
-
-
 ###############################################################################
+
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
 class Climate_recipe:
 
     CR_folder = "Files/climate_recipes/"
 
-    def __init__(self,variety):
-        self.caracteristics = CSV_reader(Climate_recipe.CR_folder+"caracteristics.csv").get_infos(variety)
+    def __init__(self,variety,model):
+        self.caracteristics = CSV_reader(Climate_recipe.CR_folder+"caracteristics.csv").get_infos(variety) # dict of caracteristics
         self.thresholds = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"thresholds.csv")
         self.nutrients = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"nutrients.csv")
-        self.variety = variety
+        self.system = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"system.csv").get_infos(model)
 
     def get_period(self,day):
         """return current period according to day"""
@@ -76,23 +74,20 @@ class Climate_recipe:
 
 
     ############### Functions for Nutrients Module ######################
+    def flow_coef(pump,water_level):
+        """return the coef in s/ml of the pump depending on the water_level"""
+        size_y_bac, size_x_bac = self.system[size_tank] #cm
+        flow= self.system["flux_NUT_Pump_"+pump] #pump's flow
+        volume = size_x_bac*size_y_bac*water_level/1000
+        coef = volume/flow
+        return(coef)
 
-    def floraMicro(self,day):
-        """return the quantity in ml of this nutrient according to climate recipe"""
+    def pump_nut_time(nutrient,day,water_level):
+        """return the quantity in ml of a nutrient according to climate recipe"""
         week = day//7+1
-        return(self.nutrients.get(week,"micro"))
-
-    def floraGro(self,day):
-        """return the number of ml of this nutrient according to climate recipe"""
-        week = day//7+1
-        return(self.nutrients.get(week,"gro"))
-
-    def floraBloom(self,day):
-        """return the number of ml of this nutrient according to climate recipe"""
-        week = day//7+1
-        return(self.nutrients.get(week,"bloom"))
-
-
+        quantity = self.nutrients.get(week,nutrient)
+        coef = self.flow_coef(nutrient,water_level)
+        return(quantity*coef)
     ########## Functions for Watering Module #########################
 
     def pH_max(self):
