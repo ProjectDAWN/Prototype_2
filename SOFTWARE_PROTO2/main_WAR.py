@@ -27,12 +27,12 @@ import datetime
 import time
 
 from Raspberry_Interface.sensor_classes import AtlasI2C
-from config import growth_config
+from config import growth_config,log_config
 
 
 
 ######################## Modules loops #######################################
-
+sys.stdout = open(log_config.print_log,'w')
 ###Variable initialization
 
 actuators = growth_config.actuators()
@@ -93,4 +93,5 @@ def end_loop():
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
+print(date_current)
 watering_loop(diff.days,climate_recipe)
