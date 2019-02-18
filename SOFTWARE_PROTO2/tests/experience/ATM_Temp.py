@@ -26,7 +26,7 @@ def test(actuator):
 	InOut.activate(actuator)
 	print("Allumé")
 
-	t_act = time.time() + 120
+	t_act = time.time() + 600
 	print("Test avec actionneurs")
 	while time.time() < t_act :
 		values.append(sensors.read("temperature"))
@@ -36,7 +36,7 @@ def test(actuator):
 	print("Eteint")
 
 
-	t_fin = time.time() + 120
+	t_fin = time.time() + 600
 	print("Test sans actionneurs")
 	while time.time() < t_fin :
 		values.append(sensors.read("temperature"))
