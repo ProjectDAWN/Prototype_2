@@ -37,33 +37,18 @@ actuators = growth_config.actuators()
 sensors = growth_config.sensors()
 climate_recipe = growth_config.recipe()
 date_ini = growth_config.date_ini()
-
-size_x_bac = 80 #cm
-size_y_bac = 50 #cm
-flow= 1.6 #pump's flow = 1.6ml.s-1
-water_level = sensors.read("waterlevel")
-volume = size_x_bac*size_y_bac*water_level/1000
-coef = volume/flow
-print(coef)
-
+water_level = sensors.read("water_level")
 
 ####### Nutrients module
 def nutrients_loop(day,climate_recipe):
     """nutrients_loop is a function that control the release of nutrients according to climate recipe"""
-    FloraMicro = climate_recipe.floraMicro(day) #ml
-    print("FloraMicro : {}".format(FloraMicro))
-    actuators.activate("NUT_Pump_Micro")
-    time.sleep(FloraMicro*coef)
-    print(FloraMicro*coef)
-    actuators.desactivate("NUT_Pump_Micro")
-    FloraGro = climate_recipe.floraGro(day) #ml
-    actuators.activate("NUT_Pump_BioGro")
-    time.sleep(FloraGro*coef)
-    actuators.desactivate("NUT_Pump_BioGro")
-    FloraBloom = climate_recipe.floraBloom(day) # ml
-    actuators.activate("NUT_Pump_BioBloom")
-    time.sleep(FloraBloom*coef)
-    actuators.desactivate("NUT_Pump_BioBloom")
+    NUT_list = ("Micro","BioBloom","BioGro","Mato")
+    for nutrient in NUT_list:
+        nut_time = climate_recipe.pump_nut_time(nutrient,day,water_level) #second
+        actuators.activate("NUT_Pump_"+nutrient)
+        time.sleep(nut_time)
+        actuators.desactivate("NUT_Pump_"+nutrient)
+
 
 ####### End of growth
 

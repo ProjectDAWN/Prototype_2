@@ -7,7 +7,7 @@ from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
 
 class GPIO_Sensors :
 
-    class_dict = dict.fromkeys(["pH","conductivity","waterlevel","water_temperature","temperature","humidity"])
+    class_dict = dict.fromkeys(["pH","conductivity","water_level","water_temperature","temperature","humidity"])
 
     def __init__(self,InOutMode,realMode=True) :
         self.realMode = realMode
@@ -19,7 +19,7 @@ class GPIO_Sensors :
             from Raspberry_Interface.sensor_classes.ds18b20 import DS18B20
             from Raspberry_Interface.sensor_classes.am2320_Humidity import AM2320_Humidity
             from Raspberry_Interface.sensor_classes.am2320_Temperature import AM2320_Temperature
-            GPIO_Sensors.class_dict = {"pH" : pH(), "conductivity" : EC(), "waterlevel" : MCP3008(), "water_temperature" : DS18B20(),
+            GPIO_Sensors.class_dict = {"pH" : pH(), "conductivity" : EC(), "water_level" : MCP3008(), "water_temperature" : DS18B20(),
             "temperature" : AM2320_Temperature(), "humidity" : AM2320_Humidity()}
 
             GPIO.setmode(GPIO.BCM)
@@ -49,10 +49,8 @@ class GPIO_Sensors :
     def print(self,name_sensor):
         """Given name_sensor
         check if the reading is possible and print the value"""
-        if self.verif_sensor(name_sensor):
-            if(self.realMode):
-                sensor_class = GPIO_Sensors.class_dict[name_sensor]
-                print(name_sensor+" : {}".format(output))
+        output = self.read(name_sensor)
+        print("{s} : {v}".format(s=name_sensor,v=output))
 
 
 

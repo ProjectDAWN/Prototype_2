@@ -9,6 +9,7 @@ realMode = False
 variety = "tomato"
 InOutMode = "GPIO"
 date_file = open("Files/date_ini",'rb')
+model = Prototype_2
 
 ### access function
 def date_ini():
@@ -18,7 +19,7 @@ def date_ini():
 
 def recipe():
     """return climate recipe class"""
-    return(Climate_recipe(variety))
+    return(Climate_recipe(variety,model))
 
 def sensors():
     """return sensor class"""
