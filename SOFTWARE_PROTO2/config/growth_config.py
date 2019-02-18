@@ -9,7 +9,7 @@ realMode = False
 variety = "tomato"
 InOutMode = "GPIO"
 date_file = open("Files/date_ini",'rb')
-model = Prototype_2
+model = "Prototype_2"
 
 ### access function
 def date_ini():

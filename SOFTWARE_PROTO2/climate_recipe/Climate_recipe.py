@@ -28,7 +28,7 @@ class Climate_recipe:
         self.caracteristics = CSV_reader(Climate_recipe.CR_folder+"caracteristics.csv").get_infos(variety) # dict of caracteristics
         self.thresholds = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"thresholds.csv")
         self.nutrients = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"nutrients.csv")
-        self.system = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"system.csv").get_infos(model)
+        self.system = CSV_reader("Files/system.csv").get_infos(model)
 
     def get_period(self,day):
         """return current period according to day"""
@@ -74,15 +74,15 @@ class Climate_recipe:
 
 
     ############### Functions for Nutrients Module ######################
-    def flow_coef(pump,water_level):
+    def flow_coef(self,pump,water_level):
         """return the coef in s/ml of the pump depending on the water_level"""
-        size_y_bac, size_x_bac = self.system[size_tank] #cm
+        size_tank_x,size_tank_y = self.system["size_tank_x"],self.system["size_tank_y"] #cm
         flow= self.system["flux_NUT_Pump_"+pump] #pump's flow
-        volume = size_x_bac*size_y_bac*water_level/1000
+        volume = size_tank_x*size_tank_y*water_level/1000
         coef = volume/flow
         return(coef)
 
-    def pump_nut_time(nutrient,day,water_level):
+    def pump_nut_time(self,nutrient,day,water_level):
         """return the quantity in ml of a nutrient according to climate recipe"""
         week = day//7+1
         quantity = self.nutrients.get(week,nutrient)

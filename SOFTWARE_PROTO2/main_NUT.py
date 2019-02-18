@@ -46,6 +46,7 @@ def nutrients_loop(day,climate_recipe):
     for nutrient in NUT_list:
         nut_time = climate_recipe.pump_nut_time(nutrient,day,water_level) #second
         actuators.activate("NUT_Pump_"+nutrient)
+        print(nut_time)
         time.sleep(nut_time)
         actuators.desactivate("NUT_Pump_"+nutrient)
 
