@@ -70,7 +70,7 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-	t_ON_1 = time.time() + 60
+	t_ON_1 = time.time() + 12
 	print("Test avec actionneurs")
 	while time.time() < t_ON_1 :
 		values.append(sensors.read("humidity"))
@@ -91,7 +91,7 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-	t_ON_2 = time.time() + 60
+	t_ON_2 = time.time() + 12
 	print("Test avec actionneurs")
 	while time.time() < t_ON_2 :
 		values.append(sensors.read("humidity"))
@@ -112,7 +112,7 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-	t_ON_3 = time.time() + 60
+	t_ON_3 = time.time() + 12
 	print("Test avec actionneurs")
 	while time.time() < t_ON_3 :
 		values.append(sensors.read("humidity"))
