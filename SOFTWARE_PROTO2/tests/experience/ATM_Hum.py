@@ -77,7 +77,7 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator2)
 	print("Eteint")
 	t = time.time()
-	t_OFF_1 = t + 120
+	t_OFF_1 = t + 150
 	print("Test sans actionneurs")
 	while time.time() < t_OFF_1 :
 		values.append(sensors.read("humidity"))
@@ -87,7 +87,7 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-	t_ON_1 = time.time() + 12
+	t_ON_1 = time.time() + 20
 	print("Test avec actionneurs")
 	while time.time() < t_ON_1 :
 		values.append(sensors.read("humidity"))
@@ -98,7 +98,7 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator2)
 	print("Eteint")
 	t = time.time()
-	t_OFF_2 = t + 120
+	t_OFF_2 = t + 150
 	print("Test sans actionneurs")
 	while time.time() < t_OFF_2 :
 		values.append(sensors.read("humidity"))
@@ -108,7 +108,7 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-	t_ON_2 = time.time() + 12
+	t_ON_2 = time.time() + 20
 	print("Test avec actionneurs")
 	while time.time() < t_ON_2 :
 		values.append(sensors.read("humidity"))
@@ -119,7 +119,7 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator2)
 	print("Eteint")	
 	t = time.time()
-	t_OFF_3 = t + 120
+	t_OFF_3 = t + 150
 	print("Test sans actionneurs")
 	while time.time() < t_OFF_3 :
 		values.append(sensors.read("humidity"))
@@ -129,7 +129,7 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
-	t_ON_3 = time.time() + 12
+	t_ON_3 = time.time() + 20
 	print("Test avec actionneurs")
 	while time.time() < t_ON_3 :
 		values.append(sensors.read("humidity"))
@@ -139,7 +139,7 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator1)
 	InOut.desactivate(actuator2)
 	print("Eteint")
-	t_fin = time.time() + 120
+	t_fin = time.time() + 150
 	print("Test sans actionneurs")
 	while time.time() < t_fin :
 		values.append(sensors.read("humidity"))
