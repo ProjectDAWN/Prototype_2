@@ -62,7 +62,7 @@ def atmospheric_loop(hour,day,climate_recipe):
     if humidity < humidity_threshold*(1-0.005):
         # humidity is too low
         actuators.activate("ATM_MistMaker", "ATM_Ventilator")
-        sleep(climate_recipe.system[time_hum_regulation])
+        time.sleep(climate_recipe.system["time_hum_regulation"])
         actuators.desactivate("ATM_MistMaker", "ATM_Ventilator")
     if humidity > humidity_threshold*(1+0.005) : # humidity is too high
         #actuators.desactivate("ATM_MistMaker")

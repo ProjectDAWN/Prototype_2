@@ -10,6 +10,7 @@ variety = "tomato"
 InOutMode = "GPIO"
 date_file = open("Files/date_ini",'rb')
 model = "Prototype_2"
+nut_list = ("Micro","BioBloom","BioGro","Mato")
 
 ### access function
 def date_ini():

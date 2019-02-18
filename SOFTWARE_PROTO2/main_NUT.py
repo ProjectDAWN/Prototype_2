@@ -38,13 +38,13 @@ actuators = growth_config.actuators()
 sensors = growth_config.sensors()
 climate_recipe = growth_config.recipe()
 date_ini = growth_config.date_ini()
-water_level = sensors.read("water_level")
+nut_list = growth_config.nut_list
 
 ####### Nutrients module
 def nutrients_loop(day,climate_recipe):
     """nutrients_loop is a function that control the release of nutrients according to climate recipe"""
-    NUT_list = ("Micro","BioBloom","BioGro","Mato")
-    for nutrient in NUT_list:
+    water_level = sensors.read("water_level")
+    for nutrient in nut_list:
         nut_time = climate_recipe.pump_nut_time(nutrient,day,water_level) #second
         actuators.activate("NUT_Pump_"+nutrient)
         time.sleep(nut_time)

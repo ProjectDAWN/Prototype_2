@@ -106,3 +106,6 @@ class Climate_recipe:
 
     def time_pH_regulation(self):
         return(self.system["time_pH_regulation"])
+
+    def time_temp_regulation(self):
+        return(self.system[time_temp_regulation])
