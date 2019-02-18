@@ -12,14 +12,58 @@ import time
 InOut = GPIO_Actuators(pin_file,InOutMode,realMode)
 sensors = GPIO_Sensors(InOutMode,realMode)
 
+#def test(actuator1, actuator2):
+	#values=[]
+
+	#t = time.time()
+	#t_empty = t + 60
+
+	#print("Test sans actionneurs")
+	#while time.time() < t_empty :
+		#values.append(sensors.read("humidity"))
+		#time.sleep(1)
+
+	#InOut.activate(actuator1)
+	#InOut.activate(actuator2)
+	#print("Allumé")
+
+	#t_act = time.time() + 600
+	#print("Test avec actionneurs")
+	#while time.time() < t_act :
+		#values.append(sensors.read("humidity"))
+		#time.sleep(1)
+
+	#InOut.desactivate(actuator1)
+	#InOut.desactivate(actuator2)
+	#print("Eteint")
+
+	#t_fin = time.time() + 1800
+	#print("Test sans actionneurs")
+	#while time.time() < t_fin :
+		#values.append(sensors.read("humidity"))
+		#time.sleep(1)
+
+	#ti = np.linspace(0,len(values),len(values))
+	#plt.figure()
+	#plt.plot(ti,values,"k-")
+	#plt.title("Evolution de l'humidité de l'air en fonction du temps")
+	#plt.xlabel("Temps en seconde")
+	#plt.ylabel("Humidité de l'air en %")
+	#plt.grid()
+	#plt.show()
+
+#test("ATM_MistMaker","ATM_Ventilator")
+
+
+
 def test(actuator1, actuator2):
 	values=[]
 
 	t = time.time()
-	t_empty = t + 60
+	t_OFF_1 = t + 60
 
 	print("Test sans actionneurs")
-	while time.time() < t_empty :
+	while time.time() < t_OFF_1 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
@@ -27,9 +71,9 @@ def test(actuator1, actuator2):
 	InOut.activate(actuator2)
 	print("Allumé")
 
-	t_act = time.time() + 600
+	t_ON_1 = time.time() + 60
 	print("Test avec actionneurs")
-	while time.time() < t_act :
+	while time.time() < t_ON_1 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
@@ -37,7 +81,47 @@ def test(actuator1, actuator2):
 	InOut.desactivate(actuator2)
 	print("Eteint")
 
-	t_fin = time.time() + 1800
+	t = time.time()
+	t_OFF_2 = t + 60
+
+	print("Test sans actionneurs")
+	while time.time() < t_OFF_2 :
+		values.append(sensors.read("humidity"))
+		time.sleep(1)
+
+	InOut.activate(actuator1)
+	InOut.activate(actuator2)
+	print("Allumé")
+
+	t_ON_2 = time.time() + 60
+	print("Test avec actionneurs")
+	while time.time() < t_ON_2 :
+		values.append(sensors.read("humidity"))
+		time.sleep(1)
+
+		
+	t = time.time()
+	t_OFF_3 = t + 60
+
+	print("Test sans actionneurs")
+	while time.time() < t_OFF_3 :
+		values.append(sensors.read("humidity"))
+		time.sleep(1)
+
+	InOut.activate(actuator1)
+	InOut.activate(actuator2)
+	print("Allumé")
+
+	t_ON_3 = time.time() + 60
+	print("Test avec actionneurs")
+	while time.time() < t_ON_3 :
+		values.append(sensors.read("humidity"))
+		time.sleep(1)
+		
+	InOut.desactivate(actuator1)
+	InOut.desactivate(actuator2)
+	print("Eteint")
+	t_fin = time.time() + 120
 	print("Test sans actionneurs")
 	while time.time() < t_fin :
 		values.append(sensors.read("humidity"))
@@ -53,3 +137,4 @@ def test(actuator1, actuator2):
 	plt.show()
 
 test("ATM_MistMaker","ATM_Ventilator")
+
