@@ -30,8 +30,9 @@ from config import growth_config,log_config
 
 
 ######################## Modules loops #######################################
-sys.stdout = open(log_config.print_log,'w')
+sys.stdout = log_config.print_log_file
 ###Variable initialization
+print("NUT module")
 
 actuators = growth_config.actuators()
 sensors = growth_config.sensors()
@@ -46,7 +47,6 @@ def nutrients_loop(day,climate_recipe):
     for nutrient in NUT_list:
         nut_time = climate_recipe.pump_nut_time(nutrient,day,water_level) #second
         actuators.activate("NUT_Pump_"+nutrient)
-        print(nut_time)
         time.sleep(nut_time)
         actuators.desactivate("NUT_Pump_"+nutrient)
 
@@ -64,5 +64,5 @@ def end_loop():
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
-
+print(date_current)
 nutrients_loop(diff.days,climate_recipe)

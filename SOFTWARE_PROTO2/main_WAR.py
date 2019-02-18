@@ -32,9 +32,9 @@ from config import growth_config,log_config
 
 
 ######################## Modules loops #######################################
-sys.stdout = open(log_config.print_log,'w')
+sys.stdout = log_config.print_log_file
 ###Variable initialization
-
+print("WAR module")
 actuators = growth_config.actuators()
 sensors = growth_config.sensors()
 climate_recipe = growth_config.recipe()

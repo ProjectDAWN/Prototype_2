@@ -31,9 +31,9 @@ from config import growth_config,log_config
 
 
 ######################## Modules loops #######################################
-sys.stdout = open(log_config.print_log,'w')
-
+sys.stdout = log_config.print_log_file
 ###Variable initialization
+print("ATM module")
 
 actuators = growth_config.actuators()
 sensors = growth_config.sensors()
@@ -72,4 +72,5 @@ def end_loop():
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
+print(date_current)
 atmospheric_loop(date_current.hour,diff.days,climate_recipe)
