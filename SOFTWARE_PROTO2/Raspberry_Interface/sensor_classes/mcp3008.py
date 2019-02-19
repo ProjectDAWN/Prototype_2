@@ -26,8 +26,8 @@ class MCP3008:
 		"""Get the water level, it's in millimeter""" 
 		chan = AnalogIn(self.mcp,MCP.P0)
 		V = chan.voltage
-		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
-		return H
+		#H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
+		return V
 
 	def print(self):
 		"""Print the value in terminal"""
