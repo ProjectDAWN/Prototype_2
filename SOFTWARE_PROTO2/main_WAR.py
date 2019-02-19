@@ -59,9 +59,9 @@ def watering_loop(day,climate_recipe):
         if pH_value > climate_recipe.pH_max():
             #think about arrange time regulation on pH diff
             time_pH = climate_recipe.time_pH_regulation()
-            actuators.activate("NUT_Pump_pHDown")
+            #actuators.activate("NUT_Pump_pHDown")
             time.sleep(time_pH)
-            actuators.desactivate("NUT_Pump_pHDown")
+            #actuators.desactivate("NUT_Pump_pHDown")
 
         #watering
 
