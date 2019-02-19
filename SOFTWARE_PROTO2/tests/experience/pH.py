@@ -19,6 +19,8 @@ def test_pH():
 
 	while ph_value > ph_max :
 
+		print(ph_value,ph_max)
+		
 		InOut.activate("NUT_Pump_pHDown")
 		print("pompe pH allumée")
 		time.sleep(1)
