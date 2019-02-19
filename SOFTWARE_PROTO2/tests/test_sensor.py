@@ -6,4 +6,4 @@ realMode = False
 sensors = GPIO_Sensors(realMode)
 
 def test(sensor):
-	print(sensors.read(sensor))
+	sensors.print(sensor)
