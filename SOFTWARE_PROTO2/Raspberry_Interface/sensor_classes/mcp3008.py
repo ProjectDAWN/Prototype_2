@@ -30,11 +30,6 @@ class MCP3008:
 		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
 		return round(H)
 
-	def print(self):
-		"""Print the value in terminal"""
-		print ("La hauteur immergée vaut " + str(self.read()) + ' mm')
-
-
 	def voltage(self):
 		chan = AnalogIn(self.mcp,MCP.P0)
 		V = chan.voltage
