@@ -56,11 +56,8 @@ class GPIO_Sensors :
             if(self.realMode):
                 sensor_class = GPIO_Sensors.class_dict[name_sensor]
                 output = sensor_class.print()
-                print("{s} : {v}".format(s=name_sensor,v=output))
             else:
                 output = 20
-
-        return output
 
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)

@@ -31,7 +31,7 @@ class MCP3008:
 
 	def print(self):
 		"""Print the value in terminal"""
-		print ("La hauteur immergée vaut" + str(self.read()) + ' mm')
+		print ("La hauteur immergée vaut " + str(self.read()) + ' mm')
 
 
 	def voltage(self):
