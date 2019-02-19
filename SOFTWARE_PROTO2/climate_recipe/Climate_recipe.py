@@ -26,8 +26,8 @@ class Climate_recipe:
 
     def __init__(self,variety,model):
         self.caracteristics = CSV_reader(Climate_recipe.CR_folder+"caracteristics.csv").get_infos(variety) # dict of caracteristics
-        self.thresholds = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"thresholds.csv")
-        self.nutrients = CSV_reader(Climate_recipe.CR_folder +variety+ "/" +"nutrients.csv")
+        self.thresholds = CSV_reader(Climate_recipe.CR_folder +variety+ "/thresholds.csv")
+        self.nutrients = CSV_reader(Climate_recipe.CR_folder +variety+ "/nutrients.csv")
         self.system = CSV_reader("Files/system.csv").get_infos(model)
 
     def get_period(self,day):

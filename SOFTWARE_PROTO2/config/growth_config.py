@@ -1,20 +1,22 @@
 import pickle
+import os
 from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
 from climate_recipe.Climate_recipe import Climate_recipe
 
 ### config variables
 
 chanel_file = "Files/Actuators.csv"
-realMode = True
+date_file_name = "Files/date_ini"
+realMode = False
 variety = "tomato"
 InOutMode = "GPIO"
-date_file = open("Files/date_ini",'rb')
 model = "Prototype_2"
 nut_list = ("Micro","BioBloom","BioGro","Mato")
 
 ### access function
 def date_ini():
     """return the initial date of growth"""
+    date_file = open(os.getcwd()+"/"+date_file_name,'rb')
     depickler = pickle.Unpickler(date_file)
     return(depickler.load())
 
