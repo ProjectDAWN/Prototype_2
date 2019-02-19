@@ -55,9 +55,9 @@ class GPIO_Sensors :
             print("lecture {}".format(name_sensor))
             if(self.realMode):
                 sensor_class = GPIO_Sensors.class_dict[name_sensor]
-                output = sensor_class.print()
+                sensor_class.print()
             else:
-                output = 20
+                print("Emulator mode: No sensor available")
 
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
