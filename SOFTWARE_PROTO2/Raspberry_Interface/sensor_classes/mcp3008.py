@@ -3,6 +3,7 @@ import digitalio
 import board
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
+from math import *
 
 class MCP3008:
 	"""Class for the mcp3008 sensor: Get the water level in the reservoir"""
@@ -27,7 +28,7 @@ class MCP3008:
 		chan = AnalogIn(self.mcp,MCP.P0)
 		V = chan.voltage
 		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
-		return H
+		return round(H)
 
 	def print(self):
 		"""Print the value in terminal"""
