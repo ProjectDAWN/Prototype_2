@@ -31,7 +31,3 @@ class DS18B20:
             temp_string = lines[1][equals_pos+2:]
             temp_c = float(temp_string) / 1000.0
         return temp_c
-
-    def print(self):
-        """Print the value in terminal"""
-        print("La température de l'eau est " +str(self.read()) +" °C")

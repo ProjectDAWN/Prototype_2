@@ -13,7 +13,3 @@ class AM2320_Temperature:
 	def read(self):
 		"""Get the value from the sensor. It's a tuple of float (temperature,humidity)"""
 		return self.am.temperature
-
-	def print(self):
-		"""Print the value in terminal"""
-		print("La température de l'air vaut " + str(self.read()) + " °C")

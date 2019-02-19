@@ -48,18 +48,6 @@ class GPIO_Sensors :
 
         return output
 
-    def print(self,name_sensor):
-        """Given name_sensor
-        check if the reading is possible and print the value"""
-        if self.verif_sensor(name_sensor):
-            print("lecture {}".format(name_sensor))
-            if(self.realMode):
-                sensor_class = GPIO_Sensors.class_dict[name_sensor]
-                sensor_class.print()
-            else:
-                print("Emulator mode: No sensor available")
-
-
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
 #In.read("NUT_Mixer")
 
