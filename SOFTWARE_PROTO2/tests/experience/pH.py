@@ -2,6 +2,7 @@ import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Raspberry_Interface.GPIO_Actuators import GPIO_Actuators
+from Raspberry_Interface.GPIO_Sensors import GPIO_Sensors
 pin_file = path + "/Files/Actuators.csv"
 InOutMode = "GPIO"
 realMode = True
@@ -20,7 +21,7 @@ def test_pH():
 	while ph_value > ph_max :
 
 		print(ph_value,ph_max)
-		
+
 		InOut.activate("NUT_Pump_pHDown")
 		print("pompe pH allumée")
 		time.sleep(1)
@@ -39,4 +40,4 @@ def test_pH():
 	print (count + " itérations !")
 	return count
 
-test()
+test_pH()
