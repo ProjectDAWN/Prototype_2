@@ -14,6 +14,7 @@ def test_pH():
 	ph_value = sensors.read("pH")
 	ph_max = 6.2
 	count = 0
+	temps = 0
 	print("Début test pH")
 
 	while ph_value > ph_max :
@@ -31,7 +32,9 @@ def test_pH():
 		print("WAR_Mixer éteint")
 
 		count = count + 1
-
+		temps = count * 31
+		print(temps)
+	print (count + " itérations !")
 	return count
 
 test()
