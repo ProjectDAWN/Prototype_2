@@ -13,10 +13,10 @@ class MCP3008:
 
 		# create the spi bus
 		self.spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
- 
+
 		# create the cs (chip select)
 		self.cs = digitalio.DigitalInOut(board.D5)
- 
+
 		# create the mcp object
 		self.mcp = MCP.MCP3008(self.spi, self.cs)
 		self.Vmax = 1.891728
@@ -24,7 +24,7 @@ class MCP3008:
 		self.Hmax = 213
 
 	def read(self):
-		"""Get the water level, it's in millimeter""" 
+		"""Get the water level, it's in millimeter"""
 		chan = AnalogIn(self.mcp,MCP.P0)
 		V = chan.voltage
 		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
