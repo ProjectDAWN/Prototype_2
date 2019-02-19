@@ -46,7 +46,9 @@ class GPIO_Sensors :
             else:
                 output = 20
 
-        return output
+            return output
+        else:
+            return(-1)
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
 #In.read("NUT_Mixer")
