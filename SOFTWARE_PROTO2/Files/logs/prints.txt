@@ -1,0 +1,173 @@
+lecture water_level
+activation NUT_Pump_Micro : 12
+21.05263157894737
+desactivation NUT_Pump_Micro : 12
+activation NUT_Pump_BioBloom : 6
+21.05263157894737
+desactivation NUT_Pump_BioBloom : 6
+activation NUT_Pump_BioGro : 25
+21.05263157894737
+desactivation NUT_Pump_BioGro : 25
+activation NUT_Pump_Mato : 13
+21.05263157894737
+desactivation NUT_Pump_Mato : 13
+ATM module
+lecture temperature
+activation ATM_Warmer : 27
+lecture humidity
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+ATM module
+2019-02-18 16:51:01.353556
+lecture temperature
+activation ATM_Warmer : 27
+lecture humidity
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+NUT module
+lecture water_level
+2019-02-18 16:51:08.353101
+activation NUT_Pump_Micro : 12
+desactivation NUT_Pump_Micro : 12
+activation NUT_Pump_BioBloom : 6
+desactivation NUT_Pump_BioBloom : 6
+activation NUT_Pump_BioGro : 25
+desactivation NUT_Pump_BioGro : 25
+activation NUT_Pump_Mato : 13
+desactivation NUT_Pump_Mato : 13
+LIG module
+2019-02-18 16:59:18.779503
+desactivation LIG_Led : 21
+WAR module
+2019-02-18 16:59:37.573028
+lecture pH
+lecture conductivity
+activation NUT_Pump_pHDown : 20
+desactivation NUT_Pump_pHDown : 20
+activation WAR_Mixer : 17
+desactivation WAR_Mixer : 17
+activation WAR_MistMaker : 24
+activation WAR_Ventilator : 16
+desactivation WAR_MistMaker : 24
+desactivation WAR_Ventilator : 16
+lecture pH
+lecture conductivity
+activation NUT_Pump_pHDown : 20
+desactivation NUT_Pump_pHDown : 20
+activation WAR_Mixer : 17
+desactivation WAR_Mixer : 17
+activation WAR_MistMaker : 24
+activation WAR_Ventilator : 16
+desactivation WAR_MistMaker : 24
+desactivation WAR_Ventilator : 16
+ATM module
+2019-02-18 18:03:27.096530
+lecture temperature
+lecture humidity
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+ATM module
+2019-02-18 18:04:18.593235
+lecture temperature
+lecture humidity
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+ATM module
+2019-02-18 18:04:38.778085
+lecture temperature
+lecture humidity
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+desactivation ATM_MistMaker : 23
+desactivation ATM_Ventilator : 22
+NUT module
+lecture water_level
+2019-02-18 18:06:02.298339
+activation NUT_Pump_Micro : 12
+desactivation NUT_Pump_Micro : 12
+activation NUT_Pump_BioBloom : 6
+desactivation NUT_Pump_BioBloom : 6
+activation NUT_Pump_BioGro : 25
+desactivation NUT_Pump_BioGro : 25
+activation NUT_Pump_Mato : 13
+desactivation NUT_Pump_Mato : 13
+NUT module
+2019-02-18 18:10:35.307818
+lecture water_level
+ATM module
+2019-02-18 18:11:33.691921
+lecture temperature
+lecture humidity
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+desactivation ATM_MistMaker : 23
+desactivation ATM_Ventilator : 22
+NUT module
+2019-02-18 18:10:44.728469
+lecture water_level
+activation NUT_Pump_Micro : 12
+desactivation NUT_Pump_Micro : 12
+activation NUT_Pump_BioBloom : 6
+desactivation NUT_Pump_BioBloom : 6
+activation NUT_Pump_BioGro : 25
+desactivation NUT_Pump_BioGro : 25
+activation NUT_Pump_Mato : 13
+desactivation NUT_Pump_Mato : 13
+LIG module
+2019-02-18 18:12:22.490597
+desactivation LIG_Led : 21
+ATM module
+ATM module
+2019-02-19 16:33:21.541004
+lecture temperature
+lecture humidity
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+desactivation ATM_MistMaker : 23
+desactivation ATM_Ventilator : 22
+NUT module
+2019-02-19 16:41:44.121675
+lecture water_level
+activation NUT_Pump_Micro : 12
+desactivation NUT_Pump_Micro : 12
+activation NUT_Pump_BioBloom : 6
+desactivation NUT_Pump_BioBloom : 6
+activation NUT_Pump_BioGro : 20
+desactivation NUT_Pump_BioGro : 20
+activation NUT_Pump_Mato : 13
+desactivation NUT_Pump_Mato : 13
+LIG module
+2019-02-19 16:52:23.580409
+desactivation LIG_Led : 21
+WAR module
+2019-02-19 16:51:49.210455
+lecture pH
+lecture conductivity
+activation NUT_Pump_pHDown : 25
+desactivation NUT_Pump_pHDown : 25
+activation WAR_Mixer : 17
+desactivation WAR_Mixer : 17
+activation WAR_MistMaker : 24
+activation WAR_Ventilator : 16
+desactivation WAR_MistMaker : 24
+desactivation WAR_Ventilator : 16
+lecture pH
+lecture conductivity
+activation NUT_Pump_pHDown : 25
+desactivation NUT_Pump_pHDown : 25
+activation WAR_Mixer : 17
+desactivation WAR_Mixer : 17
+activation WAR_MistMaker : 24
+activation WAR_Ventilator : 16
+desactivation WAR_MistMaker : 24
+desactivation WAR_Ventilator : 16
+lecture pH
+lecture conductivity
+activation NUT_Pump_pHDown : 25
+desactivation NUT_Pump_pHDown : 25
+activation WAR_Mixer : 17
+desactivation WAR_Mixer : 17
+activation WAR_MistMaker : 24
+activation WAR_Ventilator : 16
+desactivation WAR_MistMaker : 24
+desactivation WAR_Ventilator : 16
