@@ -20,6 +20,7 @@
 ###############################################################################
 
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
+import sys
 class Climate_recipe:
 
     CR_folder = "Files/climate_recipes/"

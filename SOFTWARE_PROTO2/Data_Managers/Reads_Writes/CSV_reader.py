@@ -1,11 +1,11 @@
 import numpy as np
 import pandas as pd
-import os
+import sys
 
 class CSV_reader :
 
     def __init__(self,file_name):
-        self.df = pd.read_csv(os.getcwd()+"/"+file_name,index_col=0)
+        self.df = pd.read_csv(sys.path[0]+"/"+file_name,index_col=0)
         self.nb_index = self.df.shape[0]
 
     def get(self,id, caracteristic):
