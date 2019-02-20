@@ -5,7 +5,7 @@ path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Raspberry_Interface.GPIO_Actuators import GPIO_Actuators
 from Raspberry_Interface.GPIO_Sensors import GPIO_Sensors
-pin_file = path + "/Files/Actuators.csv"
+pin_file = "../../Files/Actuators.csv"
 InOutMode = "GPIO"
 realMode = True
 import time
@@ -59,11 +59,11 @@ sensors = GPIO_Sensors(InOutMode,realMode)
 def test(actuator1, actuator2):
 	values=[]
 
-# On commence à 62% d'humidité. D'après nos données,le module humidité fait +3%/min. 
+# On commence à 62% d'humidité. D'après nos données,le module humidité fait +3%/min.
 # On veut donc arriver à 70% puis fluctuer autour de cette valeur.
 # On allume donc 7min = 420.
-	
-	
+
+
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	t_reach = time.time() + 240
@@ -71,8 +71,8 @@ def test(actuator1, actuator2):
 	while time.time() < t_reach :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
-		
-		
+
+
 	InOut.desactivate(actuator1)
 	InOut.desactivate(actuator2)
 	print("Eteint")
@@ -83,7 +83,7 @@ def test(actuator1, actuator2):
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
-		
+
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
@@ -93,7 +93,7 @@ def test(actuator1, actuator2):
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
-		
+
 	InOut.desactivate(actuator1)
 	InOut.desactivate(actuator2)
 	print("Eteint")
@@ -104,7 +104,7 @@ def test(actuator1, actuator2):
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
-		
+
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
@@ -113,11 +113,11 @@ def test(actuator1, actuator2):
 	while time.time() < t_ON_2 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
-		
-		
+
+
 	InOut.desactivate(actuator1)
 	InOut.desactivate(actuator2)
-	print("Eteint")	
+	print("Eteint")
 	t = time.time()
 	t_OFF_3 = t + 240
 	print("Test sans actionneurs")
@@ -125,7 +125,7 @@ def test(actuator1, actuator2):
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
-		
+
 	InOut.activate(actuator1)
 	InOut.activate(actuator2)
 	print("Allumé")
@@ -134,8 +134,8 @@ def test(actuator1, actuator2):
 	while time.time() < t_ON_3 :
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
-		
-		
+
+
 	InOut.desactivate(actuator1)
 	InOut.desactivate(actuator2)
 	print("Eteint")
@@ -145,7 +145,7 @@ def test(actuator1, actuator2):
 		values.append(sensors.read("humidity"))
 		time.sleep(1)
 
-		
+
 	ti = np.linspace(0,len(values),len(values))
 	plt.figure()
 	plt.plot(ti,values,"k-")
@@ -156,4 +156,3 @@ def test(actuator1, actuator2):
 	plt.show()
 
 test("ATM_MistMaker","ATM_Ventilator")
-

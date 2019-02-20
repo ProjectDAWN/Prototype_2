@@ -1,11 +1,11 @@
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 import numpy as np
 import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Raspberry_Interface.GPIO_Actuators import GPIO_Actuators
 from Raspberry_Interface.GPIO_Sensors import GPIO_Sensors
-pin_file = path + "/Files/Actuators.csv"
+pin_file = "../../Files/Actuators.csv"
 InOutMode = "GPIO"
 realMode = True
 import time

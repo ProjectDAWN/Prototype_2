@@ -2,7 +2,7 @@ import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Raspberry_Interface.GPIO_Actuators import GPIO_Actuators
-pin_file = path + "/Files/Actuators.csv"
+pin_file = "../../Files/Actuators.csv"
 InOutMode = "GPIO"
 realMode = True
 import time
