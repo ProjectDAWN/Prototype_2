@@ -19,7 +19,7 @@ def test_pH():
 	print("Début test pH")
 
 	while ph_value > ph_max :
-		ph_value = sensors.read("pH")
+
 		print(ph_value,ph_max)
 
 		InOut.activate("NUT_Pump_pHDown")
@@ -37,6 +37,7 @@ def test_pH():
 		count = count + 1
 		temps = count * 31
 		print(temps)
+		ph_value = sensors.read("pH")
 	print (count)
 	return count
 
