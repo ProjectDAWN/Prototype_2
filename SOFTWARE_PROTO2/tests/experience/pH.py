@@ -24,7 +24,7 @@ def test_pH():
 
 		InOut.activate("NUT_Pump_pHDown")
 		print("pompe pH allumée")
-		time.sleep(1)
+		time.sleep(3)
 		InOut.desactivate("NUT_Pump_pHDown")
 		print("pompe pH éteinte")
 
