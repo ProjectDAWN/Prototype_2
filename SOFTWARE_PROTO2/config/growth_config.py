@@ -31,3 +31,8 @@ def sensors():
 def actuators():
     """return actuator class"""
     return(GPIO_Actuators.GPIO_Actuators(chanel_file,InOutMode,realMode))
+
+def set_date_ini(date):
+    date_file = open(sys.path[0]+"/"+date_file_path,'wb')
+    pickler = pickle.Pickler(date_file)
+    pickler.dump(date)

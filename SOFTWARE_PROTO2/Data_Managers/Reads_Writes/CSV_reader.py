@@ -16,14 +16,3 @@ class CSV_reader :
 
     def get_infos(self,key):
         return(dict(zip(list(self.df),list(self.df.loc[key]))))
-
-    def print_pins(file_name):
-        pins_file = open(file_name,'r')
-        names,pins = [],[]
-        for pin in pins_file.readlines():
-            pin = pin.split(" ")
-            names.append(pin[0])
-            pins.append(int(pin[1]))
-        df = pd.DataFrame(pins, index=names, columns = ['pins'])
-        df.to_csv("../Files/share_holder.csv")
-        return(df)
