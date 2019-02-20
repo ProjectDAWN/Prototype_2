@@ -14,7 +14,7 @@ class GPIO_Actuators :
         self.actuators = CSV_reader(channel_file) #instantiation of the actuators manager class
         self.activated_channels = [] #list of channels which are activate (hardware ON)
         self.nb_channels = self.actuators.nb_index
-        self.channels_dict = dict(zip(self.actuators.get_list("GPIO"),[None]*self.nb_channels)) #dict of state by channel
+        self.channels_dict = dict(zip(self.actuators.get_list(InOutMode),[None]*self.nb_channels)) #dict of state by channel
         self.realMode = realMode
         self.InOutMode = InOutMode #determine which kind of channel the interface use
 
@@ -24,7 +24,7 @@ class GPIO_Actuators :
         take a channel and a bool indicating the info to communicate"""
 
         if(channel not in self.channels_dict.keys()):
-            print("Pin {} doesn't exist".format(channel))
+            print("{} {} doesn't exist".format(self.InOutMode,channel))
             return(False)
         #elif(activate and channel in self.activated_channels):
         #    print("Pin {} already activated".format(channel))
