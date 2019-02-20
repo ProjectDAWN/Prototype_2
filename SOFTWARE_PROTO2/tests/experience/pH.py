@@ -37,7 +37,7 @@ def test_pH():
 		count = count + 1
 		temps = count * 31
 		print(temps)
-	print (count + " itérations !")
+	print (count)
 	return count
 
 test_pH()
