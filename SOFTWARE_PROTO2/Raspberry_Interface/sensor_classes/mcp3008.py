@@ -4,6 +4,12 @@ import board
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 from math import *
+import sys
+path = sys.path[0]+"/../.."
+sys.path.append(path)
+from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
+system_file = path + "/Files/system.csv"
+
 
 class MCP3008:
 	"""Class for the mcp3008 sensor: Get the water level in the reservoir"""
@@ -19,15 +25,16 @@ class MCP3008:
 
 		# create the mcp object
 		self.mcp = MCP.MCP3008(self.spi, self.cs)
-		self.Vmax = 1.891728
-		self.Vmin = 0.947475
-		self.Hmax = 213
+		self.system_config = CSV_reader(system_file)
 
 	def read(self):
 		"""Get the water level, it's in millimeter"""
 		chan = AnalogIn(self.mcp,MCP.P0)
 		V = chan.voltage
-		H = self.Hmax*(self.Vmax-V)/(self.Vmax-self.Vmin)
+		Vmax = self.system_config.get(0,"water_level_Vmax")
+		Vmin = self.system_config.get(0,"water_level_Vmin")
+		Hmax = self.system_config.get(0,"water_level_Hmax")
+		H = Hmax*(Vmax-V)/(Vmax-Vmin)
 		return round(H)
 
 	def voltage(self):
@@ -37,7 +44,7 @@ class MCP3008:
 
 	def low(self):
 		print("Récupération de la tension à vide")
-		self.Vmax = self.voltage()
+		#self.Vmax = self.voltage()
 
 	def high(self):
 		print("Remplir de l'eau jusqu'en haut du capteur")
@@ -45,7 +52,7 @@ class MCP3008:
 		while not isPut:
 			rep = input("Rentrer y si c'est fait")
 			isPut = (rep=="y")
-		self.Vmin = self.voltage()
+		#self.Vmin = self.voltage()
 
 	def calibrate(self):
 		self.low()
