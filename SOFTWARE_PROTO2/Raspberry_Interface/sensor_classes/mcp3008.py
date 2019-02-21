@@ -8,7 +8,7 @@ import sys
 path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
-system_file = "Files/system.csv"
+system_file = "../../Files/system.csv"
 model = "Prototype_2"
 
 class MCP3008:
