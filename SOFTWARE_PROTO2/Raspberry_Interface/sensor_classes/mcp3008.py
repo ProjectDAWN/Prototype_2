@@ -9,12 +9,12 @@ path = sys.path[0]+"/../.."
 sys.path.append(path)
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
 system_file = "../../Files/system.csv"
-
+model = "Prototype_2"
 
 class MCP3008:
 	"""Class for the mcp3008 sensor: Get the water level in the reservoir"""
 
-	def __init__(self,model):
+	def __init__(self):
 		"""Initialize the class & establish the connection with the sensor"""
 
 		# create the spi bus
@@ -26,7 +26,6 @@ class MCP3008:
 		# create the mcp object
 		self.mcp = MCP.MCP3008(self.spi, self.cs)
 		self.system_config = CSV_reader(system_file)
-		self.model = model
 
 	def read(self):
 		"""Get the water level, it's in millimeter"""
