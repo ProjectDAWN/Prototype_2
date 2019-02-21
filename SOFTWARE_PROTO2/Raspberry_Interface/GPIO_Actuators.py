@@ -66,9 +66,13 @@ class GPIO_Actuators :
                 print("desactivation {} : {}".format(actuator,channel))
                 if(self.realMode):
                     import RPi.GPIO as GPIO
-                    GPIO.setmode(GPIO.BCM)
-                    GPIO.setup(channel, GPIO.OUT)
-                    GPIO.cleanup(channel)
+                    try:
+                        GPIO.cleanup(channel)
+                    except:
+                        GPIO.setmode(GPIO.BCM)
+                        GPIO.setup(channel, GPIO.OUT)
+                        GPIO.cleanup(channel)
+
 
     def cleanup(self):
         for actuator in self.actuators.get_list(self.InOutMode):

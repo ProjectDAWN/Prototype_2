@@ -16,3 +16,6 @@ class CSV_reader :
 
     def get_infos(self,key):
         return(dict(zip(list(self.df),list(self.df.loc[key]))))
+
+    def get_fields(self):
+        return(list(self.df))
