@@ -44,11 +44,9 @@ date_ini = growth_config.date_ini()
 
 def watering_loop(day,climate_recipe):
     """water_loop control level_water, pH, EC, hydroponic system"""
-    count = 0
     time_pH = 0
-    bool = True
 
-    while bool==True :
+    while True :
         #get pH value
         pH_value = sensors.read("pH")
 
@@ -75,9 +73,6 @@ def watering_loop(day,climate_recipe):
         time.sleep(climate_recipe.ON_time(day))
         actuators.desactivate("WAR_MistMaker", "WAR_Ventilator")
 
-        count+=1
-        if count == 3 :
-            bool = False
 
 ####### End of growth
 
