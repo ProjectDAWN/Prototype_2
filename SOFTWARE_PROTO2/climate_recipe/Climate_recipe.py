@@ -88,7 +88,8 @@ class Climate_recipe:
         week = day//7+1
         quantity = self.nutrients.get(week,nutrient)
         coef = self.flow_coef(nutrient,water_level)
-        return(quantity*coef)
+        time = quantity*coef
+        return(min(25,time))
     ########## Functions for Watering Module #########################
 
     def pH_max(self):
