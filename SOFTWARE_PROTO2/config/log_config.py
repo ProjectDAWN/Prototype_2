@@ -1,4 +1,3 @@
 import sys
-import os
-print_log = os.getcwd()+"/Files/logs/prints.txt"
-print_log_file = sys.__stdout__#open(print_log,'a')
+print_log = sys.path[0]+"/Files/logs/prints.txt"
+print_log_file = open(print_log,'a')

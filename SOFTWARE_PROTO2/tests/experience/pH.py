@@ -5,7 +5,7 @@ from Raspberry_Interface.GPIO_Actuators import GPIO_Actuators
 from Raspberry_Interface.GPIO_Sensors import GPIO_Sensors
 pin_file = "../../Files/Actuators.csv"
 InOutMode = "GPIO"
-realMode = True
+realMode = False
 import time
 InOut = GPIO_Actuators(pin_file,InOutMode,realMode)
 sensors = GPIO_Sensors(InOutMode,realMode)
