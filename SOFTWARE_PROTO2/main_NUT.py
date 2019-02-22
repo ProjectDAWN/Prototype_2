@@ -44,6 +44,9 @@ nut_list = growth_config.nut_list
 def nutrients_loop(day,climate_recipe):
     """nutrients_loop is a function that control the release of nutrients according to climate recipe"""
     water_level = sensors.read("water_level")
+    actuators.activate("NUT_Mixer")
+    time.sleep(60)
+    actuators.desactivate("NUT_Mixer")
     for nutrient in nut_list:
         nut_time = climate_recipe.pump_nut_time(nutrient,day,water_level) #second
         actuators.activate("NUT_Pump_"+nutrient)
@@ -57,7 +60,9 @@ def end_loop():
     """put all the actuators pins at LOW value"""
     actuators.desactivate("NUT_Pump_BioGro",
                     "NUT_Pump_Micro",
-                    "NUT_Pump_BioBloom")
+                    "NUT_Pump_BioBloom",
+                    "NUT_Pump_Mato"
+                    "NUT_Mixer")
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini

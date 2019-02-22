@@ -51,6 +51,8 @@ def watering_loop(day,climate_recipe):
         pH_value = sensors.read("pH")
 
         water_level = sensors.read("water_level")
+        if water_level<80:
+            print("WARNING ! WATER LEVEL TOO LOW !!!!!!!!!!")
 
         #get EC value
         EC_value = sensors.read("conductivity")
