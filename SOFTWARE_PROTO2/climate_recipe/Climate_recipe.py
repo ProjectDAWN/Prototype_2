@@ -78,7 +78,7 @@ class Climate_recipe:
     def flow_coef(self,pump,water_level):
         """return the coef in s/ml of the pump depending on the water_level"""
         size_tank_x,size_tank_y = self.system["size_tank_x"],self.system["size_tank_y"] #cm
-        flow= self.system["flux_NUT_Pump_"+pump] #pump's flow
+        flow= self.system["flux_NUT_Pump_"+pump] #pump's flow ml/s
         volume = size_tank_x*size_tank_y*water_level/10000
         coef = volume/flow
         return(coef)

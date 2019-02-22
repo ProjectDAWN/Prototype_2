@@ -45,6 +45,8 @@ date_ini = growth_config.date_ini()
 def watering_loop(day,climate_recipe):
     """water_loop control level_water, pH, EC, hydroponic system"""
     time_pH = 0
+    date_current = datetime.datetime.now()
+    print(date_current)
 
     while True :
         #get pH value
