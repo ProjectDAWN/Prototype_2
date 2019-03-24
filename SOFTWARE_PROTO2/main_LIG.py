@@ -18,10 +18,10 @@
 #
 ##################### Importation section   #################################
 import sys
-import Raspberry_Interface
 import datetime
 import time
 
+import Raspberry_Interface
 from Raspberry_Interface.sensor_classes import AtlasI2C
 from config import growth_config,log_config
 #add sensors' and actuators' classes here
@@ -38,9 +38,17 @@ climate_recipe = growth_config.recipe()
 date_ini = growth_config.date_ini()
 
 def lighting_loop(hour,day,climate_recipe):
-    """lighting_loop i a function that control Leds acoording to climate recipe"""
+    """(des)Activate acoording to climate recipe
 
-    if(hour<climate_recipe.LEDupBoundary(day)) and (hour>=climate_recipe.LEDdownBoundary(day)):
+    Arguments:
+    hour -- [int] current hour of the day
+    day -- [int] current day of growth
+    climate_recipe -- [Climate_recipe] class managing the current growth
+
+    """
+
+    if(hour < climate_recipe.LEDupBoundary(day)) and
+      (hour >= climate_recipe.LEDdownBoundary(day)):
         actuators.desactivate("LIG_Led")
     else:
         actuators.activate("LIG_Led")
@@ -48,7 +56,7 @@ def lighting_loop(hour,day,climate_recipe):
 ####### End of growth
 
 def end_loop():
-    """put all the actuators pins at LOW value"""
+    """Desactivate every LIG actuators"""
     actuators.activate("LIG_Led")
 
 

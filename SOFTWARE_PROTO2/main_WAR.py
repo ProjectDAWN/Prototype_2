@@ -28,6 +28,7 @@ import time
 
 from Raspberry_Interface.sensor_classes import AtlasI2C
 from config import growth_config,log_config
+print = partial(print,flush=True)
 
 
 
@@ -43,7 +44,13 @@ date_ini = growth_config.date_ini()
 
 
 def watering_loop(day,climate_recipe):
-    """water_loop control level_water, pH, EC, hydroponic system"""
+    """Control water_level, pH, EC, aeroponic system
+
+    Arguments:
+    day -- [int] current day of growth
+    climate_recipe -- [Climate_recipe] class managing the current growth
+
+    """
     time_pH = 0
     date_current = datetime.datetime.now()
     print(date_current)
@@ -53,7 +60,7 @@ def watering_loop(day,climate_recipe):
         pH_value = sensors.read("pH")
 
         water_level = sensors.read("water_level")
-        if water_level<80:
+        if water_level < 80:
             print("WARNING ! WATER LEVEL TOO LOW !!!!!!!!!!")
 
         #get EC value
@@ -71,7 +78,7 @@ def watering_loop(day,climate_recipe):
 
         #break time with activation of the mixer
         actuators.activate("WAR_Mixer")
-        time.sleep(climate_recipe.OFF_time(day)-time_pH)
+        time.sleep(climate_recipe.OFF_time(day) - time_pH)
         actuators.desactivate("WAR_Mixer")
 
         #vaporization time
@@ -83,8 +90,7 @@ def watering_loop(day,climate_recipe):
 ####### End of growth
 
 def end_loop():
-    """put all the actuators pins at LOW value"""
-
+    """Desactivate every WAR actuators"""
     actuators.desactivate("WAR_MistMaker",
                     "WAR_Mixer",
                     "WAR_Ventilator",

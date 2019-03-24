@@ -19,10 +19,10 @@
 #
 ##################### Importation section   #################################
 import sys
-import Raspberry_Interface
 import datetime
 import time
 
+import Raspberry_Interface
 from Raspberry_Interface.sensor_classes import AtlasI2C
 from config import growth_config,log_config
 #add sensors' and actuators' classes here
@@ -42,27 +42,33 @@ nut_list = growth_config.nut_list
 
 ####### Nutrients module
 def nutrients_loop(day,climate_recipe):
-    """nutrients_loop is a function that control the release of nutrients according to climate recipe"""
+    """Control the release of nutrients according to climate recipe
+
+    Arguments:
+    day -- [int] current day of growth
+    climate_recipe -- [Climate_recipe] class managing the current growth
+
+    """
     water_level = sensors.read("water_level")
     actuators.activate("NUT_Mixer")
     time.sleep(60)
     actuators.desactivate("NUT_Mixer")
     for nutrient in nut_list:
         nut_time = climate_recipe.pump_nut_time(nutrient,day,water_level) #second
-        actuators.activate("NUT_Pump_"+nutrient)
+        actuators.activate("NUT_Pump_" + nutrient)
         time.sleep(nut_time)
-        actuators.desactivate("NUT_Pump_"+nutrient)
+        actuators.desactivate("NUT_Pump_" + nutrient)
 
 
 ####### End of growth
 
 def end_loop():
-    """put all the actuators pins at LOW value"""
+    """Desactivate every NUT actuators"""
     actuators.desactivate("NUT_Pump_BioGro",
-                    "NUT_Pump_Micro",
-                    "NUT_Pump_BioBloom",
-                    "NUT_Pump_Mato"
-                    "NUT_Mixer")
+                        "NUT_Pump_Micro",
+                        "NUT_Pump_BioBloom",
+                        "NUT_Pump_Mato"
+                        "NUT_Mixer")
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
