@@ -19,7 +19,7 @@ class GPIO_Sensors :
 
     class_dict = dict.fromkeys(["pH","conductivity","water_level",
                                 "water_temperature","temperature","humidity"])
-
+    
     def __init__(self,InOutMode,realMode=True) :
         """Constructor of Sensors class
 
@@ -47,12 +47,12 @@ class GPIO_Sensors :
             GPIO.setmode(GPIO.BCM)
 
     def verif_sensor(self,name):
-    """Check error on sensor access
+        """Check error on sensor access
 
-    Keyword Arguments:
-    name -- [string] sensor name to check
+        Keyword Arguments:
+        name -- [string] sensor name to check
 
-    """
+        """
         if(name not in GPIO_Sensors.class_dict.keys()):
             print("sensor {} doesn't exist".format(name))
             return(False)
