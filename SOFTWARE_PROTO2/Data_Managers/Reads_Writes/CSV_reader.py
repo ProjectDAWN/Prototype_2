@@ -15,7 +15,7 @@ class CSV_reader :
 
         file_name -- [string] name of the file to read which contains the datas
         """
-        self.df = pd.read_csv(sys.path[0] + "/" + file_name,index_col=0)
+        self.df = pd.read_csv(sys.path[0] + "/../" + file_name,index_col=0)
         self.nb_index = self.df.shape[0]
 
     def get(self,id, caracteristic):
