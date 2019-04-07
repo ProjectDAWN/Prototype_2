@@ -19,7 +19,7 @@ class GPIO_Sensors :
 
     class_dict = dict.fromkeys(["pH","conductivity","water_level",
                                 "water_temperature","temperature","humidity"])
-    
+
     def __init__(self,InOutMode,realMode=True) :
         """Constructor of Sensors class
 
@@ -34,13 +34,13 @@ class GPIO_Sensors :
             from Raspberry_Interface.sensor_classes.pH import pH
             from Raspberry_Interface.sensor_classes.EC import EC
             from Raspberry_Interface.sensor_classes.mcp3008 import MCP3008
-            from Raspberry_Interface.sensor_classes.ds18b20 import DS18B20
+            #from Raspberry_Interface.sensor_classes.ds18b20 import DS18B20
             from Raspberry_Interface.sensor_classes.am2320_Humidity import AM2320_Humidity
             from Raspberry_Interface.sensor_classes.am2320_Temperature import AM2320_Temperature
             GPIO_Sensors.class_dict = {"pH" : pH(),
                                        "conductivity" : EC(),
                                        "water_level" : MCP3008(),
-                                       "water_temperature" : DS18B20(),
+                                       #"water_temperature" : DS18B20(),
                                        "temperature" : AM2320_Temperature(),
                                        "humidity" : AM2320_Humidity()}
 
@@ -64,7 +64,7 @@ class GPIO_Sensors :
 
         Keyword Arguments:
         name_sensor -- [string] name of the sensor to access
-        
+
         """
         if self.verif_sensor(name_sensor):
             if(self.realMode):
