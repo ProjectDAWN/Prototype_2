@@ -1,1 +1,1 @@
-python3 ~/Desktop/Prototype_2/SOFTWARE_PROTO2/main_LIG.py > ~/Desktop/test_log.txt 2>&1
+python3 ~/Desktop/Prototype_2/SOFTWARE_PROTO2/Main/main_LIG.py > ~/Desktop/test_log.txt 2>&1
