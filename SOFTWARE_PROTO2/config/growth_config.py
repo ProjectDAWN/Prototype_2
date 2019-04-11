@@ -1,5 +1,7 @@
 import pickle
 import sys
+path = sys.path[0]+"/.."
+sys.path.append(path)
 
 from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
 from climate_recipe.Climate_recipe import Climate_recipe
