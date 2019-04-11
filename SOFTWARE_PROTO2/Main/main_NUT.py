@@ -21,6 +21,8 @@
 import sys
 import datetime
 import time
+path = sys.path[0]+"/.."
+sys.path.append(path)
 
 import Raspberry_Interface
 from Raspberry_Interface.sensor_classes import AtlasI2C
