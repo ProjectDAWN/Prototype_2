@@ -49,8 +49,7 @@ def lighting_loop(hour,day,climate_recipe):
 
     """
 
-    if(hour < climate_recipe.LEDupBoundary(day)) and
-      (hour >= climate_recipe.LEDdownBoundary(day)):
+    if(hour < climate_recipe.LEDupBoundary(day)) and (hour >= climate_recipe.LEDdownBoundary(day)):
         actuators.desactivate("LIG_Led")
     else:
         actuators.activate("LIG_Led")
