@@ -6,7 +6,7 @@
 import sys
 sys.path.append(sys.path[0] + "/..")
 from Data_Managers.Reads_Writes.CSV_reader import CSV_reader
-print = partial(print,flush=True)
+#print = partial(print,flush=True)
 
 class GPIO_Actuators :
 
