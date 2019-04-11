@@ -19,7 +19,7 @@ nut_list = ("Micro","BioBloom","BioGro","Mato")
 ### access function
 def date_ini():
     """return the initial date of growth"""
-    date_file = open(sys.path[0] + "/" + date_file_path,'rb')
+    date_file = open(sys.path[0] + "/../" + date_file_path,'rb')
     depickler = pickle.Unpickler(date_file)
     return(depickler.load())
 
