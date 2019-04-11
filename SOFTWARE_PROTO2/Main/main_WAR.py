@@ -30,7 +30,7 @@ sys.path.append(path)
 import Raspberry_Interface
 from Raspberry_Interface.sensor_classes import AtlasI2C
 from config import growth_config,log_config
-print = partial(print,flush=True)
+#print = partial(print,flush=True)
 
 
 
