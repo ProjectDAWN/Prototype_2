@@ -25,11 +25,10 @@ import time
 path = sys.path[0]+"/.."
 sys.path.append(path)
 
-import Raspberry_Interface
-from Raspberry_Interface.sensor_classes import AtlasI2C
-from config import growth_config,log_config
-#add sensors' and actuators' classes here
+from SOFTWARE_PROTO2.Raspberry_Interface import *
+from SOFTWARE_PROTO2.config import growth_config, log_config
 
+# add sensors' and actuators' classes here
 
 
 ######################## Modules loops #######################################
@@ -43,8 +42,7 @@ climate_recipe = growth_config.recipe()
 date_ini = growth_config.date_ini()
 
 
-
-def atmospheric_loop(hour,day,climate_recipe):
+def atmospheric_loop(hour, day):
     """Maintain parameters (temperature, humidity) in a range defined in climate recipe
 
     Arguments:
@@ -54,18 +52,18 @@ def atmospheric_loop(hour,day,climate_recipe):
 
     """
 
-    #Temperature
+    # Temperature
     temperature = sensors.read("temperature")
-    if temperature < climate_recipe.threshold_temp(hour, day) - 1 : #too cold
-        #actuators.activate("ATM_Warmer")
-        #sleep(climate_recipe.system[time_temp_regulation])
-        #actuator.desactivate("ATM_Warmer")
+    if temperature < climate_recipe.threshold_temp(hour, day) - 1:  # too cold
+        # actuators.activate("ATM_Warmer")
+        # sleep(climate_recipe.system[time_temp_regulation])
+        # actuator.desactivate("ATM_Warmer")
         pass
-    if temperature > climate_recipe.threshold_temp(hour, day) + 1:  #too warm
-        #actuators.activate("ATM_Cooler")
+    if temperature > climate_recipe.threshold_temp(hour, day) + 1:  # too warm
+        # actuators.activate("ATM_Cooler")
         pass
 
-    #humidity
+    # humidity
     humidity = sensors.read("humidity")
     humidity_threshold = climate_recipe.thresholdd_humidity(date_current.hour,
                                                             date_current.day)
@@ -74,8 +72,8 @@ def atmospheric_loop(hour,day,climate_recipe):
         actuators.activate("ATM_MistMaker", "ATM_Ventilator")
         time.sleep(climate_recipe.system["time_hum_regulation"])
         actuators.desactivate("ATM_MistMaker", "ATM_Ventilator")
-    if humidity > humidity_threshold * (1 + 0.005) : # humidity is too high
-        #actuators.desactivate("ATM_MistMaker")
+    if humidity > humidity_threshold * (1 + 0.005):  # humidity is too high
+        # actuators.desactivate("ATM_MistMaker")
         pass
 
 
@@ -84,10 +82,11 @@ def atmospheric_loop(hour,day,climate_recipe):
 def end_loop():
     """Desactivate every ATM actuators"""
     actuators.desactivate("ATM_Ventilator",
-                    "ATM_MistMaker",
-                    "ATM_Warmer")
+                          "ATM_MistMaker",
+                          "ATM_Warmer")
+
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini
 print(date_current)
-atmospheric_loop(date_current.hour,diff.days,climate_recipe)
+atmospheric_loop(date_current.hour, diff.days)
