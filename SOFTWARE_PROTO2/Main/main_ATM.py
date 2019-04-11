@@ -25,8 +25,9 @@ import time
 path = sys.path[0]+"/.."
 sys.path.append(path)
 
-from SOFTWARE_PROTO2.Raspberry_Interface import *
-from SOFTWARE_PROTO2.config import growth_config, log_config
+
+from Raspberry_Interface import *
+from config import growth_config, log_config
 
 # add sensors' and actuators' classes here
 
