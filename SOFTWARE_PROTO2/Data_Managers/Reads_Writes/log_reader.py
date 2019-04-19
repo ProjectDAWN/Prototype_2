@@ -3,12 +3,14 @@ import re
 import sys
 import matplotlib
 import matplotlib.pyplot as plt
-log_file = sys.path[0]+ "/../../Files/logs/prints.txt"
+
+log_file = sys.path[0] + "/../../Files/logs/prints.txt"
 format = '%Y-%m-%d %H:%M:%S.%f'
 file = open(log_file,'r')
-sensors = ["pH","conductivity","water_level","water_temperature","temperature","humidity"]
-X_dict = dict(zip(sensors,[[]]*len(sensors)))
-Y_dict = dict(zip(sensors,[[]]*len(sensors)))
+sensors = ["pH","conductivity","water_level","water_temperature",
+            "temperature","humidity"]
+X_dict = dict(zip(sensors,[[]] * len(sensors)))
+Y_dict = dict(zip(sensors,[[]] * len(sensors)))
 for line in file.readlines():
     line = line.strip()
     if re.search(r"^2019-",line):
@@ -25,4 +27,4 @@ for sensor in sensors:
     print(X_dict[sensor])
     plt.plot(dates,Y_dict[sensor])
     axes.set(xlabel ="time")
-    plt.savefig(sensor+".pdf")
+    plt.savefig(sensor + ".pdf")

@@ -16,7 +16,7 @@
 #
 # Sensors : Temperature, humidity (same probe)
 #
-# Actuactors : waterproof ventilator, mistmaker, electrical warmer
+# Actuators : waterproof ventilator, mistmaker, electrical warmer
 #
 ##################### Importation section   #################################
 import sys

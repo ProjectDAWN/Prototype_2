@@ -17,21 +17,22 @@
 
 # Sensors : water level, pH, EC
 #
-# Actuactors :  ultrasonic mixt maker, agitateur solution nutritive,
+# Actuators :  ultrasonic mixt maker, agitateur solution nutritive,
 #                        ventilateur waterproof
 #
 ##################### Importation section   #################################
 import sys
 import datetime
 import time
-path = sys.path[0]+"/.."
+
+path = sys.path[0] + "/.."
 sys.path.append(path)
 
 import Raspberry_Interface
 from Raspberry_Interface.sensor_classes import AtlasI2C
-from config import growth_config,log_config
-#print = partial(print,flush=True)
+from config import growth_config, log_config
 
+# print = partial(print,flush=True)
 
 
 ######################## Modules loops #######################################
@@ -57,33 +58,33 @@ def watering_loop(day,climate_recipe):
     date_current = datetime.datetime.now()
     print(date_current)
 
-    while True :
-        #get pH value
+    while True:
+        # get pH value
         pH_value = sensors.read("pH")
 
         water_level = sensors.read("water_level")
         if water_level < 80:
             print("WARNING ! WATER LEVEL TOO LOW !!!!!!!!!!")
 
-        #get EC value
+        # get EC value
         EC_value = sensors.read("conductivity")
 
-        #pH regulation
+        # pH regulation
         if pH_value > climate_recipe.pH_max():
-            #think about arrange time regulation on pH diff
+            # think about arrange time regulation on pH diff
             time_pH = climate_recipe.time_pH_regulation()
             actuators.activate("NUT_Pump_pHDown")
             time.sleep(time_pH)
             actuators.desactivate("NUT_Pump_pHDown")
 
-        #watering
+        # watering
 
-        #break time with activation of the mixer
+        # break time with activation of the mixer
         actuators.activate("WAR_Mixer")
         time.sleep(climate_recipe.OFF_time(day) - time_pH)
         actuators.desactivate("WAR_Mixer")
 
-        #vaporization time
+        # vaporization time
         actuators.activate("WAR_MistMaker", "WAR_Ventilator")
         time.sleep(climate_recipe.ON_time(day))
         actuators.desactivate("WAR_MistMaker", "WAR_Ventilator")
@@ -94,11 +95,10 @@ def watering_loop(day,climate_recipe):
 def end_loop():
     """Desactivate every WAR actuators"""
     actuators.desactivate("WAR_MistMaker",
-                    "WAR_Mixer",
-                    "WAR_Ventilator",
-                    "NUT_Pump_pHDown")
+                          "WAR_Mixer",
+                          "WAR_Ventilator",
+                          "NUT_Pump_pHDown")
 
-######################### Main loop ###########################################
 
 date_current = datetime.datetime.now()
 diff = datetime.datetime.now() - date_ini

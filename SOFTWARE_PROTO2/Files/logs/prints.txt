@@ -28,3 +28,62 @@ lecture conductivity
 activation NUT_Pump_pHDown : 25
 desactivation NUT_Pump_pHDown : 25
 activation WAR_Mixer : 17
+WAR module
+WAR module
+2019-02-22 17:14:04.988194
+lecture pH
+lecture water_level
+WARNING ! WATER LEVEL TOO LOW !!!!!!!!!!
+lecture conductivity
+activation NUT_Pump_pHDown : 25
+desactivation NUT_Pump_pHDown : 25
+activation WAR_Mixer : 17
+ATM module
+2019-04-10 22:52:59.997083
+temperature : 20
+humidity : 20
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+desactivation ATM_MistMaker : 23
+desactivation ATM_Ventilator : 22
+ATM module
+2019-04-10 22:55:23.010898
+temperature : 20
+humidity : 20
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+desactivation ATM_MistMaker : 23
+desactivation ATM_Ventilator : 22
+ATM module
+2019-04-11 15:47:03.714231
+temperature : 20
+humidity : 20
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+desactivation ATM_MistMaker : 23
+desactivation ATM_Ventilator : 22
+ATM module
+2019-04-11 15:47:35.416998
+temperature : 20
+humidity : 20
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+desactivation ATM_MistMaker : 23
+desactivation ATM_Ventilator : 22
+ATM module
+2019-04-18 16:41:13.437343
+temperature : 20
+humidity : 20
+activation ATM_MistMaker : 23
+activation ATM_Ventilator : 22
+desactivation ATM_MistMaker : 23
+desactivation ATM_Ventilator : 22
+WAR module
+2019-04-18 16:41:30.064697
+pH : 20
+water_level : 20
+WARNING ! WATER LEVEL TOO LOW !!!!!!!!!!
+conductivity : 20
+activation NUT_Pump_pHDown : 25
+desactivation NUT_Pump_pHDown : 25
+activation WAR_Mixer : 17

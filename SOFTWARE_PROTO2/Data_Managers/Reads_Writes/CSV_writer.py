@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import sys
 
-class CSV_writer :
 
+class CSV_writer:
     """CSV file data writer
 
     Allow to write and modify csv files without considering the
