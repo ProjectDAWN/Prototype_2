@@ -45,18 +45,13 @@ climate_recipe = growth_config.recipe()
 date_ini = growth_config.date_ini()
 
 
-
-def watering_loop(day,climate_recipe):
-    """Control water_level, pH, EC, aeroponic system
-
-    Arguments:
-    day -- [int] current day of growth
-    climate_recipe -- [Climate_recipe] class managing the current growth
-
-    """
+def watering_loop():
+    """Control water_level, pH, EC, aeroponic system"""
     time_pH = 0
     date_current = datetime.datetime.now()
+    diff = datetime.datetime.now() - date_ini
     print(date_current)
+    day = diff.days
 
     while True:
         # get pH value
@@ -100,7 +95,4 @@ def end_loop():
                           "NUT_Pump_pHDown")
 
 
-date_current = datetime.datetime.now()
-diff = datetime.datetime.now() - date_ini
-print(date_current)
-watering_loop(diff.days,climate_recipe)
+watering_loop()
