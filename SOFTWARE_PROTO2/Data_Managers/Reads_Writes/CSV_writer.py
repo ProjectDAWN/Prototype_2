@@ -17,7 +17,8 @@ class CSV_writer:
         
         """
         if file_name:
-            self.df = pd.read_csv(sys.path[0] + "/" + file_name, index_col=0)  # think about the case that csv doesn't exist
+            self.df = pd.read_csv(sys.path[0] + "/" + file_name, index_col=0)
+            # think about the case that csv doesn't exist
         else:
             self.df = pd.DataFrame()
 
@@ -56,14 +57,16 @@ class CSV_writer:
         info = pd.DataFrame(info)  # change to add key in the df
         self.df.update(info)
 
-    def add(self, other):
-        """Add another dataframe to the existing one
+    def add(self, row_dict):
+        """Add an other dataframe to the existing one
 
         Keyword Arguments:
         other -- [pd.DataFrame] the df to add
 
         """
-        self.df.append(other)
+        #line = pd.DataFrame(row_dict)
+        self.df.append(row_dict, ignore_index=True)
+        print(self.df)
 
     def write(self, file=None, w_mode='w'):
         """Write the DataFrame in a csv, if file is not given, write in self.file_name
