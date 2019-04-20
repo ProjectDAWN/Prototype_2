@@ -6,7 +6,7 @@ sys.path.append(path)
 from Raspberry_Interface import GPIO_Actuators, GPIO_Sensors
 from climate_recipe.Climate_recipe import Climate_recipe
 
-### config variables
+# config variables
 
 chanel_file = "Files/Actuators.csv"
 date_file_path = "Files/date_ini"
@@ -16,24 +16,30 @@ InOutMode = "GPIO"
 model = "Prototype_2"
 nut_list = ("Micro","BioBloom","BioGro","Mato")
 
-### access function
+
+# access functions
+
 def date_ini():
     """return the initial date of growth"""
     date_file = open(sys.path[0] + "/../" + date_file_path,'rb')
     depickler = pickle.Unpickler(date_file)
     return(depickler.load())
 
+
 def recipe():
     """return climate recipe class"""
     return(Climate_recipe(variety,model))
+
 
 def sensors():
     """return sensor class"""
     return(GPIO_Sensors.GPIO_Sensors(InOutMode,realMode))
 
+
 def actuators():
     """return actuator class"""
     return(GPIO_Actuators.GPIO_Actuators(chanel_file,InOutMode,realMode))
+
 
 def set_date_ini(date):
     date_file = open(sys.path[0] + "/" + date_file_path,'wb')
