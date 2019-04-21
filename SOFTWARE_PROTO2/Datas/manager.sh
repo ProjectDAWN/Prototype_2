@@ -18,13 +18,11 @@ cut -d '/' -f 2 |\
 cut -c-10 |\
 sort -u |\
 tail -n 1`
-echo $d0
 if [ -z "$d0" ]
 then
   num=3
 else
   l0=`tail -n 1 $d0.csv`
-  echo $l0
   num=$(grep -n $l0 $1 | cut -d: -f1 | tail -1)
   let "num=num+1"
 fi
