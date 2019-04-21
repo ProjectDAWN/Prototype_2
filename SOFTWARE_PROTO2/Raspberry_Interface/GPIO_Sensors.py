@@ -16,10 +16,8 @@ class GPIO_Sensors:
     check if any problem can occur during this access
 
     """
-
-    class_dict = dict.fromkeys(["pH","conductivity","water_level",
-                                "water_temperature","temperature",
-                                "humidity"])
+    sensors_df = CSV_reader("Files/Sensors.csv")
+    class_dict = dict.fromkeys(sensors_df.get_indexes())
 
     def __init__(self, InOutMode, realMode=True):
         """Constructor of Sensors class
@@ -77,6 +75,13 @@ class GPIO_Sensors:
             return output
         else:
             return(-1)
+
+    def get_module(self, name_sensor):
+        return GPIO_Sensors.sensors_df.get(name_sensor, "module")
+
+    def get_id(self, name_sensor):
+        return str(int(GPIO_Sensors.sensors_df.get(name_sensor, "id")))
+
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
 #In.read("NUT_Mixer")

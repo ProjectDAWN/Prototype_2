@@ -46,16 +46,18 @@ def data_loop():
         date_current = datetime.datetime.now()
         for sensor in sensors.class_dict.keys():
             value = sensors.read(sensor)
-            id = "..."
-            module = "ATM"
-            column = sensor + "_value"
+            id = sensors.get_id(sensor)
+            module = sensors.get_module(sensor)
+            value_column = sensor
             data_df.add({"date": date_current,
                          "id": id,
                          "module": module,
-                         column: value})
+                         value_column: value})
 
-            data_df.write("../Datas/ex.csv", 'a')
-            data_df.clear_df()
+        data_df.write("../Datas/ex.csv", 'a')
+        data_df.clear_df()
         count = count+1
         time.sleep(1)
+
+
 data_loop()

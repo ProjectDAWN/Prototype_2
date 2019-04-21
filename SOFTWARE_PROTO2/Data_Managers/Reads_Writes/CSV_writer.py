@@ -64,9 +64,7 @@ class CSV_writer:
         other -- [pd.DataFrame] the df to add
 
         """
-        #line = pd.DataFrame(row_dict)
-        self.df.append(row_dict, ignore_index=True)
-        print(self.df)
+        self.df = self.df.append(row_dict, ignore_index=True)
 
     def write(self, file=None, w_mode='w'):
         """Write the DataFrame in a csv, if file is not given, write in self.file_name
@@ -80,7 +78,7 @@ class CSV_writer:
         else:
             target = self.file_name
 
-        self.df.to_csv(sys.path[0] + "/" + target, mode=w_mode)
+        self.df.to_csv(sys.path[0] + "/" + target, mode=w_mode, header=False, index=False)
 
     def clear_df(self):
         """Replace the df by a new empty DataFrame
