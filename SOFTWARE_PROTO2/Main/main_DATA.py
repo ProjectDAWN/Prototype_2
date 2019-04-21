@@ -31,6 +31,7 @@ from Data_Managers.Reads_Writes import CSV_writer
 ######################## Module loop #######################################
 
 sys.stdout = log_config.print_log_file
+print("DATA module")
 ###Variable initialization
 
 actuators = growth_config.actuators()
@@ -44,16 +45,20 @@ def data_loop():
     count = 0
     while count < 5:
         date_current = datetime.datetime.now()
+        day = date_current.strftime("%Y-%m-%d")
+        hour = date_current.strftime("%H-%M-%S")
         for sensor in sensors.class_dict.keys():
             value = sensors.read(sensor)
             id = sensors.get_id(sensor)
             module = sensors.get_module(sensor)
             value_column = sensor
-            data_df.add({"date": date_current,
+            data_df.add({"day": day,
+                         "hour": hour,
                          "id": id,
                          "module": module,
                          value_column: value})
 
+        print("writing data")
         data_df.write("../Datas/ex.csv", 'a')
         data_df.clear_df()
         count = count+1

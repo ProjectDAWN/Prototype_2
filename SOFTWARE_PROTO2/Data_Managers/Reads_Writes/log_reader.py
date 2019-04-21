@@ -5,7 +5,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 log_file = sys.path[0] + "/../../Files/logs/prints.txt"
-format = '%Y-%m-%d %H:%M:%S.%f'
+date_format = '%Y-%m-%d %H:%M:%S.%f'
 file = open(log_file,'r')
 sensors = ["pH","conductivity","water_level","water_temperature",
             "temperature","humidity"]
@@ -14,7 +14,7 @@ Y_dict = dict(zip(sensors,[[]] * len(sensors)))
 for line in file.readlines():
     line = line.strip()
     if re.search(r"^2019-",line):
-        date = datetime.datetime.strptime(line, format)
+        date = datetime.datetime.strptime(line, date_format)
     else:
         list = line.split(' ')
         if list[0] in sensors:
