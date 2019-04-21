@@ -82,6 +82,9 @@ class GPIO_Sensors:
     def get_id(self, name_sensor):
         return str(int(GPIO_Sensors.sensors_df.get(name_sensor, "id")))
 
+    def get_interval(self, name_sensor):
+        return GPIO_Sensors.sensors_df.get(name_sensor, "interval")
+
 
 #In = GPIO_Sensors("../Files/Actuators.csv",False)
 #In.read("NUT_Mixer")
