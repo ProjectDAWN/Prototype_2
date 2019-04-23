@@ -10,7 +10,7 @@ from climate_recipe.Climate_recipe import Climate_recipe
 
 chanel_file = "Files/Actuators.csv"
 date_file_path = "Files/date_ini"
-realMode = True
+realMode = False
 variety = "tomato"
 InOutMode = "GPIO"
 model = "Prototype_2"
