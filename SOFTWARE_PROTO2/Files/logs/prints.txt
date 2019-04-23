@@ -87,3 +87,221 @@ conductivity : 20
 activation NUT_Pump_pHDown : 25
 desactivation NUT_Pump_pHDown : 25
 activation WAR_Mixer : 17
+DATA module
+DATA module
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+DATA module
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+DATA module
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+DATA module
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+DATA module
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+DATA module
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+DATA module
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data
+pH : 20
+conductivity : 20
+temperature : 20
+humidity : 20
+water_level : 20
+writing data

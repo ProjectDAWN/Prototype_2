@@ -43,7 +43,7 @@ def data_loop():
 
     data_df = CSV_writer.CSV_writer()
     count = 0
-    while count < 5:
+    while count < 20:
         date_current = datetime.datetime.now()
         day = date_current.strftime("%Y-%m-%d")
         hour = date_current.strftime("%H-%M-%S")
@@ -62,7 +62,7 @@ def data_loop():
         data_df.write("../Datas/ex.csv", 'a')
         data_df.clear_df()
         count = count+1
-        time.sleep(1)
+        time.sleep(4)
 
 
 data_loop()
