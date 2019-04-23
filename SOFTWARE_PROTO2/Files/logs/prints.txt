@@ -611,6 +611,11 @@ pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
+humidity : 20
+water_level : 20
+pH : 20
+conductivity : 20
+temperature : 20
 water_level : 20
 pH : 20
 conductivity : 20
@@ -632,71 +637,81 @@ conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
+DATA module
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
+DATA module
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
 humidity : 20
 water_level : 20
-pH : 20
-conductivity : 20
-temperature : 20
-humidity : 20
-water_level : 20
+writing data
 pH : 20
 conductivity : 20
 temperature : 20
@@ -770,292 +785,64 @@ humidity : 20
 water_level : 20
 writing data
 DATA module
-DATA module
-writing data
-writing data
-writing data
-writing data
-writing data
-DATA module
-2019-04-21 16:58:15.791817
-writing data
-2019-04-21 16:58:19.797831
-writing data
-2019-04-21 16:58:23.806252
-writing data
-2019-04-21 16:58:27.814258
-writing data
-2019-04-21 16:58:31.822286
-writing data
-DATA module
-DATA module
-2019-04-21 17:11:25.264794
-DATA module
-2019-04-21 17:11:49.935400
-writing data
-2019-04-21 17:11:53.942051
-writing data
-2019-04-21 17:11:57.950140
-writing data
-2019-04-21 17:12:01.954167
-writing data
-2019-04-21 17:12:05.962252
-writing data
-DATA module
-2019-04-21 17:12:58.756491
-writing data
-2019-04-21 17:13:02.762262
-writing data
-2019-04-21 17:13:06.770260
-writing data
-2019-04-21 17:13:10.778202
-writing data
-2019-04-21 17:13:14.787389
-writing data
-DATA module
-2019-04-21 17:14:39.318509
--58 days, 0:28:47.790547
--58 days, 0:28:47.790547
--58 days, 0:28:47.790547
--58 days, 0:28:47.790547
--58 days, 0:28:47.790547
-writing data
-DATA module
-2019-04-21 17:14:41.367288
--58 days, 0:28:45.741768
--58 days, 0:28:45.741768
--58 days, 0:28:45.741768
--58 days, 0:28:45.741768
--58 days, 0:28:45.741768
-writing data
-2019-04-21 17:14:45.371247
--1 day, 23:59:55.996041
--1 day, 23:59:55.996041
--1 day, 23:59:55.996041
--1 day, 23:59:55.996041
--1 day, 23:59:55.996041
-writing data
-2019-04-21 17:14:49.378271
--58 days, 0:28:41.734744
--58 days, 0:28:41.734744
--58 days, 0:28:41.734744
--58 days, 0:28:41.734744
--58 days, 0:28:41.734744
-writing data
-2019-04-21 17:14:53.386959
--1 day, 23:59:51.987353
--1 day, 23:59:51.987353
--1 day, 23:59:51.987353
--1 day, 23:59:51.987353
--1 day, 23:59:51.987353
-writing data
-2019-04-21 17:14:57.394161
--58 days, 0:28:37.727542
--58 days, 0:28:37.727542
--58 days, 0:28:37.727542
--58 days, 0:28:37.727542
--58 days, 0:28:37.727542
-writing data
-DATA module
-2019-04-21 17:15:11.736875
-57 days, 23:31:44.627819
 pH : 20
-57 days, 23:31:44.627819
 conductivity : 20
-57 days, 23:31:44.627819
 temperature : 20
-57 days, 23:31:44.627819
 humidity : 20
-57 days, 23:31:44.627819
 water_level : 20
 writing data
-2019-04-21 17:15:15.766911
-115 days, 23:03:33.285674
 pH : 20
-115 days, 23:03:33.285674
 conductivity : 20
-115 days, 23:03:33.285674
 temperature : 20
-115 days, 23:03:33.285674
 humidity : 20
-115 days, 23:03:33.285674
 water_level : 20
 writing data
-2019-04-21 17:15:19.814254
-173 days, 22:35:25.990872
 pH : 20
-173 days, 22:35:25.990872
 conductivity : 20
-173 days, 22:35:25.990872
 temperature : 20
-173 days, 22:35:25.990872
 humidity : 20
-173 days, 22:35:25.990872
 water_level : 20
 writing data
-2019-04-21 17:15:25.568071
-231 days, 22:07:24.449887
 pH : 20
-231 days, 22:07:24.449887
 conductivity : 20
-231 days, 22:07:24.449887
 temperature : 20
-231 days, 22:07:24.449887
 humidity : 20
-231 days, 22:07:24.449887
 water_level : 20
 writing data
-2019-04-21 17:15:29.617390
-289 days, 21:39:26.958221
 pH : 20
-289 days, 21:39:26.958221
 conductivity : 20
-289 days, 21:39:26.958221
 temperature : 20
-289 days, 21:39:26.958221
 humidity : 20
-289 days, 21:39:26.958221
 water_level : 20
 writing data
 DATA module
-2019-04-21 17:20:21.380341
-57 days, 23:36:54.271285
 pH : 20
-57 days, 23:36:54.271285
 conductivity : 20
-57 days, 23:36:54.271285
 temperature : 20
-57 days, 23:36:54.271285
 humidity : 20
-57 days, 23:36:54.271285
 water_level : 20
 writing data
-2019-04-21 17:20:25.412006
-0:00:04.031665
-0:00:04.031665
-0:00:04.031665
-0:00:04.031665
-0:00:04.031665
-writing data
-2019-04-21 17:20:29.421843
-57 days, 23:36:58.281122
 pH : 20
-57 days, 23:36:58.281122
 conductivity : 20
-57 days, 23:36:58.281122
 temperature : 20
-57 days, 23:36:58.281122
 humidity : 20
-57 days, 23:36:58.281122
 water_level : 20
 writing data
-2019-04-21 17:20:33.456062
-0:00:08.065884
-0:00:08.065884
-0:00:08.065884
-0:00:08.065884
-0:00:08.065884
-writing data
-2019-04-21 17:20:37.464030
-57 days, 23:37:02.289090
 pH : 20
-57 days, 23:37:02.289090
 conductivity : 20
-57 days, 23:37:02.289090
 temperature : 20
-57 days, 23:37:02.289090
 humidity : 20
-57 days, 23:37:02.289090
 water_level : 20
 writing data
-DATA module
-2019-04-21 17:26:40.984973
-DATA module
-2019-04-21 17:27:02.329776
-DATA module
-2019-04-21 17:27:12.496595
-57 days, 23:43:45.387576
 pH : 20
-57 days, 23:43:45.391481
 conductivity : 20
-57 days, 23:43:45.395634
 temperature : 20
-57 days, 23:43:45.400143
 humidity : 20
-57 days, 23:43:45.404826
 water_level : 20
 writing data
-2019-04-21 17:27:16.525422
-0:00:04.028908
-0:00:04.025200
-0:00:04.021138
-0:00:04.016700
-0:00:04.012084
-writing data
-2019-04-21 17:27:20.532252
-0:00:04.006869
-0:00:04.006935
-0:00:04.007003
-0:00:04.007044
-0:00:04.007070
-writing data
-2019-04-21 17:27:24.541067
-0:00:04.008771
-0:00:04.008699
-0:00:04.008635
-0:00:04.008594
-0:00:04.008569
-writing data
-2019-04-21 17:27:28.548058
-0:00:04.006991
-0:00:04.006994
-0:00:04.006996
-0:00:04.006997
-0:00:04.007028
-writing data
-DATA module
-2019-04-21 17:28:11.564085
-57 days, 23:44:44.455068
 pH : 20
-57 days, 23:44:44.459223
 conductivity : 20
-57 days, 23:44:44.465165
 temperature : 20
-57 days, 23:44:44.472668
 humidity : 20
-57 days, 23:44:44.477736
 water_level : 20
-writing data
-2019-04-21 17:28:15.599214
-0:00:04.035163
-0:00:04.031127
-0:00:04.025232
-0:00:04.017768
-0:00:04.012736
-writing data
-2019-04-21 17:28:19.604036
-0:00:08.040061
-0:00:08.036144
-0:00:08.030311
-0:00:08.022899
-0:00:08.017917
-writing data
-2019-04-21 17:28:23.612032
-0:00:12.048077
-pH : 20
-0:00:12.052714
-conductivity : 20
-0:00:12.057233
-temperature : 20
-0:00:12.061193
-humidity : 20
-0:00:12.064017
-water_level : 20
-writing data
-2019-04-21 17:28:27.660359
-0:00:04.048285
-0:00:04.039685
-0:00:04.029316
-0:00:04.017923
-0:00:04.010096
 writing data
