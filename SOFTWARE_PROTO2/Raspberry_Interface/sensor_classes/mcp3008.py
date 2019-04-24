@@ -36,7 +36,8 @@ class MCP3008:
 		Hmax = self.system_config.get(model,"water_level_Hmax")
 		H = Hmax*(Vmax-V)/(Vmax-Vmin)
 		H = max(1,H)
-		return round(H)
+		#return round(H)
+		return V
 
 	def voltage(self):
 		chan = AnalogIn(self.mcp,MCP.P0)
