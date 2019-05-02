@@ -38,12 +38,13 @@ actuators = growth_config.actuators()
 sensors = growth_config.sensors()
 date_ini = growth_config.date_ini()
 
+time_to_sleep = 1
+
 
 def data_loop():
 
     data_df = CSV_writer.CSV_writer()
     count = 0
-    diff = datetime.timedelta(0)
     last_date = dict(zip(sensors.class_dict.keys(), [date_ini]*5))
     while count < 5:
         date_current = datetime.datetime.now()
@@ -70,8 +71,10 @@ def data_loop():
         print("writing data")
         data_df.write("../Datas/ex.csv", 'a')
         data_df.clear_df()
-        count = count+1
-        time.sleep(4)
+        if sensors.realMode:
+            count = count+1
+            sleep(3)
+        sleep(time_to_sleep)
 
 
 data_loop()
