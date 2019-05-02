@@ -15,5 +15,5 @@ def test(actuator):
 	InOut.desactivate(actuator)
 	print("Eteint")
 
-test("WAR_Ventilator")
-test("WAR_MistMaker")
+test("ATM_Ventilator")
+test("ATM_MistMaker")
