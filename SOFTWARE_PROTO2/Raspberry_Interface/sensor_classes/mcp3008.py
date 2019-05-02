@@ -35,7 +35,7 @@ class MCP3008:
 		#Vmin = self.system_config.get(model,"water_level_Vmin")
 		#Hmax = self.system_config.get(model,"water_level_Hmax")
 		H = -123.88*V + 332.16
-		return V
+		return H
 
 	def voltage(self):
 		chan = AnalogIn(self.mcp,MCP.P0)
