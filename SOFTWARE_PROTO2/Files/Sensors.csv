@@ -1,6 +1,6 @@
 Sensor,id,module,interval
-pH,002,WAR,10
-conductivity,003,WAR,10
-temperature,001,ATM,10
-humidity,001,ATM,10
-water_level,004,WAR,10
+pH,002,WAR,600
+conductivity,003,WAR,600
+temperature,001,ATM,600
+humidity,001,ATM,600
+water_level,004,WAR,600

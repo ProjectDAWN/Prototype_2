@@ -38,15 +38,15 @@ actuators = growth_config.actuators()
 sensors = growth_config.sensors()
 date_ini = growth_config.date_ini()
 
-time_to_sleep = 1
+time_to_sleep = 120
 
 
 def data_loop():
 
     data_df = CSV_writer.CSV_writer()
-    count = 0
+    #count = 0
     last_date = dict(zip(sensors.class_dict.keys(), [date_ini]*5))
-    while count < 5:
+    while 1:
         date_current = datetime.datetime.now()
         print(date_current)
         day = date_current.strftime("%Y-%m-%d")
@@ -72,8 +72,7 @@ def data_loop():
         data_df.write("../Datas/ex.csv", 'a')
         data_df.clear_df()
         if sensors.realMode:
-            count = count+1
-            sleep(3)
+            #count = count+1
         sleep(time_to_sleep)
 
 
