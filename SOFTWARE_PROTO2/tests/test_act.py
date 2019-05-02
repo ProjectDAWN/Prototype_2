@@ -16,3 +16,4 @@ def test(actuator):
 	print("Eteint")
 
 test("WAR_Ventilator")
+test("WAR_MistMaker")
