@@ -70,7 +70,7 @@ def data_loop():
         print("writing data")
         data_df.write("../Datas/ex.csv", 'a')
         data_df.clear_df()
-        sleep(time_to_sleep)
+        time.sleep(time_to_sleep)
 
 
 data_loop()
