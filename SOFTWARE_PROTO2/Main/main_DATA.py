@@ -44,7 +44,6 @@ time_to_sleep = 120
 def data_loop():
 
     data_df = CSV_writer.CSV_writer()
-    #count = 0
     last_date = dict(zip(sensors.class_dict.keys(), [date_ini]*5))
     while 1:
         date_current = datetime.datetime.now()
@@ -71,8 +70,6 @@ def data_loop():
         print("writing data")
         data_df.write("../Datas/ex.csv", 'a')
         data_df.clear_df()
-        if sensors.realMode:
-            #count = count+1
         sleep(time_to_sleep)
 
 
