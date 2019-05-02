@@ -34,7 +34,7 @@ class MCP3008:
 		#Vmax = self.system_config.get(model,"water_level_Vmax")
 		#Vmin = self.system_config.get(model,"water_level_Vmin")
 		#Hmax = self.system_config.get(model,"water_level_Hmax")
-		H = -120,2102*V + 322.5138
+		H = -120.2102*V + 322.5138
 		return H
 
 	def voltage(self):
