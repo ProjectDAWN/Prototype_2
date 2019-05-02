@@ -31,13 +31,11 @@ class MCP3008:
 		"""Get the water level, it's in millimeter"""
 		chan = AnalogIn(self.mcp,MCP.P0)
 		V = chan.voltage
-		Vmax = self.system_config.get(model,"water_level_Vmax")
-		Vmin = self.system_config.get(model,"water_level_Vmin")
-		Hmax = self.system_config.get(model,"water_level_Hmax")
-		H = Hmax*(Vmax-V)/(Vmax-Vmin)
-		H = max(1,H)
-		#return round(H)
-		return V
+		#Vmax = self.system_config.get(model,"water_level_Vmax")
+		#Vmin = self.system_config.get(model,"water_level_Vmin")
+		#Hmax = self.system_config.get(model,"water_level_Hmax")
+		H = -120,2102*V + 322.5138
+		return H
 
 	def voltage(self):
 		chan = AnalogIn(self.mcp,MCP.P0)
