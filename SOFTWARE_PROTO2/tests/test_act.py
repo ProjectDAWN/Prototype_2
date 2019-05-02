@@ -15,8 +15,7 @@ def test(actuator):
 	InOut.desactivate(actuator)
 	print("Eteint")
 
-test("NUT_Pump_Mato")
-test("NUT_Pump_pHDown")
-test("NUT_Pump_BioGro")
-test("NUT_Pump_BioBloom")
-test("NUT_Pump_Micro")
+test("ATM_MistMaker")
+test("ATM_Ventilator")
+test("WAR_Mixer")
+test("WAR_MistMaker")
