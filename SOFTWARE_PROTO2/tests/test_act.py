@@ -11,9 +11,9 @@ InOut = GPIO_Actuators(pin_file,InOutMode,realMode)
 def test(actuator):
 	InOut.activate(actuator)
 	print("Allumé")
-	time.sleep(12)
+	time.sleep(5)
 	InOut.desactivate(actuator)
 	print("Eteint")
 
-test("ATM_Ventilator")
-test("ATM_MistMaker")
+test("WAR_Ventilator")
+test("WAR_MistMaker")
