@@ -51,7 +51,7 @@ def nutrients_loop(day,climate_recipe):
     climate_recipe -- [Climate_recipe] class managing the current growth
 
     """
-    water_level = sensors.read("water_level")
+    water_level = 15 #sensors.read("water_level")
     actuators.activate("NUT_Mixer")
     time.sleep(60)
     actuators.desactivate("NUT_Mixer")
