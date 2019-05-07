@@ -33,5 +33,3 @@ do
   date=`echo $line | cut -d',' -f 1 `
   echo $line  >> $date.csv
 done
-
-mv *.csv ~/Desktop/Prototype_2/SOFTWARE_PROTO2/Datas
