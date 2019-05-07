@@ -6,7 +6,7 @@ class pH:
 
 	def __init__(self):
 		"""Initialize the classe & establish the I2C connection between the Raspberry and the sensor"""
-		self.pH_I2C_address = 0x60
+		self.pH_I2C_address = 0x63
 		self.device = AtlasI2C(self.pH_I2C_address)
 
 	def read(self):
