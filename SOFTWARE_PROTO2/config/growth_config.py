@@ -10,7 +10,7 @@ from climate_recipe.Climate_recipe import Climate_recipe
 
 chanel_file = "Files/Actuators.csv"
 date_file_path = "Files/date_ini"
-realMode = True
+realMode = False
 variety = "tomato"
 InOutMode = "GPIO"
 model = "Prototype_2"
@@ -22,8 +22,9 @@ nut_list = ("Micro","BioBloom","BioGro","Mato")
 def date_ini():
     """return the initial date of growth"""
     date_file = open(sys.path[0] + "/../" + date_file_path,'rb')
-    depickler = pickle.Unpickler(date_file)
-    return(depickler.load())
+    date = pickle.Unpickler(date_file).load()
+    date_file.close()
+    return(date)
 
 
 def recipe():
@@ -45,3 +46,4 @@ def set_date_ini(date):
     date_file = open(sys.path[0] + "/" + date_file_path,'wb')
     pickler = pickle.Pickler(date_file)
     pickler.dump(date)
+    date_file.close()
