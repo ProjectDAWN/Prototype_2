@@ -1,9 +1,9 @@
 period,temp,humidity,ON,OFF,hour
-germination_day,28,85,14,720,5
-germination_night,28,85,14,720,23
-growth_day,26,75,14,720,5
-growth_night,19,75,14,720,23
-flowering_day,26,70,19,600,7
-flowering_night,19,70,19,600,19
-fructification_day,26,70,19,600,7
-fructification_night,19,70,19,600,19
+germination_day,28,85,28,720,5
+germination_night,28,85,28,720,23
+growth_day,26,75,28,720,5
+growth_night,19,75,28,720,23
+flowering_day,26,70,40,600,7
+flowering_night,19,70,40,600,19
+fructification_day,26,70,40,600,7
+fructification_night,19,70,40,600,19
