@@ -29,13 +29,17 @@ class MCP3008:
 
 	def read(self):
 		"""Get the water level, it's in millimeter"""
-		chan = AnalogIn(self.mcp,MCP.P0)
-		V = chan.voltage
-		#Vmax = self.system_config.get(model,"water_level_Vmax")
-		#Vmin = self.system_config.get(model,"water_level_Vmin")
-		#Hmax = self.system_config.get(model,"water_level_Hmax")
-		H = -123.88*V + 336.76
-		return H
+		try:
+			chan = AnalogIn(self.mcp,MCP.P0)
+			V = chan.voltage
+			#Vmax = self.system_config.get(model,"water_level_Vmax")
+			#Vmin = self.system_config.get(model,"water_level_Vmin")
+			#Hmax = self.system_config.get(model,"water_level_Hmax")
+			H = -123.88*V + 336.76
+			return H
+		except:
+			print("error water level")
+			return 0
 
 	def voltage(self):
 		chan = AnalogIn(self.mcp,MCP.P0)

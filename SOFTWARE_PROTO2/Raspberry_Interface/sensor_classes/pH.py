@@ -18,7 +18,7 @@ class pH:
 			return float(pH_value)
 
 		except :
-			print("erreur pH")
+			print("error pH")
 			return 0
 
 	def mid(self):

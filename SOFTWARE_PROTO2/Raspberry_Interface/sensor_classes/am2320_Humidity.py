@@ -12,4 +12,8 @@ class AM2320_Humidity:
 
 	def read(self):
 		"""Get the value from the sensor. It's a tuple of float (temperature,humidity)"""
-		return self.am.relative_humidity
+		try:
+			return self.am.relative_humidity
+		except:
+			print("error atmosphere humidity")
+			return 0

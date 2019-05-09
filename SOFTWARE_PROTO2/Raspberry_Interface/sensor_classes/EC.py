@@ -11,10 +11,14 @@ class EC:
 
 	def read(self):
 		"""Get the conductivity value, in microSiemens"""
-		msg = self.device.query("R") #Get a message from the sensor, it's in a String and it contains the value
-		list_msg = msg.split( ) #Parse the string with a blanck a space
-		EC_value = list_msg[2].split("\x00")[0] #Get the 3rd value in the list then parse it with \x00 and get the 1st value
-		return float(EC_value)
+		try:
+			msg = self.device.query("R") #Get a message from the sensor, it's in a String and it contains the value
+			list_msg = msg.split( ) #Parse the string with a blanck a space
+			EC_value = list_msg[2].split("\x00")[0] #Get the 3rd value in the list then parse it with \x00 and get the 1st value
+			return float(EC_value)
+		except:
+			print("error EC")
+			return 0
 
 	def dry(self):
 		self.device.query("Cal,dry")
