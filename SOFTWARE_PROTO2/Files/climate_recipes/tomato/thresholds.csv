@@ -1,8 +1,8 @@
 period,temp,humidity,ON,OFF,hour
-germination_day,28,85,30,300,5
-germination_night,28,85,30,300,23
-growth_day,26,75,30,300,5
-growth_night,19,75,30,300,23
+germination_day,28,85,20,720,5
+germination_night,28,85,20,720,23
+growth_day,26,75,20,720,5
+growth_night,19,75,20,720,23
 flowering_day,26,70,40,600,7
 flowering_night,19,70,40,600,19
 fructification_day,26,70,40,600,7
